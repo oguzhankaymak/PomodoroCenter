@@ -54,6 +54,7 @@ class HomeViewController: UIViewController {
         button.setTitle("5", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .gray
+        button.addTarget(self, action: #selector(shortBreakTimeButtonPress), for: .touchUpInside)
         return button
     }()
     
@@ -65,6 +66,7 @@ class HomeViewController: UIViewController {
         button.layer.borderWidth = 1
         button.setTitle("15", for: .normal)
         button.setTitleColor(.gray, for: .normal)
+        button.addTarget(self, action: #selector(longBreakTimeButtonPress), for: .touchUpInside)
         return button
     }()
     
@@ -231,6 +233,15 @@ class HomeViewController: UIViewController {
         model.setTime(timeType: .longBreak)
     }
     
+    @objc private func longBreakTimeButtonPress(sender: UIButton){
+        if (model.timerIsRunning || !finishTimerButton.isHidden) {
+            showWarningMessage(title: "Uyarı", message: "Çalışmış olduğunuz zaman kaybedilecek. Emin misiniz?", handlerFunc: setLongBreakTime)
+        }
+        else {
+            setLongBreakTime()
+        }
+    }
+    
     private func setShortBreakTime(){
         longBreakTimeButton.backgroundColor = .white
         longBreakTimeButton.setTitleColor(.gray, for: .normal)
@@ -246,6 +257,15 @@ class HomeViewController: UIViewController {
         }
         
         model.setTime(timeType: .shortBreak)
+    }
+    
+    @objc private func shortBreakTimeButtonPress(sender: UIButton){
+        if (model.timerIsRunning || !finishTimerButton.isHidden) {
+            showWarningMessage(title: "Uyarı", message: "Çalışmış olduğunuz zaman kaybedilecek. Emin misiniz?", handlerFunc: setShortBreakTime)
+        }
+        else {
+            setShortBreakTime()
+        }
     }
     
     

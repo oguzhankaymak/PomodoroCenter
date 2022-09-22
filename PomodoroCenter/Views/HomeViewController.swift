@@ -22,6 +22,7 @@ class HomeViewController: UIViewController {
         button.setTitle("Pomodoro", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .black
+        button.addTarget(self, action: #selector(pomodoroButtonPress), for: .touchUpInside)
         return button
     }()
     
@@ -33,6 +34,7 @@ class HomeViewController: UIViewController {
         button.layer.borderWidth = 1
         button.setTitle("Break", for: .normal)
         button.setTitleColor(.gray, for: .normal)
+        button.addTarget(self, action: #selector(breakButtonPress), for: .touchUpInside)
         return button
     }()
     
@@ -82,6 +84,7 @@ class HomeViewController: UIViewController {
         button.layer.cornerRadius = 40
         button.backgroundColor = .black
         button.tintColor = .white
+
         button.addTarget(self, action: #selector(actionButtonPress), for: .touchUpInside)
         
         let image = UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
@@ -151,6 +154,7 @@ class HomeViewController: UIViewController {
         model.startTimer()
     }
     
+    
     @objc private func finishtimerButtonPress(sender: UIButton){
         convertActionButtonToPlayButton()
         finishTimerButton.isHidden = true
@@ -174,6 +178,15 @@ class HomeViewController: UIViewController {
         model.setTime(timeType: .pomodoro)
     }
     
+    @objc private func pomodoroButtonPress(sender: UIButton){
+        if (model.timerIsRunning || !finishTimerButton.isHidden) {
+            showWarningMessage(title: "Uyarı", message: "Çalışmış olduğunuz zaman kaybedilecek. Emin misiniz?", handlerFunc: goToPomodoro)
+        }
+        else {
+            goToPomodoro()
+        }
+    }
+    
     private func goToBreak() {
         if !finishTimerButton.isHidden {
             setStartTimeView()
@@ -190,6 +203,16 @@ class HomeViewController: UIViewController {
         timeText.textColor = .gray
         actionButton.backgroundColor = .gray
         model.setTime(timeType: self.shortBreakTimeButton.backgroundColor == .gray ? .shortBreak : .longBreak)
+    }
+    
+    @objc private func breakButtonPress(sender: UIButton){
+        if (model.timerIsRunning || !finishTimerButton.isHidden) {
+            showWarningMessage(title: "Uyarı", message: "Çalışmış olduğunuz zaman kaybedilecek. Emin misiniz?", handlerFunc: goToBreak)
+        }
+        else {
+            goToBreak()
+        }
+        
     }
     
     private func setLongBreakTime(){
@@ -224,6 +247,7 @@ class HomeViewController: UIViewController {
         
         model.setTime(timeType: .shortBreak)
     }
+    
     
     private func subscribeToModel(){
         model.onRunningTime = { [weak self] timeStr in

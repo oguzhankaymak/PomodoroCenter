@@ -82,6 +82,7 @@ class HomeViewController: UIViewController {
         button.layer.cornerRadius = 40
         button.backgroundColor = .black
         button.tintColor = .white
+        button.addTarget(self, action: #selector(actionButtonPress), for: .touchUpInside)
         
         let image = UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
         button.setImage(image, for: .normal)
@@ -133,12 +134,22 @@ class HomeViewController: UIViewController {
         finishTimerButton.isHidden = true
     }
     
+    @objc private func actionButtonPress(sender: UIButton){
+        if(model.timerIsRunning){
+            setStopTimeView()
+            model.stopTimer()
+        }
+        else {
+            setStartTimeView()
+            model.startTimer()
+        }
+    }
+    
     @objc private func continueButtonPress(sender: UIButton){
         convertActionButtonToPauseButton()
         setStartTimeView()
         model.startTimer()
     }
-    
     
     @objc private func finishtimerButtonPress(sender: UIButton){
         convertActionButtonToPlayButton()
@@ -220,7 +231,6 @@ class HomeViewController: UIViewController {
         }
         
         model.onCompleteTime = { [weak self] activeTimeType in
-            print("activeTimeType : \(activeTimeType)")
             if activeTimeType == TimeType.shortBreak || activeTimeType == TimeType.longBreak {
                 self?.goToPomodoro()
             }

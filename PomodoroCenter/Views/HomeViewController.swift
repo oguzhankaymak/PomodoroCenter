@@ -2,6 +2,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    var model: TimeViewModel!
+    
     private lazy var timeTypeStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -105,8 +107,10 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        model = TimeViewModel()
         addSubViews()
         configureConstraints()
+        subscribeToModel()
     }
     
     private func convertActionButtonToPauseButton(){
@@ -132,12 +136,14 @@ class HomeViewController: UIViewController {
     @objc private func continueButtonPress(sender: UIButton){
         convertActionButtonToPauseButton()
         setStartTimeView()
+        model.startTimer()
     }
     
     
     @objc private func finishtimerButtonPress(sender: UIButton){
         convertActionButtonToPlayButton()
         finishTimerButton.isHidden = true
+        model.finishtimer()
     }
     
     private func goToPomodoro(){
@@ -154,6 +160,7 @@ class HomeViewController: UIViewController {
         timeText.textColor = .black
         actionButton.backgroundColor = .black
         
+        model.setTime(timeType: .pomodoro)
     }
     
     private func goToBreak() {
@@ -171,6 +178,7 @@ class HomeViewController: UIViewController {
         
         timeText.textColor = .gray
         actionButton.backgroundColor = .gray
+        model.setTime(timeType: self.shortBreakTimeButton.backgroundColor == .gray ? .shortBreak : .longBreak)
     }
     
     private func setLongBreakTime(){
@@ -179,6 +187,14 @@ class HomeViewController: UIViewController {
         
         longBreakTimeButton.backgroundColor = .gray
         longBreakTimeButton.setTitleColor(.white, for: .normal)
+        
+        if model.timerIsRunning {
+            convertActionButtonToPlayButton()
+        }
+        else {
+            finishTimerButton.isHidden = true
+        }
+        model.setTime(timeType: .longBreak)
     }
     
     private func setShortBreakTime(){
@@ -187,6 +203,39 @@ class HomeViewController: UIViewController {
         
         shortBreakTimeButton.backgroundColor = .gray
         shortBreakTimeButton.setTitleColor(.white, for: .normal)
+        
+        if model.timerIsRunning {
+            convertActionButtonToPlayButton()
+        }
+        else {
+            finishTimerButton.isHidden = true
+        }
+        
+        model.setTime(timeType: .shortBreak)
+    }
+    
+    private func subscribeToModel(){
+        model.onRunningTime = { [weak self] timeStr in
+            self?.timeText.text = timeStr
+        }
+        
+        model.onCompleteTime = { [weak self] activeTimeType in
+            print("activeTimeType : \(activeTimeType)")
+            if activeTimeType == TimeType.shortBreak || activeTimeType == TimeType.longBreak {
+                self?.goToPomodoro()
+            }
+            else {
+                self?.goToBreak()
+            }
+        }
+        
+        model.onFinishTimer = { [weak self] timeStr in
+            self?.timeText.text = timeStr
+        }
+        
+        model.onSetTimer = { [weak self] timeStr in
+            self?.timeText.text = timeStr
+        }
     }
     
     private func addSubViews(){

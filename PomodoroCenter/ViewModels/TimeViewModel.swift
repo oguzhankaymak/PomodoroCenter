@@ -13,6 +13,7 @@ final class TimeViewModel {
     
     private var activeTimeType: TimeType
     private var formatedSeconds: String
+    private let database: PomodoroDatabaseProtocol
     
     var onRunningTime: ((String) -> Void)? = nil
     var onCompleteTime: ((TimeType) -> Void)? = nil
@@ -21,7 +22,8 @@ final class TimeViewModel {
     
     // MARK: - init
 
-    init() {
+    init(database: PomodoroDatabaseProtocol = PomodoroCoreDataDatabase()) {
+        self.database = database
         self.seconds = 1500
         self.formatedSeconds = "25 : 00"
         self.activeTimeType = .pomodoro
@@ -35,7 +37,11 @@ final class TimeViewModel {
         if seconds == 0 {
             timerIsRunning = false
             timer.invalidate()
-            print("complete : \(activeTimeType)")
+            
+            database.saveTime(
+                time: getTimeByTimeType(timeType: activeTimeType),
+                timeType: activeTimeType)
+            
             onCompleteTime?(activeTimeType)
         }
         onRunningTime?(formatedSeconds)
@@ -50,6 +56,16 @@ final class TimeViewModel {
         formatedSeconds = "\(String(format: "%02d", minutesAndSeconds.0)) : \(String(format: "%02d", minutesAndSeconds.1))"
     }
     
+    private func getTimeByTimeType(timeType: TimeType) -> Int {
+        switch timeType {
+            case .pomodoro:
+                return 1500
+            case .longBreak:
+                return 900
+            case .shortBreak:
+                return 300
+        }
+    }
     
     //MARK: - Public Methods
     
@@ -64,25 +80,17 @@ final class TimeViewModel {
     }
     
     func finishtimer(){
-        timerIsRunning = false
+        let elapseTime = getTimeByTimeType(timeType: activeTimeType) - seconds
+        database.saveTime(time: elapseTime, timeType: activeTimeType)
+        
         setTime(timeType: activeTimeType)
         onFinishTimer?(formatedSeconds)
     }
     
     func setTime(timeType: TimeType) {
         stopTimer()
-        if(timeType == .pomodoro){
-            seconds = 1500
-            activeTimeType = .pomodoro
-        }
-        else if(timeType == .longBreak) {
-            seconds = 900
-            activeTimeType = .longBreak
-        }
-        else if(timeType == .shortBreak){
-            seconds = 300
-            activeTimeType = .shortBreak
-        }
+        activeTimeType = timeType
+        seconds = getTimeByTimeType(timeType: timeType)
         onSetTimer?(formatedSeconds)
     }
     

@@ -275,6 +275,7 @@ class HomeViewController: UIViewController {
         }
         
         model.onCompleteTime = { [weak self] activeTimeType in
+            self?.convertActionButtonToPlayButton()
             if activeTimeType == TimeType.shortBreak || activeTimeType == TimeType.longBreak {
                 self?.goToPomodoro()
             }

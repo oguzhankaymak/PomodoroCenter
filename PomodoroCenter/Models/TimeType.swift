@@ -1,6 +1,6 @@
 import Foundation
 
-enum TimeType {
+enum TimeType: String {
    case pomodoro
    case shortBreak
    case longBreak

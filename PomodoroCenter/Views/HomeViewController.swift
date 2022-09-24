@@ -113,10 +113,36 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        configureNavigationBar()
         model = TimeViewModel()
         addSubViews()
         configureConstraints()
         subscribeToModel()
+    }
+    
+    private func configureNavigationBar(){
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.backgroundColor = .systemTeal
+        
+        let label = UILabel()
+        label.textColor = .white
+        label.text = "PomodoroCenter"
+        label.font = .italicSystemFont(ofSize: 20)
+        
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
+        
+        let image = UIImage(systemName: "calendar.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20))
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: image,
+            style: .plain,
+            target: self,
+            action: #selector(openStatistics))
+    }
+    
+    @objc private func openStatistics(){
+        print("click openStatistics")
     }
     
     private func convertActionButtonToPauseButton(){

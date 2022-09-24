@@ -26,7 +26,6 @@ class PomodoroCoreDataDatabase: PomodoroDatabaseProtocol {
         
         do {
             try context.save()
-            print("sucess")
         } catch {
             print(error)
         }
@@ -34,7 +33,7 @@ class PomodoroCoreDataDatabase: PomodoroDatabaseProtocol {
     
     func getSavedTimeByDate(date: Date) -> [Time] {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "History")
-        fetchRequest.returnsObjectsAsFaults = false //cache
+        fetchRequest.returnsObjectsAsFaults = false
                 
         do {
             var historiesData: [Time] = []
@@ -56,9 +55,7 @@ class PomodoroCoreDataDatabase: PomodoroDatabaseProtocol {
                     )
                 }
             }
-            
-            print(historiesData)
-            
+
             return historiesData
             
         } catch {

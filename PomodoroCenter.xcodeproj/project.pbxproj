@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BEF17078D6E844633CFB8A8 /* Pods_PomodoroCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEE1D24B463AEBE1A23A579 /* Pods_PomodoroCenter.framework */; };
 		E20E608E28DC6D3000D43F02 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20E608D28DC6D3000D43F02 /* Extensions.swift */; };
 		E22E486028DDC86000A84689 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E485F28DDC86000A84689 /* Time.swift */; };
 		E22E486628DDCB9600A84689 /* PomodoroCoreDataDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E486528DDCB9600A84689 /* PomodoroCoreDataDatabase.swift */; };
+		E25126B528E0C7D600673B6F /* StatisticViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25126B428E0C7D600673B6F /* StatisticViewModel.swift */; };
+		E25126B728E0CF0200673B6F /* TimeByDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25126B628E0CF0200673B6F /* TimeByDay.swift */; };
+		E27A98B528E058E90002C14F /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27A98B428E058E90002C14F /* StatisticsViewController.swift */; };
+		E2955EA228E19C25002D868C /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2955EA128E19C25002D868C /* Functions.swift */; };
 		E2A26BE828D9D4AE0098A182 /* TimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A26BE728D9D4AE0098A182 /* TimeType.swift */; };
 		E2B74AFB28D8EE4D0076ACC4 /* TimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B74AFA28D8EE4D0076ACC4 /* TimeViewModel.swift */; };
 		E2B79D5428D891AD00058EF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B79D5328D891AD00058EF5 /* AppDelegate.swift */; };
@@ -21,9 +26,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		204D242226EFEB5AE8379F2A /* Pods-PomodoroCenter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PomodoroCenter.debug.xcconfig"; path = "Target Support Files/Pods-PomodoroCenter/Pods-PomodoroCenter.debug.xcconfig"; sourceTree = "<group>"; };
+		4CEE1D24B463AEBE1A23A579 /* Pods_PomodoroCenter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PomodoroCenter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E4E5312E4304CAA511AD97F /* Pods-PomodoroCenter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PomodoroCenter.release.xcconfig"; path = "Target Support Files/Pods-PomodoroCenter/Pods-PomodoroCenter.release.xcconfig"; sourceTree = "<group>"; };
 		E20E608D28DC6D3000D43F02 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		E22E485F28DDC86000A84689 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		E22E486528DDCB9600A84689 /* PomodoroCoreDataDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroCoreDataDatabase.swift; sourceTree = "<group>"; };
+		E25126B428E0C7D600673B6F /* StatisticViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewModel.swift; sourceTree = "<group>"; };
+		E25126B628E0CF0200673B6F /* TimeByDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeByDay.swift; sourceTree = "<group>"; };
+		E27A98B428E058E90002C14F /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		E2955EA128E19C25002D868C /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		E2A26BE728D9D4AE0098A182 /* TimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeType.swift; sourceTree = "<group>"; };
 		E2B74AFA28D8EE4D0076ACC4 /* TimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewModel.swift; sourceTree = "<group>"; };
 		E2B79D5028D891AD00058EF5 /* PomodoroCenter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomodoroCenter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,12 +53,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BEF17078D6E844633CFB8A8 /* Pods_PomodoroCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BAAF0C7C738798DCB50342BD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				204D242226EFEB5AE8379F2A /* Pods-PomodoroCenter.debug.xcconfig */,
+				9E4E5312E4304CAA511AD97F /* Pods-PomodoroCenter.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		E20E608C28DC6D1100D43F02 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -63,11 +85,20 @@
 			path = Database;
 			sourceTree = "<group>";
 		};
+		E2955EA028E19C14002D868C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E2955EA128E19C25002D868C /* Functions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		E2B74AF728D8EDB60076ACC4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				E2A26BE728D9D4AE0098A182 /* TimeType.swift */,
 				E22E485F28DDC86000A84689 /* Time.swift */,
+				E25126B628E0CF0200673B6F /* TimeByDay.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -76,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				E2B74AFA28D8EE4D0076ACC4 /* TimeViewModel.swift */,
+				E25126B428E0C7D600673B6F /* StatisticViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -84,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				E2B79D5728D891AD00058EF5 /* HomeViewController.swift */,
+				E27A98B428E058E90002C14F /* StatisticsViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -93,6 +126,8 @@
 			children = (
 				E2B79D5228D891AD00058EF5 /* PomodoroCenter */,
 				E2B79D5128D891AD00058EF5 /* Products */,
+				BAAF0C7C738798DCB50342BD /* Pods */,
+				FF36B1674DC92F0CDBE1DA1B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,6 +142,7 @@
 		E2B79D5228D891AD00058EF5 /* PomodoroCenter */ = {
 			isa = PBXGroup;
 			children = (
+				E2955EA028E19C14002D868C /* Utils */,
 				E22E486428DDCB8200A84689 /* Database */,
 				E20E608C28DC6D1100D43F02 /* Extension */,
 				E2B74AF928D8EDD30076ACC4 /* Views */,
@@ -122,6 +158,14 @@
 			path = PomodoroCenter;
 			sourceTree = "<group>";
 		};
+		FF36B1674DC92F0CDBE1DA1B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4CEE1D24B463AEBE1A23A579 /* Pods_PomodoroCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -129,9 +173,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E2B79D6728D891AF00058EF5 /* Build configuration list for PBXNativeTarget "PomodoroCenter" */;
 			buildPhases = (
+				868C3C3C13470191EF496C6C /* [CP] Check Pods Manifest.lock */,
 				E2B79D4C28D891AD00058EF5 /* Sources */,
 				E2B79D4D28D891AD00058EF5 /* Frameworks */,
 				E2B79D4E28D891AD00058EF5 /* Resources */,
+				9034401E502A83099298E206 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -187,15 +233,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		868C3C3C13470191EF496C6C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PomodoroCenter-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9034401E502A83099298E206 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PomodoroCenter/Pods-PomodoroCenter-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PomodoroCenter/Pods-PomodoroCenter-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PomodoroCenter/Pods-PomodoroCenter-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E2B79D4C28D891AD00058EF5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E25126B528E0C7D600673B6F /* StatisticViewModel.swift in Sources */,
 				E2B79D5828D891AD00058EF5 /* HomeViewController.swift in Sources */,
+				E27A98B528E058E90002C14F /* StatisticsViewController.swift in Sources */,
 				E2B79D5428D891AD00058EF5 /* AppDelegate.swift in Sources */,
 				E20E608E28DC6D3000D43F02 /* Extensions.swift in Sources */,
+				E2955EA228E19C25002D868C /* Functions.swift in Sources */,
 				E2B74AFB28D8EE4D0076ACC4 /* TimeViewModel.swift in Sources */,
+				E25126B728E0CF0200673B6F /* TimeByDay.swift in Sources */,
 				E22E486028DDC86000A84689 /* Time.swift in Sources */,
 				E2A26BE828D9D4AE0098A182 /* TimeType.swift in Sources */,
 				E2B79D5628D891AD00058EF5 /* SceneDelegate.swift in Sources */,
@@ -334,6 +426,7 @@
 		};
 		E2B79D6828D891AF00058EF5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 204D242226EFEB5AE8379F2A /* Pods-PomodoroCenter.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -361,6 +454,7 @@
 		};
 		E2B79D6928D891AF00058EF5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9E4E5312E4304CAA511AD97F /* Pods-PomodoroCenter.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

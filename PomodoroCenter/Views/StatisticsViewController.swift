@@ -1,6 +1,9 @@
 import UIKit
+import Charts
 
 class StatisticsViewController: UIViewController {
+    
+    var model: StatisticViewModel!
     
     let statisticTypes = ["Haftalık", "Aylık"]
     
@@ -29,12 +32,34 @@ class StatisticsViewController: UIViewController {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         return segmentedControl
     }()
+    
+    private lazy var barChartView: BarChartView = {
+        let barChartView = BarChartView(frame: CGRect(x: 0,
+                                                      y: 0,
+                                                      width: view.frame.size.width,
+                                                      height: view.frame.size.width)
+        )
+        
+        
+        barChartView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return barChartView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        model = StatisticViewModel()
         addSubViews()
         configureConstraints()
+        subscribeToModel()
+        model.getSavedPomodoroTimesByDay()
+    }
+    
+    private func subscribeToModel(){
+        model.getPomodoroTimesByDay = { [weak self] datas in
+            self?.createBarChart(datas: datas)
+        }
     }
     
     private func addSubViews(){
@@ -61,13 +86,60 @@ class StatisticsViewController: UIViewController {
     @objc func suitDidChange(_ segmentedControl: UISegmentedControl){
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            print("haftalık")
+            barChartView.animate(yAxisDuration: 1.5)
+            barChartView.isHidden = false
         case 1:
-            print("aylık")
+            barChartView.isHidden = true
         default:
             print("default")
         }
         
     }
+    
+    private func createBarChart(datas: [TimeByDay]){
+        let xAxis = barChartView.xAxis
+        xAxis.valueFormatter = IndexAxisValueFormatter(values: datas.map {
+            $0.dayOfWeek
+        })
+        
+        xAxis.labelPosition = .bottom
+        
+        let rightAxis = barChartView.rightAxis
+        rightAxis.enabled = false
 
+        
+        let leftAxis = barChartView.leftAxis
+        leftAxis.axisMinimum = 0
+
+        barChartView.animate(yAxisDuration: 1.5)
+        
+        var entries = [BarChartDataEntry]()
+        
+        for index in 0..<datas.count {
+            entries.append(
+                BarChartDataEntry(
+                    x: Double(index),
+                    y: datas[index].minutes
+                )
+            
+            )
+        }
+        
+        let set = BarChartDataSet(entries: entries, label: "Dakika")
+        set.drawValuesEnabled = false
+        set.colors = ChartColorTemplates.colorful()
+        let data = BarChartData(dataSet: set)
+        
+        barChartView.data = data
+        view.addSubview(barChartView)
+        
+        let barChartViewConstraints: [NSLayoutConstraint] = [
+            barChartView.topAnchor.constraint(equalTo: statisticTypeSegmentedControl.bottomAnchor, constant: 80),
+            barChartView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            barChartView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            barChartView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200)
+        ]
+        
+        NSLayoutConstraint.activate(barChartViewConstraints)
+    }
 }

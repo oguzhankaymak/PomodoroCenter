@@ -132,7 +132,7 @@ class HomeViewController: UIViewController {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
         
-        let image = UIImage(systemName: "calendar.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20))
+        let image = UIImage(systemName: "calendar.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22))
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: image,
@@ -142,7 +142,8 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func openStatistics(){
-        print("click openStatistics")
+        let vc = StatisticsViewController()
+        navigationController?.present(vc, animated: true)
     }
     
     private func convertActionButtonToPauseButton(){

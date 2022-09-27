@@ -4,7 +4,7 @@ import CoreData
 
 protocol PomodoroDatabaseProtocol {
     func saveTime(time: Int, timeType: TimeType) -> Void
-    func getSavedTimeByDate (date: Date) -> [Time]
+    func getSavedTimesByType (type: TimeType) -> [Time]
 }
 
 class PomodoroCoreDataDatabase: PomodoroDatabaseProtocol {
@@ -31,10 +31,10 @@ class PomodoroCoreDataDatabase: PomodoroDatabaseProtocol {
         }
     }
     
-    func getSavedTimeByDate(date: Date) -> [Time] {
+    func getSavedTimesByType(type: TimeType) -> [Time] {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "History")
         fetchRequest.returnsObjectsAsFaults = false
-                
+        
         do {
             var historiesData: [Time] = []
             let results = try context.fetch(fetchRequest)
@@ -45,17 +45,20 @@ class PomodoroCoreDataDatabase: PomodoroDatabaseProtocol {
                     let time = result.value(forKey: "time") as! Int
                     let timeType = result.value(forKey: "timeType") as! String
                     
-                    historiesData.append(
-                        Time(
-                            id: id,
-                            date: date,
-                            time: time,
-                            timeType: TimeType(rawValue: timeType) ?? .pomodoro
+                    if type == TimeType(rawValue: timeType) {
+                        historiesData.append(
+                            Time(
+                                id: id,
+                                date: date,
+                                time: time,
+                                timeType: TimeType(rawValue: timeType) ?? .pomodoro
+                            )
                         )
-                    )
+                    }
+                    
                 }
             }
-
+            
             return historiesData
             
         } catch {

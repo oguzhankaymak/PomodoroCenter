@@ -34,16 +34,24 @@ class StatisticsViewController: UIViewController {
     }()
     
     private lazy var barChartView: BarChartView = {
-        let barChartView = BarChartView(frame: CGRect(x: 0,
-                                                      y: 0,
-                                                      width: view.frame.size.width,
-                                                      height: view.frame.size.width)
-        )
-        
-        
+        let barChartView = BarChartView()
         barChartView.translatesAutoresizingMaskIntoConstraints = false
-        
+        barChartView.xAxis.labelPosition = .bottom
+        barChartView.rightAxis.enabled = false
+        barChartView.leftAxis.axisMinimum = 0
+        barChartView.animate(yAxisDuration: 1.5)
         return barChartView
+    }()
+    
+    private lazy var lineChartView: LineChartView = {
+        let lineChartView = LineChartView()
+        lineChartView.translatesAutoresizingMaskIntoConstraints = false
+        lineChartView.rightAxis.enabled = false
+        lineChartView.xAxis.labelPosition = .bottom
+        lineChartView.xAxis.axisMinimum = 1
+        lineChartView.isHidden = true
+        lineChartView.animate(yAxisDuration: 1.5)
+        return lineChartView
     }()
 
     override func viewDidLoad() {
@@ -54,11 +62,16 @@ class StatisticsViewController: UIViewController {
         configureConstraints()
         subscribeToModel()
         model.getSavedPomodoroTimesByDay()
+        model.getSavedPomodoroTimesByMonth()
     }
     
     private func subscribeToModel(){
         model.getPomodoroTimesByDay = { [weak self] datas in
             self?.createBarChart(datas: datas)
+        }
+        
+        model.getPomodoroTimesByMonth = {[weak self] datas in
+            self?.createLineChart(datas: datas)
         }
     }
     
@@ -86,14 +99,25 @@ class StatisticsViewController: UIViewController {
     @objc func suitDidChange(_ segmentedControl: UISegmentedControl){
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            barChartView.animate(yAxisDuration: 1.5)
-            barChartView.isHidden = false
+            showBarChart()
         case 1:
-            barChartView.isHidden = true
+            showLineChart()
         default:
-            print("default")
+            break
         }
         
+    }
+    
+    private func showBarChart(){
+        barChartView.animate(yAxisDuration: 1.5)
+        lineChartView.isHidden = true
+        barChartView.isHidden = false
+    }
+    
+    private func showLineChart(){
+        barChartView.isHidden = true
+        lineChartView.isHidden = false
+        lineChartView.animate(yAxisDuration: 1.5)
     }
     
     private func createBarChart(datas: [TimeByDay]){
@@ -101,17 +125,6 @@ class StatisticsViewController: UIViewController {
         xAxis.valueFormatter = IndexAxisValueFormatter(values: datas.map {
             $0.dayOfWeek
         })
-        
-        xAxis.labelPosition = .bottom
-        
-        let rightAxis = barChartView.rightAxis
-        rightAxis.enabled = false
-
-        
-        let leftAxis = barChartView.leftAxis
-        leftAxis.axisMinimum = 0
-
-        barChartView.animate(yAxisDuration: 1.5)
         
         var entries = [BarChartDataEntry]()
         
@@ -128,18 +141,54 @@ class StatisticsViewController: UIViewController {
         let set = BarChartDataSet(entries: entries, label: "Dakika")
         set.drawValuesEnabled = false
         set.colors = ChartColorTemplates.colorful()
-        let data = BarChartData(dataSet: set)
         
+        let data = BarChartData(dataSet: set)
         barChartView.data = data
+        
         view.addSubview(barChartView)
         
         let barChartViewConstraints: [NSLayoutConstraint] = [
-            barChartView.topAnchor.constraint(equalTo: statisticTypeSegmentedControl.bottomAnchor, constant: 80),
-            barChartView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            barChartView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            barChartView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200)
+            barChartView.topAnchor.constraint(equalTo: statisticTypeSegmentedControl.bottomAnchor, constant: 50),
+            barChartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            barChartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            barChartView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.frame.height / 6)
         ]
         
         NSLayoutConstraint.activate(barChartViewConstraints)
+    }
+    
+    private func createLineChart(datas: [TimeByMonth]){
+        let xAxis = lineChartView.xAxis
+        xAxis.valueFormatter = IndexAxisValueFormatter(values: datas.map {
+            $0.monthOfYear
+        })
+        
+        
+        var entries = [ChartDataEntry]()
+        for index in 0..<datas.count {
+            entries.append(ChartDataEntry(x: Double(index), y: datas[index].hours))
+        }
+        
+        let set = LineChartDataSet(entries: entries, label: "Saat")
+        set.mode = .linear
+        set.lineWidth = 3
+        set.fill = ColorFill(color: .systemBlue)
+        set.fillAlpha = 0.8
+        set.drawFilledEnabled = true
+        
+        let data = LineChartData(dataSet: set)
+        data.setDrawValues(false)
+        lineChartView.data = data
+        
+        view.addSubview(lineChartView)
+        
+        let lineChartViewConstraints: [NSLayoutConstraint] = [
+            lineChartView.topAnchor.constraint(equalTo: statisticTypeSegmentedControl.bottomAnchor, constant: 50),
+            lineChartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            lineChartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            lineChartView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.frame.height / 6)
+        ]
+        
+        NSLayoutConstraint.activate(lineChartViewConstraints)
     }
 }

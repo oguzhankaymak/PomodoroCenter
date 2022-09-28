@@ -74,7 +74,7 @@ class HomeViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "25 : 00"
-        label.font = .systemFont(ofSize: 78, weight: .bold)
+        label.font = .systemFont(ofSize: 75, weight: .bold)
         label.textColor = .black
         label.textAlignment = .center
         return label
@@ -337,12 +337,12 @@ class HomeViewController: UIViewController {
     
     private func configureConstraints(){
         let timeTypeStackViewConstraints: [NSLayoutConstraint] = [
-            timeTypeStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            timeTypeStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.frame.height / 10),
             timeTypeStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: 50),
             timeTypeStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50)]
         
         let timeTextConstraints: [NSLayoutConstraint] = [
-            timeText.topAnchor.constraint(equalTo: timeTypeStackView.bottomAnchor, constant: 70),
+            timeText.topAnchor.constraint(equalTo: timeTypeStackView.bottomAnchor, constant: view.frame.height / 10),
             timeText.centerXAnchor.constraint(equalTo: view.centerXAnchor)]
         
         let shortBreakTimeButtonConstraints: [NSLayoutConstraint] = [
@@ -356,7 +356,7 @@ class HomeViewController: UIViewController {
             longBreakTimeButton.heightAnchor.constraint(equalToConstant: 35)]
         
         let breakTimesViewConstraints: [NSLayoutConstraint] = [
-            breakTimesView.topAnchor.constraint(equalTo: timeText.bottomAnchor, constant: 40),
+            breakTimesView.topAnchor.constraint(equalTo: timeText.bottomAnchor, constant: view.frame.height / 20),
             breakTimesView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             breakTimesView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             breakTimesView.heightAnchor.constraint(equalToConstant: 35)]
@@ -364,11 +364,11 @@ class HomeViewController: UIViewController {
         let actionButtonConstraints: [NSLayoutConstraint] = [
             actionButton.widthAnchor.constraint(equalToConstant: 80),
             actionButton.heightAnchor.constraint(equalToConstant: 80),
-            actionButton.topAnchor.constraint(equalTo: breakTimesView.bottomAnchor, constant: 50),
+            actionButton.topAnchor.constraint(equalTo: breakTimesView.bottomAnchor, constant: view.frame.height / 20),
             actionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)]
         
         let finishTimerButtonConstraints: [NSLayoutConstraint] = [
-            finishTimerButton.topAnchor.constraint(equalTo: actionButton.bottomAnchor, constant: 50),
+            finishTimerButton.topAnchor.constraint(equalTo: actionButton.bottomAnchor, constant: view.frame.height / 22),
             finishTimerButton.widthAnchor.constraint(equalToConstant: 100),
             finishTimerButton.heightAnchor.constraint(equalToConstant: 35),
             finishTimerButton.centerXAnchor.constraint(equalTo: actionButton.centerXAnchor)]

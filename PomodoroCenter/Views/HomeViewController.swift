@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
     }()
     
     private lazy var breakButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 8
         button.layer.borderColor = UIColor.gray.cgColor
@@ -46,7 +46,7 @@ class HomeViewController: UIViewController {
     }()
     
     private lazy var shortBreakTimeButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 8
         button.layer.borderColor = UIColor.gray.cgColor
@@ -59,7 +59,7 @@ class HomeViewController: UIViewController {
     }()
     
     private lazy var longBreakTimeButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 8
         button.layer.borderColor = UIColor.gray.cgColor
@@ -73,7 +73,6 @@ class HomeViewController: UIViewController {
     private lazy var timeText: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "25 : 00"
         label.font = .systemFont(ofSize: 75, weight: .bold)
         label.textColor = .black
         label.textAlignment = .center
@@ -86,7 +85,7 @@ class HomeViewController: UIViewController {
         button.layer.cornerRadius = 40
         button.backgroundColor = .black
         button.tintColor = .white
-
+        
         button.addTarget(self, action: #selector(actionButtonPress), for: .touchUpInside)
         
         let image = UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
@@ -109,7 +108,7 @@ class HomeViewController: UIViewController {
         button.isHidden = true
         return button
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -204,7 +203,7 @@ class HomeViewController: UIViewController {
         timeText.textColor = .black
         actionButton.backgroundColor = .black
         
-        model.setTime(timeType: .pomodoro)
+        model.assignTime(timeType: .pomodoro)
     }
     
     @objc private func pomodoroButtonPress(sender: UIButton){
@@ -231,7 +230,7 @@ class HomeViewController: UIViewController {
         
         timeText.textColor = .gray
         actionButton.backgroundColor = .gray
-        model.setTime(timeType: self.shortBreakTimeButton.backgroundColor == .gray ? .shortBreak : .longBreak)
+        model.assignTime(timeType: self.shortBreakTimeButton.backgroundColor == .gray ? .shortBreak : .longBreak)
     }
     
     @objc private func breakButtonPress(sender: UIButton){
@@ -257,7 +256,7 @@ class HomeViewController: UIViewController {
         else {
             finishTimerButton.isHidden = true
         }
-        model.setTime(timeType: .longBreak)
+        model.assignTime(timeType: .longBreak)
     }
     
     @objc private func longBreakTimeButtonPress(sender: UIButton){
@@ -283,7 +282,7 @@ class HomeViewController: UIViewController {
             finishTimerButton.isHidden = true
         }
         
-        model.setTime(timeType: .shortBreak)
+        model.assignTime(timeType: .shortBreak)
     }
     
     @objc private func shortBreakTimeButtonPress(sender: UIButton){
@@ -297,11 +296,14 @@ class HomeViewController: UIViewController {
     
     
     private func subscribeToModel(){
-        model.onRunningTime = { [weak self] timeStr in
+        
+        timeText.text = model.getFormattedSeconds()
+        
+        model.onRunningTimer = { [weak self] timeStr in
             self?.timeText.text = timeStr
         }
         
-        model.onCompleteTime = { [weak self] activeTimeType in
+        model.onCompleteTimer = { [weak self] activeTimeType in
             self?.convertActionButtonToPlayButton()
             if activeTimeType == TimeType.shortBreak || activeTimeType == TimeType.longBreak {
                 self?.goToPomodoro()
@@ -315,7 +317,7 @@ class HomeViewController: UIViewController {
             self?.timeText.text = timeStr
         }
         
-        model.onSetTimer = { [weak self] timeStr in
+        model.onAssignTimer = { [weak self] timeStr in
             self?.timeText.text = timeStr
         }
     }

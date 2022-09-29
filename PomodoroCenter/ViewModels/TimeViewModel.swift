@@ -7,7 +7,7 @@ final class TimeViewModel {
     
     private var seconds: Int {
         didSet {
-            formatSecondsAndSet(seconds: seconds)
+            formatedSeconds = formatSeconds(seconds: seconds)
         }
     }
     
@@ -15,17 +15,17 @@ final class TimeViewModel {
     private var formatedSeconds: String
     private let database: PomodoroDatabaseProtocol
     
-    var onRunningTime: ((String) -> Void)? = nil
-    var onCompleteTime: ((TimeType) -> Void)? = nil
+    var onRunningTimer: ((String) -> Void)? = nil
+    var onCompleteTimer: ((TimeType) -> Void)? = nil
     var onFinishTimer: ((String) -> Void)? = nil
-    var onSetTimer: ((String) -> Void)? = nil
+    var onAssignTimer: ((String) -> Void)? = nil
     
     // MARK: - init
 
     init(database: PomodoroDatabaseProtocol = PomodoroCoreDataDatabase()) {
         self.database = database
         self.seconds = 1500
-        self.formatedSeconds = "25 : 00"
+        self.formatedSeconds = formatSeconds(seconds: self.seconds)
         self.activeTimeType = .pomodoro
     }
     
@@ -42,19 +42,11 @@ final class TimeViewModel {
                 time: getTimeByTimeType(timeType: activeTimeType),
                 timeType: activeTimeType)
             
-            onCompleteTime?(activeTimeType)
+            onCompleteTimer?(activeTimeType)
         }
-        onRunningTime?(formatedSeconds)
+        onRunningTimer?(formatedSeconds)
     }
-    
-    private func secondsToMinutes(seconds: Int) -> (Int, Int) {
-        return ((seconds/60),(seconds%60))
-    }
-    
-    private func formatSecondsAndSet(seconds: Int) {
-        let minutesAndSeconds = secondsToMinutes(seconds: seconds)
-        formatedSeconds = "\(String(format: "%02d", minutesAndSeconds.0)) : \(String(format: "%02d", minutesAndSeconds.1))"
-    }
+
     
     private func getTimeByTimeType(timeType: TimeType) -> Int {
         switch timeType {
@@ -83,15 +75,19 @@ final class TimeViewModel {
         let elapseTime = getTimeByTimeType(timeType: activeTimeType) - seconds
         database.saveTime(time: elapseTime, timeType: activeTimeType)
         
-        setTime(timeType: activeTimeType)
+        assignTime(timeType: activeTimeType)
         onFinishTimer?(formatedSeconds)
     }
     
-    func setTime(timeType: TimeType) {
+    func assignTime(timeType: TimeType) {
         stopTimer()
         activeTimeType = timeType
         seconds = getTimeByTimeType(timeType: timeType)
-        onSetTimer?(formatedSeconds)
+        onAssignTimer?(formatedSeconds)
+    }
+    
+    func getFormattedSeconds() -> String {
+        return formatedSeconds
     }
     
 }

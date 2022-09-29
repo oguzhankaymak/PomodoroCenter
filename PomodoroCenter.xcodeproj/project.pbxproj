@@ -17,6 +17,7 @@
 		E27AEAAF28E45AF900CFB06A /* TimeByMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27AEAAE28E45AF900CFB06A /* TimeByMonth.swift */; };
 		E2955EA228E19C25002D868C /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2955EA128E19C25002D868C /* Functions.swift */; };
 		E2A26BE828D9D4AE0098A182 /* TimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A26BE728D9D4AE0098A182 /* TimeType.swift */; };
+		E2AF474A28E4DF510073F32A /* TimeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AF474928E4DF510073F32A /* TimeViewModelTests.swift */; };
 		E2B74AFB28D8EE4D0076ACC4 /* TimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B74AFA28D8EE4D0076ACC4 /* TimeViewModel.swift */; };
 		E2B79D5428D891AD00058EF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B79D5328D891AD00058EF5 /* AppDelegate.swift */; };
 		E2B79D5628D891AD00058EF5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B79D5528D891AD00058EF5 /* SceneDelegate.swift */; };
@@ -25,6 +26,16 @@
 		E2B79D6028D891AF00058EF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2B79D5F28D891AF00058EF5 /* Assets.xcassets */; };
 		E2B79D6328D891AF00058EF5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B79D6128D891AF00058EF5 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E2AF474B28E4DF510073F32A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E2B79D4828D891AD00058EF5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E2B79D4F28D891AD00058EF5;
+			remoteInfo = PomodoroCenter;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		204D242226EFEB5AE8379F2A /* Pods-PomodoroCenter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PomodoroCenter.debug.xcconfig"; path = "Target Support Files/Pods-PomodoroCenter/Pods-PomodoroCenter.debug.xcconfig"; sourceTree = "<group>"; };
@@ -39,6 +50,8 @@
 		E27AEAAE28E45AF900CFB06A /* TimeByMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeByMonth.swift; sourceTree = "<group>"; };
 		E2955EA128E19C25002D868C /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		E2A26BE728D9D4AE0098A182 /* TimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeType.swift; sourceTree = "<group>"; };
+		E2AF474728E4DF510073F32A /* PomodoroCenterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomodoroCenterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2AF474928E4DF510073F32A /* TimeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewModelTests.swift; sourceTree = "<group>"; };
 		E2B74AFA28D8EE4D0076ACC4 /* TimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewModel.swift; sourceTree = "<group>"; };
 		E2B79D5028D891AD00058EF5 /* PomodoroCenter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomodoroCenter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2B79D5328D891AD00058EF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +64,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E2AF474428E4DF510073F32A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E2B79D4D28D891AD00058EF5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -95,6 +115,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		E2AF474828E4DF510073F32A /* PomodoroCenterTests */ = {
+			isa = PBXGroup;
+			children = (
+				E2AF474928E4DF510073F32A /* TimeViewModelTests.swift */,
+			);
+			path = PomodoroCenterTests;
+			sourceTree = "<group>";
+		};
 		E2B74AF728D8EDB60076ACC4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				E2B79D5228D891AD00058EF5 /* PomodoroCenter */,
+				E2AF474828E4DF510073F32A /* PomodoroCenterTests */,
 				E2B79D5128D891AD00058EF5 /* Products */,
 				BAAF0C7C738798DCB50342BD /* Pods */,
 				FF36B1674DC92F0CDBE1DA1B /* Frameworks */,
@@ -138,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				E2B79D5028D891AD00058EF5 /* PomodoroCenter.app */,
+				E2AF474728E4DF510073F32A /* PomodoroCenterTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -172,6 +202,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E2AF474628E4DF510073F32A /* PomodoroCenterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E2AF474D28E4DF510073F32A /* Build configuration list for PBXNativeTarget "PomodoroCenterTests" */;
+			buildPhases = (
+				E2AF474328E4DF510073F32A /* Sources */,
+				E2AF474428E4DF510073F32A /* Frameworks */,
+				E2AF474528E4DF510073F32A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E2AF474C28E4DF510073F32A /* PBXTargetDependency */,
+			);
+			name = PomodoroCenterTests;
+			productName = PomodoroCenterTests;
+			productReference = E2AF474728E4DF510073F32A /* PomodoroCenterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		E2B79D4F28D891AD00058EF5 /* PomodoroCenter */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E2B79D6728D891AF00058EF5 /* Build configuration list for PBXNativeTarget "PomodoroCenter" */;
@@ -201,6 +249,10 @@
 				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					E2AF474628E4DF510073F32A = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = E2B79D4F28D891AD00058EF5;
+					};
 					E2B79D4F28D891AD00058EF5 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -220,11 +272,19 @@
 			projectRoot = "";
 			targets = (
 				E2B79D4F28D891AD00058EF5 /* PomodoroCenter */,
+				E2AF474628E4DF510073F32A /* PomodoroCenterTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E2AF474528E4DF510073F32A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E2B79D4E28D891AD00058EF5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -279,6 +339,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E2AF474328E4DF510073F32A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2AF474A28E4DF510073F32A /* TimeViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E2B79D4C28D891AD00058EF5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -302,6 +370,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		E2AF474C28E4DF510073F32A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E2B79D4F28D891AD00058EF5 /* PomodoroCenter */;
+			targetProxy = E2AF474B28E4DF510073F32A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		E2B79D6128D891AF00058EF5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -314,6 +390,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		E2AF474E28E4DF510073F32A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Oguzhan.PomodoroCenterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PomodoroCenter.app/PomodoroCenter";
+			};
+			name = Debug;
+		};
+		E2AF474F28E4DF510073F32A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Oguzhan.PomodoroCenterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PomodoroCenter.app/PomodoroCenter";
+			};
+			name = Release;
+		};
 		E2B79D6528D891AF00058EF5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -487,6 +597,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E2AF474D28E4DF510073F32A /* Build configuration list for PBXNativeTarget "PomodoroCenterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2AF474E28E4DF510073F32A /* Debug */,
+				E2AF474F28E4DF510073F32A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E2B79D4B28D891AD00058EF5 /* Build configuration list for PBXProject "PomodoroCenter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

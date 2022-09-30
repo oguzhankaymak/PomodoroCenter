@@ -54,7 +54,7 @@ class StatisticsViewController: UIViewController {
         lineChartView.animate(yAxisDuration: 1.5)
         return lineChartView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -62,17 +62,21 @@ class StatisticsViewController: UIViewController {
         addSubViews()
         configureConstraints()
         subscribeToModel()
-        model.getSavedPomodoroTimesByDay()
-        model.getSavedPomodoroTimesByMonth()
+        model.getSavedPomodoroTimesByDays()
+        model.getSavedPomodoroTimesByMonths()
     }
     
     private func subscribeToModel(){
-        model.getPomodoroTimesByDay = { [weak self] datas in
-            self?.createBarChart(datas: datas)
+        model.onGetPomodoroTimesByDays = { [weak self] pomodoroMinutesByDays in
+            self?.createBarChart(
+                pomodoroMinutesByDays: pomodoroMinutesByDays
+            )
         }
         
-        model.getPomodoroTimesByMonth = {[weak self] datas in
-            self?.createLineChart(datas: datas)
+        model.onGetPomodoroTimesByMonths = {[weak self] pomodoroHoursByMonths in
+            self?.createLineChart(
+                pomodoroHoursByMonths: pomodoroHoursByMonths
+            )
         }
     }
     
@@ -121,21 +125,21 @@ class StatisticsViewController: UIViewController {
         lineChartView.animate(yAxisDuration: 1.5)
     }
     
-    private func createBarChart(datas: [TimeByDay]){
+    private func createBarChart(pomodoroMinutesByDays: [TimeByDay]){
         let xAxis = barChartView.xAxis
-        xAxis.valueFormatter = IndexAxisValueFormatter(values: datas.map {
+        xAxis.valueFormatter = IndexAxisValueFormatter(values: pomodoroMinutesByDays.map {
             $0.dayOfWeek
         })
         
         var entries = [BarChartDataEntry]()
         
-        for index in 0..<datas.count {
+        for index in 0..<pomodoroMinutesByDays.count {
             entries.append(
                 BarChartDataEntry(
                     x: Double(index),
-                    y: datas[index].minutes
+                    y: pomodoroMinutesByDays[index].minutes
                 )
-            
+                
             )
         }
         
@@ -158,16 +162,16 @@ class StatisticsViewController: UIViewController {
         NSLayoutConstraint.activate(barChartViewConstraints)
     }
     
-    private func createLineChart(datas: [TimeByMonth]){
+    private func createLineChart(pomodoroHoursByMonths: [TimeByMonth]){
         let xAxis = lineChartView.xAxis
-        xAxis.valueFormatter = IndexAxisValueFormatter(values: datas.map {
+        xAxis.valueFormatter = IndexAxisValueFormatter(values: pomodoroHoursByMonths.map {
             $0.monthOfYear
         })
         
         
         var entries = [ChartDataEntry]()
-        for index in 0..<datas.count {
-            entries.append(ChartDataEntry(x: Double(index), y: datas[index].hours))
+        for index in 0..<pomodoroHoursByMonths.count {
+            entries.append(ChartDataEntry(x: Double(index), y: pomodoroHoursByMonths[index].hours))
         }
         
         let set = LineChartDataSet(entries: entries, label: "Saat")

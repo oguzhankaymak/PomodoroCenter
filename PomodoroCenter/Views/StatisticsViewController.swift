@@ -49,6 +49,7 @@ class StatisticsViewController: UIViewController {
         lineChartView.rightAxis.enabled = false
         lineChartView.xAxis.labelPosition = .bottom
         lineChartView.xAxis.axisMinimum = 1
+        lineChartView.xAxis.setLabelCount(6, force: true)
         lineChartView.isHidden = true
         lineChartView.animate(yAxisDuration: 1.5)
         return lineChartView

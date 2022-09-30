@@ -73,15 +73,3 @@ class TimeViewModelTests: XCTestCase {
     }
 
 }
-
-class PomodoroDatabaseSpy: PomodoroDatabaseProtocol {
-    func saveTime(time: Int, timeType: TimeType) {
-        XCTAssertNotNil(time, "When you want to save the time to the database, the time is nil!")
-        XCTAssertNotNil(timeType, "When you want to save the time to the database, the timeType is nil!")
-    }
-    
-    func getSavedTimesByType(type: TimeType) -> [Time] {
-        return []
-    }
-    
-}

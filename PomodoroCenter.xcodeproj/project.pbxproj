@@ -11,6 +11,7 @@
 		E20E608E28DC6D3000D43F02 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20E608D28DC6D3000D43F02 /* Extensions.swift */; };
 		E22E486028DDC86000A84689 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E485F28DDC86000A84689 /* Time.swift */; };
 		E22E486628DDCB9600A84689 /* PomodoroCoreDataDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E486528DDCB9600A84689 /* PomodoroCoreDataDatabase.swift */; };
+		E235652928E714ED002B09BE /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235652828E714ED002B09BE /* Mocks.swift */; };
 		E25126B528E0C7D600673B6F /* StatisticViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25126B428E0C7D600673B6F /* StatisticViewModel.swift */; };
 		E25126B728E0CF0200673B6F /* TimeByDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25126B628E0CF0200673B6F /* TimeByDay.swift */; };
 		E27A98B528E058E90002C14F /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27A98B428E058E90002C14F /* StatisticsViewController.swift */; };
@@ -25,6 +26,8 @@
 		E2B79D5E28D891AD00058EF5 /* PomodoroCenter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E2B79D5C28D891AD00058EF5 /* PomodoroCenter.xcdatamodeld */; };
 		E2B79D6028D891AF00058EF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2B79D5F28D891AF00058EF5 /* Assets.xcassets */; };
 		E2B79D6328D891AF00058EF5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B79D6128D891AF00058EF5 /* LaunchScreen.storyboard */; };
+		E2CF312E28E6E83F00D3669E /* StatisticsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF312D28E6E83F00D3669E /* StatisticsViewModelTests.swift */; };
+		E2CF313128E6ED7000D3669E /* PomodoroDatabaseSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF313028E6ED7000D3669E /* PomodoroDatabaseSpy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,7 @@
 		E20E608D28DC6D3000D43F02 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		E22E485F28DDC86000A84689 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		E22E486528DDCB9600A84689 /* PomodoroCoreDataDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroCoreDataDatabase.swift; sourceTree = "<group>"; };
+		E235652828E714ED002B09BE /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		E25126B428E0C7D600673B6F /* StatisticViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewModel.swift; sourceTree = "<group>"; };
 		E25126B628E0CF0200673B6F /* TimeByDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeByDay.swift; sourceTree = "<group>"; };
 		E27A98B428E058E90002C14F /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +65,8 @@
 		E2B79D5F28D891AF00058EF5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2B79D6228D891AF00058EF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E2B79D6428D891AF00058EF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2CF312D28E6E83F00D3669E /* StatisticsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModelTests.swift; sourceTree = "<group>"; };
+		E2CF313028E6ED7000D3669E /* PomodoroDatabaseSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroDatabaseSpy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +125,9 @@
 			isa = PBXGroup;
 			children = (
 				E2AF474928E4DF510073F32A /* TimeViewModelTests.swift */,
+				E2CF312D28E6E83F00D3669E /* StatisticsViewModelTests.swift */,
+				E2CF313028E6ED7000D3669E /* PomodoroDatabaseSpy.swift */,
+				E235652828E714ED002B09BE /* Mocks.swift */,
 			);
 			path = PomodoroCenterTests;
 			sourceTree = "<group>";
@@ -344,6 +353,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2AF474A28E4DF510073F32A /* TimeViewModelTests.swift in Sources */,
+				E2CF312E28E6E83F00D3669E /* StatisticsViewModelTests.swift in Sources */,
+				E2CF313128E6ED7000D3669E /* PomodoroDatabaseSpy.swift in Sources */,
+				E235652928E714ED002B09BE /* Mocks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

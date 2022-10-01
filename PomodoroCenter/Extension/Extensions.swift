@@ -3,12 +3,22 @@ import UIKit
 
 extension UIViewController {
     
-    func showWarningMessage(title: String, message: String, handlerFunc: @escaping () -> Void) {
+    func showWarningMessage(
+        title: String,
+        message: String,
+        handlerOkay: (() -> Void)?,
+        handlerCancel: (() -> Void)?
+    ) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
         alertController.addAction(UIAlertAction(title: "Tamam", style: .default, handler: { _ in
-            handlerFunc()
+            handlerOkay?()
         }))
-        alertController.addAction(UIAlertAction(title: "Vazgeç", style: .cancel))
+        
+        alertController.addAction(UIAlertAction(title: "Vazgeç", style: .cancel, handler: { _ in
+            handlerCancel?()
+        }))
+        
         self.present(alertController, animated: true, completion: nil)
     }
 }

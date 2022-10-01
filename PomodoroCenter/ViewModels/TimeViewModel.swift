@@ -24,7 +24,7 @@ final class TimeViewModel {
 
     init(database: PomodoroDatabaseProtocol = PomodoroCoreDataDatabase()) {
         self.database = database
-        self.seconds = 1500
+        self.seconds = Global.pomodorotime
         self.formatedSeconds = formatSeconds(seconds: self.seconds)
         self.activeTimeType = .pomodoro
     }
@@ -50,12 +50,12 @@ final class TimeViewModel {
     
     private func getTimeByTimeType(timeType: TimeType) -> Int {
         switch timeType {
-            case .pomodoro:
-                return 1500
-            case .longBreak:
-                return 900
-            case .shortBreak:
-                return 300
+        case .pomodoro:
+            return Global.pomodorotime
+        case .longBreak:
+            return Global.longBreak
+        case .shortBreak:
+            return Global.shortBreak
         }
     }
     

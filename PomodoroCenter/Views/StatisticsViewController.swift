@@ -28,7 +28,7 @@ class StatisticsViewController: UIViewController {
             [NSAttributedString.Key.foregroundColor: UIColor.white],
             for: .normal
         )
-        segmentedControl.addTarget(self, action: #selector(suitDidChange(_:)), for: .valueChanged)
+        segmentedControl.addTarget(self, action: #selector(statisticTypesSegmentedControlValueChanged(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         return segmentedControl
     }()
@@ -101,7 +101,7 @@ class StatisticsViewController: UIViewController {
         NSLayoutConstraint.activate(statisticTypeSegmentedControlConstraints)
     }
     
-    @objc func suitDidChange(_ segmentedControl: UISegmentedControl){
+    @objc func statisticTypesSegmentedControlValueChanged(_ segmentedControl: UISegmentedControl){
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             showBarChart()

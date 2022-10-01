@@ -3,39 +3,27 @@ import UIKit
 class HomeViewController: UIViewController {
     
     var model: TimeViewModel!
+    let timeTypes = ["Pomodoro", "Break"]
     
-    private lazy var timeTypeStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.spacing = 30
-        return stackView
-    }()
-    
-    private lazy var pomodoroButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 8
-        button.layer.borderColor = UIColor.black.cgColor
-        button.layer.borderWidth = 1
-        button.setTitle("Pomodoro", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .black
-        button.addTarget(self, action: #selector(pomodoroButtonPress), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var breakButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 8
-        button.layer.borderColor = UIColor.gray.cgColor
-        button.layer.borderWidth = 1
-        button.setTitle("Break", for: .normal)
-        button.setTitleColor(.gray, for: .normal)
-        button.addTarget(self, action: #selector(breakButtonPress), for: .touchUpInside)
-        return button
+    private lazy var timeTypesSegmentedControl: UISegmentedControl = {
+        let segmentedControl = UISegmentedControl(items: timeTypes)
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.tintColor = .white
+        segmentedControl.backgroundColor = .black
+        
+        let font = UIFont.systemFont(ofSize: 14)
+        
+        segmentedControl.setTitleTextAttributes(
+            [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.black],
+            for: .selected
+        )
+        segmentedControl.setTitleTextAttributes(
+            [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white],
+            for: .normal
+        )
+        segmentedControl.addTarget(self, action: #selector(timeTypesSegmentedControlValueChanged(_:)), for: .valueChanged)
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        return segmentedControl
     }()
     
     private lazy var breakTimesView: UIView = {
@@ -119,6 +107,50 @@ class HomeViewController: UIViewController {
         subscribeToModel()
     }
     
+    @objc func timeTypesSegmentedControlValueChanged(_ segmentedControl: UISegmentedControl){
+        if (model.timerIsRunning || !finishTimerButton.isHidden) {
+            showWarningMessage(
+                title: "Uyarı",
+                message: "Çalışmış olduğunuz zaman kaybedilecek. Emin misiniz?") {
+                    self.onChangeTimeTypesSegmentedValue(newSelectedSegmentIndex: segmentedControl.selectedSegmentIndex)
+                } handlerCancel: {
+                    self.cancelTimeTypesSegmentedValue(newSelectedSegmentIndex: segmentedControl.selectedSegmentIndex)
+                }
+            
+        }
+        else {
+            onChangeTimeTypesSegmentedValue(
+                newSelectedSegmentIndex: segmentedControl.selectedSegmentIndex
+            )
+        }
+        
+        
+    }
+    
+    private func onChangeTimeTypesSegmentedValue(newSelectedSegmentIndex: Int){
+        switch newSelectedSegmentIndex {
+        case 0:
+            timeTypesSegmentedControl.backgroundColor = .black
+            goToPomodoro()
+        case 1:
+            timeTypesSegmentedControl.backgroundColor = .gray
+            goToBreak()
+        default:
+            break
+        }
+    }
+    
+    private func cancelTimeTypesSegmentedValue(newSelectedSegmentIndex: Int){
+        switch newSelectedSegmentIndex {
+        case 0:
+            timeTypesSegmentedControl.selectedSegmentIndex = 1
+        case 1:
+            timeTypesSegmentedControl.selectedSegmentIndex = 0
+        default:
+            break
+        }
+    }
+    
     private func configureNavigationBar(){
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.backgroundColor = .systemTeal
@@ -194,25 +226,11 @@ class HomeViewController: UIViewController {
         convertActionButtonToPlayButton()
         
         breakTimesView.isHidden = true
-        breakButton.backgroundColor = .white
-        breakButton.setTitleColor(.gray, for: .normal)
-        
-        pomodoroButton.backgroundColor = .black
-        pomodoroButton.setTitleColor(.white, for: .normal)
         
         timeText.textColor = .black
         actionButton.backgroundColor = .black
         
         model.assignTime(timeType: .pomodoro)
-    }
-    
-    @objc private func pomodoroButtonPress(sender: UIButton){
-        if (model.timerIsRunning || !finishTimerButton.isHidden) {
-            showWarningMessage(title: "Uyarı", message: "Çalışmış olduğunuz zaman kaybedilecek. Emin misiniz?", handlerFunc: goToPomodoro)
-        }
-        else {
-            goToPomodoro()
-        }
     }
     
     private func goToBreak() {
@@ -222,26 +240,12 @@ class HomeViewController: UIViewController {
         }
         
         breakTimesView.isHidden = false
-        pomodoroButton.backgroundColor = .white
-        pomodoroButton.setTitleColor(.black, for: .normal)
-        
-        breakButton.backgroundColor = .gray
-        breakButton.setTitleColor(.white, for: .normal)
         
         timeText.textColor = .gray
         actionButton.backgroundColor = .gray
         model.assignTime(timeType: self.shortBreakTimeButton.backgroundColor == .gray ? .shortBreak : .longBreak)
     }
-    
-    @objc private func breakButtonPress(sender: UIButton){
-        if (model.timerIsRunning || !finishTimerButton.isHidden) {
-            showWarningMessage(title: "Uyarı", message: "Çalışmış olduğunuz zaman kaybedilecek. Emin misiniz?", handlerFunc: goToBreak)
-        }
-        else {
-            goToBreak()
-        }
-        
-    }
+
     
     private func setLongBreakTime(){
         shortBreakTimeButton.backgroundColor = .white
@@ -261,7 +265,12 @@ class HomeViewController: UIViewController {
     
     @objc private func longBreakTimeButtonPress(sender: UIButton){
         if (model.timerIsRunning || !finishTimerButton.isHidden) {
-            showWarningMessage(title: "Uyarı", message: "Çalışmış olduğunuz zaman kaybedilecek. Emin misiniz?", handlerFunc: setLongBreakTime)
+            showWarningMessage(
+                title: "Uyarı",
+                message: "Çalışmış olduğunuz zaman kaybedilecek. Emin misiniz?",
+                handlerOkay: setLongBreakTime,
+                handlerCancel: nil
+            )
         }
         else {
             setLongBreakTime()
@@ -287,7 +296,12 @@ class HomeViewController: UIViewController {
     
     @objc private func shortBreakTimeButtonPress(sender: UIButton){
         if (model.timerIsRunning || !finishTimerButton.isHidden) {
-            showWarningMessage(title: "Uyarı", message: "Çalışmış olduğunuz zaman kaybedilecek. Emin misiniz?", handlerFunc: setShortBreakTime)
+            showWarningMessage(
+                title: "Uyarı",
+                message: "Çalışmış olduğunuz zaman kaybedilecek. Emin misiniz?",
+                handlerOkay: setShortBreakTime,
+                handlerCancel: nil
+            )
         }
         else {
             setShortBreakTime()
@@ -306,10 +320,12 @@ class HomeViewController: UIViewController {
         model.onCompleteTimer = { [weak self] activeTimeType in
             self?.convertActionButtonToPlayButton()
             if activeTimeType == TimeType.shortBreak || activeTimeType == TimeType.longBreak {
-                self?.goToPomodoro()
+                self?.timeTypesSegmentedControl.selectedSegmentIndex = 0
+                self?.onChangeTimeTypesSegmentedValue(newSelectedSegmentIndex: 0)
             }
             else {
-                self?.goToBreak()
+                self?.timeTypesSegmentedControl.selectedSegmentIndex = 1
+                self?.onChangeTimeTypesSegmentedValue(newSelectedSegmentIndex: 1)
             }
         }
         
@@ -323,9 +339,7 @@ class HomeViewController: UIViewController {
     }
     
     private func addSubViews(){
-        view.addSubview(timeTypeStackView)
-        timeTypeStackView.addArrangedSubview(pomodoroButton)
-        timeTypeStackView.addArrangedSubview(breakButton)
+        view.addSubview(timeTypesSegmentedControl)
         
         view.addSubview(timeText)
         view.addSubview(breakTimesView)
@@ -338,13 +352,14 @@ class HomeViewController: UIViewController {
     }
     
     private func configureConstraints(){
-        let timeTypeStackViewConstraints: [NSLayoutConstraint] = [
-            timeTypeStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.frame.height / 10),
-            timeTypeStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: 50),
-            timeTypeStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50)]
+        let timeTypesSegmentedControlConstraints: [NSLayoutConstraint] = [
+            timeTypesSegmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.frame.height / 10),
+            timeTypesSegmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: 50),
+            timeTypesSegmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
+            timeTypesSegmentedControl.heightAnchor.constraint(equalToConstant: 35)]
         
         let timeTextConstraints: [NSLayoutConstraint] = [
-            timeText.topAnchor.constraint(equalTo: timeTypeStackView.bottomAnchor, constant: view.frame.height / 10),
+            timeText.topAnchor.constraint(equalTo: timeTypesSegmentedControl.bottomAnchor, constant: view.frame.height / 10),
             timeText.centerXAnchor.constraint(equalTo: view.centerXAnchor)]
         
         let shortBreakTimeButtonConstraints: [NSLayoutConstraint] = [
@@ -375,7 +390,7 @@ class HomeViewController: UIViewController {
             finishTimerButton.heightAnchor.constraint(equalToConstant: 35),
             finishTimerButton.centerXAnchor.constraint(equalTo: actionButton.centerXAnchor)]
         
-        NSLayoutConstraint.activate(timeTypeStackViewConstraints)
+        NSLayoutConstraint.activate(timeTypesSegmentedControlConstraints)
         NSLayoutConstraint.activate(timeTextConstraints)
         NSLayoutConstraint.activate(shortBreakTimeButtonConstraints)
         NSLayoutConstraint.activate(longBreakTimeButtonConstraints)

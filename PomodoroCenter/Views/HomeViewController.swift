@@ -58,7 +58,7 @@ class HomeViewController: UIViewController {
         return button
     }()
     
-    private lazy var timeText: UILabel = {
+    private lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 75, weight: .bold)
@@ -227,7 +227,7 @@ class HomeViewController: UIViewController {
         
         breakTimesView.isHidden = true
         
-        timeText.textColor = .black
+        timeLabel.textColor = .black
         actionButton.backgroundColor = .black
         
         model.assignTime(timeType: .pomodoro)
@@ -241,7 +241,7 @@ class HomeViewController: UIViewController {
         
         breakTimesView.isHidden = false
         
-        timeText.textColor = .gray
+        timeLabel.textColor = .gray
         actionButton.backgroundColor = .gray
         model.assignTime(timeType: self.shortBreakTimeButton.backgroundColor == .gray ? .shortBreak : .longBreak)
     }
@@ -311,10 +311,10 @@ class HomeViewController: UIViewController {
     
     private func subscribeToModel(){
         
-        timeText.text = model.getFormattedSeconds()
+        timeLabel.text = model.getFormattedSeconds()
         
         model.onRunningTimer = { [weak self] timeStr in
-            self?.timeText.text = timeStr
+            self?.timeLabel.text = timeStr
         }
         
         model.onCompleteTimer = { [weak self] activeTimeType in
@@ -330,18 +330,18 @@ class HomeViewController: UIViewController {
         }
         
         model.onFinishTimer = { [weak self] timeStr in
-            self?.timeText.text = timeStr
+            self?.timeLabel.text = timeStr
         }
         
         model.onAssignTimer = { [weak self] timeStr in
-            self?.timeText.text = timeStr
+            self?.timeLabel.text = timeStr
         }
     }
     
     private func addSubViews(){
         view.addSubview(timeTypesSegmentedControl)
         
-        view.addSubview(timeText)
+        view.addSubview(timeLabel)
         view.addSubview(breakTimesView)
         
         breakTimesView.addSubview(shortBreakTimeButton)
@@ -358,9 +358,9 @@ class HomeViewController: UIViewController {
             timeTypesSegmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
             timeTypesSegmentedControl.heightAnchor.constraint(equalToConstant: 35)]
         
-        let timeTextConstraints: [NSLayoutConstraint] = [
-            timeText.topAnchor.constraint(equalTo: timeTypesSegmentedControl.bottomAnchor, constant: view.frame.height / 10),
-            timeText.centerXAnchor.constraint(equalTo: view.centerXAnchor)]
+        let timeLabelConstraints: [NSLayoutConstraint] = [
+            timeLabel.topAnchor.constraint(equalTo: timeTypesSegmentedControl.bottomAnchor, constant: view.frame.height / 10),
+            timeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)]
         
         let shortBreakTimeButtonConstraints: [NSLayoutConstraint] = [
             shortBreakTimeButton.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: -10),
@@ -373,7 +373,7 @@ class HomeViewController: UIViewController {
             longBreakTimeButton.heightAnchor.constraint(equalToConstant: 35)]
         
         let breakTimesViewConstraints: [NSLayoutConstraint] = [
-            breakTimesView.topAnchor.constraint(equalTo: timeText.bottomAnchor, constant: view.frame.height / 20),
+            breakTimesView.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: view.frame.height / 20),
             breakTimesView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             breakTimesView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             breakTimesView.heightAnchor.constraint(equalToConstant: 35)]
@@ -391,7 +391,7 @@ class HomeViewController: UIViewController {
             finishTimerButton.centerXAnchor.constraint(equalTo: actionButton.centerXAnchor)]
         
         NSLayoutConstraint.activate(timeTypesSegmentedControlConstraints)
-        NSLayoutConstraint.activate(timeTextConstraints)
+        NSLayoutConstraint.activate(timeLabelConstraints)
         NSLayoutConstraint.activate(shortBreakTimeButtonConstraints)
         NSLayoutConstraint.activate(longBreakTimeButtonConstraints)
         NSLayoutConstraint.activate(breakTimesViewConstraints)

@@ -40,6 +40,7 @@ class StatisticsViewController: UIViewController {
         barChartView.rightAxis.enabled = false
         barChartView.leftAxis.axisMinimum = 0
         barChartView.animate(yAxisDuration: 1.5)
+        barChartView.accessibilityIdentifier = "barChartView"
         return barChartView
     }()
     
@@ -52,6 +53,7 @@ class StatisticsViewController: UIViewController {
         lineChartView.xAxis.setLabelCount(6, force: true)
         lineChartView.isHidden = true
         lineChartView.animate(yAxisDuration: 1.5)
+        lineChartView.accessibilityIdentifier = "lineChartView"
         return lineChartView
     }()
     

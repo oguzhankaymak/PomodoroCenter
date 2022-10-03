@@ -64,6 +64,7 @@ class HomeViewController: UIViewController {
         label.font = .systemFont(ofSize: 75, weight: .bold)
         label.textColor = .black
         label.textAlignment = .center
+        label.accessibilityIdentifier = "timeLabel"
         return label
     }()
     

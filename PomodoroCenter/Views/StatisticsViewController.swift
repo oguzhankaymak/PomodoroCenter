@@ -39,6 +39,7 @@ class StatisticsViewController: UIViewController {
         barChartView.xAxis.labelPosition = .bottom
         barChartView.rightAxis.enabled = false
         barChartView.leftAxis.axisMinimum = 0
+        barChartView.leftAxis.setLabelCount(6, force: true)
         barChartView.animate(yAxisDuration: 1.5)
         barChartView.accessibilityIdentifier = "barChartView"
         return barChartView
@@ -151,6 +152,10 @@ class StatisticsViewController: UIViewController {
         
         let data = BarChartData(dataSet: set)
         barChartView.data = data
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.generatesDecimalNumbers = false
+        barChartView.leftAxis.valueFormatter = DefaultAxisValueFormatter.init(formatter: numberFormatter)
         
         view.addSubview(barChartView)
         

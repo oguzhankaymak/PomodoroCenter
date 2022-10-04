@@ -69,9 +69,9 @@ class StatisticsViewController: UIViewController {
     }
     
     private func subscribeToModel(){
-        model.onGetPomodoroTimesByDays = { [weak self] pomodoroMinutesByDays in
+        model.onGetPomodoroTimesByDays = { [weak self] pomodoroHoursByDays in
             self?.createBarChart(
-                pomodoroMinutesByDays: pomodoroMinutesByDays
+                pomodoroHoursByDays: pomodoroHoursByDays
             )
         }
         
@@ -127,25 +127,25 @@ class StatisticsViewController: UIViewController {
         lineChartView.animate(yAxisDuration: 1.5)
     }
     
-    private func createBarChart(pomodoroMinutesByDays: [TimeByDay]){
+    private func createBarChart(pomodoroHoursByDays: [TimeByDay]){
         let xAxis = barChartView.xAxis
-        xAxis.valueFormatter = IndexAxisValueFormatter(values: pomodoroMinutesByDays.map {
-            $0.dayOfWeek
+        xAxis.valueFormatter = IndexAxisValueFormatter(values: pomodoroHoursByDays.map {
+            $0.day
         })
         
         var entries = [BarChartDataEntry]()
         
-        for index in 0..<pomodoroMinutesByDays.count {
+        for index in 0..<pomodoroHoursByDays.count {
             entries.append(
                 BarChartDataEntry(
                     x: Double(index),
-                    y: pomodoroMinutesByDays[index].minutes
+                    y: pomodoroHoursByDays[index].hours
                 )
                 
             )
         }
         
-        let set = BarChartDataSet(entries: entries, label: "Dakika")
+        let set = BarChartDataSet(entries: entries, label: "Saat")
         set.drawValuesEnabled = false
         set.colors = ChartColorTemplates.colorful()
         
@@ -167,7 +167,7 @@ class StatisticsViewController: UIViewController {
     private func createLineChart(pomodoroHoursByMonths: [TimeByMonth]){
         let xAxis = lineChartView.xAxis
         xAxis.valueFormatter = IndexAxisValueFormatter(values: pomodoroHoursByMonths.map {
-            $0.monthOfYear
+            $0.month
         })
         
         

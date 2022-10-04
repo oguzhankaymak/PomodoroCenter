@@ -1,14 +1,14 @@
 import Foundation
 
 struct TimeByMonth {
-    var monthOfYear: String
+    var month: String
     var hours: Double
 }
 
 
 extension TimeByMonth: Equatable {
     static func ==(lhs: TimeByMonth, rhs: TimeByMonth) -> Bool {
-        return lhs.monthOfYear == rhs.monthOfYear
+        return lhs.month == rhs.month
         && lhs.hours == rhs.hours
     }
 }

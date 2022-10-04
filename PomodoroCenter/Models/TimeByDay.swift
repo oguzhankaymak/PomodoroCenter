@@ -1,14 +1,14 @@
 import Foundation
 
 struct TimeByDay {
-    var dayOfWeek: String
-    var minutes: Double
+    var day: String
+    var hours: Double
 }
 
 
 extension TimeByDay: Equatable {
     static func ==(lhs: TimeByDay, rhs: TimeByDay) -> Bool {
-        return lhs.dayOfWeek == rhs.dayOfWeek
-        && lhs.minutes == rhs.minutes
+        return lhs.day == rhs.day
+        && lhs.hours == rhs.hours
     }
 }

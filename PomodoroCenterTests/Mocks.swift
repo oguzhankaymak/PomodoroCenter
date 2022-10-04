@@ -1,8 +1,8 @@
 import Foundation
 @testable import PomodoroCenter
 
-func createMockPomodoroMinutesByDaysData() -> [TimeByDay] {
-    var mockPomodoroMinutesByDaysData: [TimeByDay] = []
+func createMockPomodoroHoursByDaysData() -> [TimeByDay] {
+    var mockPomodoroHoursByDaysData: [TimeByDay] = []
     
     let sixDaysAgo = Calendar.current.date(byAdding: .day, value: -6, to: Date())
     
@@ -15,10 +15,10 @@ func createMockPomodoroMinutesByDaysData() -> [TimeByDay] {
     
     while !isDatePassed {
         let dayStr = dayOfWeek(date: tempDate)
-        mockPomodoroMinutesByDaysData.append(
+        mockPomodoroHoursByDaysData.append(
             TimeByDay(
-                dayOfWeek: dayStr,
-                minutes: 0
+                day: dayStr,
+                hours: 0
             )
         )
         
@@ -34,7 +34,7 @@ func createMockPomodoroMinutesByDaysData() -> [TimeByDay] {
         }
     }
     
-    return mockPomodoroMinutesByDaysData
+    return mockPomodoroHoursByDaysData
 }
 
 func createMockPomodoroHoursByMonthsData() -> [TimeByMonth] {
@@ -55,7 +55,7 @@ func createMockPomodoroHoursByMonthsData() -> [TimeByMonth] {
         
         mockPomodoroHoursByMonthsData.append(
             TimeByMonth(
-                monthOfYear: monthStr,
+                month: monthStr,
                 hours: 0
             )
         )

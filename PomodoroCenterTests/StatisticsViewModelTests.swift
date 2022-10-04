@@ -14,22 +14,22 @@ class StatisticsViewModelTests: XCTestCase {
     func testModelTriggersOnGetPomodoroTimesByDaysWhenCallGetSavedPomodoroTimesByDays(){
         let model = StatisticViewModel(database: PomodoroDatabaseSpy())
         
-        model.onGetPomodoroTimesByDays = { pomodoroMinutesByDays in
-            XCTAssertEqual(pomodoroMinutesByDays.count, 7, "Model didn't return minutes data by days")
+        model.onGetPomodoroTimesByDays = { pomodoroHoursByDays in
+            XCTAssertEqual(pomodoroHoursByDays.count, 7, "Model didn't return Hours data by days")
         }
         
         model.getSavedPomodoroTimesByDays()
     }
     
     func testModelReturnCorrectDataWhenTriggersOnGetPomodoroTimesByDays(){
-        let mockPomodoroMinutesByDaysData: [TimeByDay] = createMockPomodoroMinutesByDaysData()
+        let mockPomodoroHoursByDaysData: [TimeByDay] = createMockPomodoroHoursByDaysData()
         
         let model = StatisticViewModel(database: PomodoroDatabaseSpy())
         
-        model.onGetPomodoroTimesByDays = { pomodoroMinutesByDays in
-            for (index, dayData) in pomodoroMinutesByDays.enumerated() {
-                if dayData != mockPomodoroMinutesByDaysData[index] {
-                    return XCTFail("Model didn't correctly return minutes data by days!")
+        model.onGetPomodoroTimesByDays = { pomodoroHoursByDays in
+            for (index, dayData) in pomodoroHoursByDays.enumerated() {
+                if dayData != mockPomodoroHoursByDaysData[index] {
+                    return XCTFail("Model didn't correctly return hours data by days!")
                 }
             }
         }
@@ -55,7 +55,7 @@ class StatisticsViewModelTests: XCTestCase {
         model.onGetPomodoroTimesByMonths = { pomodoroHoursByMonths in
             for (index, monthData) in pomodoroHoursByMonths.enumerated() {
                 if monthData != mockPomodoroHoursByMonthsData[index] {
-                    return XCTFail("Model didn't correctly return minutes data by months!")
+                    return XCTFail("Model didn't correctly return hours data by months!")
                 }
             }
         }

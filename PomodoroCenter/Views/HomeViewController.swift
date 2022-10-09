@@ -85,6 +85,7 @@ class HomeViewController: UIViewController {
         
         button.contentMode = .center
         button.imageView?.contentMode = .scaleAspectFit
+        button.accessibilityIdentifier = "actionButton"
         return button
     }()
     

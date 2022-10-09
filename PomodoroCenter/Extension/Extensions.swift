@@ -11,13 +11,21 @@ extension UIViewController {
     ) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        alertController.addAction(UIAlertAction(title: "Tamam", style: .default, handler: { _ in
-            handlerOkay?()
-        }))
+        alertController.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("okay", comment: "Alert ok button"),
+                style: .default,
+                handler: { _ in
+                    handlerOkay?()
+                }))
         
-        alertController.addAction(UIAlertAction(title: "Vazgeç", style: .cancel, handler: { _ in
-            handlerCancel?()
-        }))
+        alertController.addAction(UIAlertAction(
+            title: NSLocalizedString("cancel", comment: "Alert cancel button"),
+            style: .cancel,
+            handler: { _ in
+                handlerCancel?()
+                
+            }))
         
         self.present(alertController, animated: true, completion: nil)
     }

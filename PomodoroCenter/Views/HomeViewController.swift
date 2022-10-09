@@ -3,7 +3,10 @@ import UIKit
 class HomeViewController: UIViewController {
     
     var model: TimeViewModel!
-    let timeTypes = ["Pomodoro", "Break"]
+    let timeTypes = [
+        NSLocalizedString("pomodoro", comment: "User choose this section if wants to work."),
+        NSLocalizedString("break", comment: "User choose this section if wants to rest.")
+    ]
     
     private lazy var timeTypesSegmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: timeTypes)
@@ -90,7 +93,7 @@ class HomeViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 12
         button.backgroundColor = .systemTeal
-        button.setTitle("Bitir", for: .normal)
+        button.setTitle(NSLocalizedString("finish", comment: "Title of finish timer button."), for: .normal)
         button.setTitleColor(.white, for: .normal)
         
         button.addTarget(self, action: #selector(finishtimerButtonPress), for: .touchUpInside)
@@ -111,8 +114,14 @@ class HomeViewController: UIViewController {
     @objc func timeTypesSegmentedControlValueChanged(_ segmentedControl: UISegmentedControl){
         if (model.timerIsRunning || !finishTimerButton.isHidden) {
             showWarningMessage(
-                title: "Uyarı",
-                message: "Çalışmış olduğunuz zaman kaybedilecek. Emin misiniz?") {
+                title: NSLocalizedString(
+                    "warning",
+                    comment: "Alert title if user turns off timer while time is running."
+                ),
+                message:  NSLocalizedString(
+                    "timer_turn_off_alert_message",
+                    comment: "Alert message if user turns off timer while time is running."
+                )) {
                     self.onChangeTimeTypesSegmentedValue(newSelectedSegmentIndex: segmentedControl.selectedSegmentIndex)
                 } handlerCancel: {
                     self.cancelTimeTypesSegmentedValue(newSelectedSegmentIndex: segmentedControl.selectedSegmentIndex)
@@ -246,7 +255,7 @@ class HomeViewController: UIViewController {
         actionButton.backgroundColor = .gray
         model.assignTime(timeType: self.shortBreakTimeButton.backgroundColor == .gray ? .shortBreak : .longBreak)
     }
-
+    
     
     private func setLongBreakTime(){
         shortBreakTimeButton.backgroundColor = .white
@@ -267,8 +276,14 @@ class HomeViewController: UIViewController {
     @objc private func longBreakTimeButtonPress(sender: UIButton){
         if (model.timerIsRunning || !finishTimerButton.isHidden) {
             showWarningMessage(
-                title: "Uyarı",
-                message: "Çalışmış olduğunuz zaman kaybedilecek. Emin misiniz?",
+                title: NSLocalizedString(
+                    "warning",
+                    comment: "Alert title if user turns off timer while time is running."
+                ),
+                message:  NSLocalizedString(
+                    "timer_turn_off_alert_message",
+                    comment: "Alert message if user turns off timer while time is running."
+                ),
                 handlerOkay: setLongBreakTime,
                 handlerCancel: nil
             )
@@ -298,8 +313,14 @@ class HomeViewController: UIViewController {
     @objc private func shortBreakTimeButtonPress(sender: UIButton){
         if (model.timerIsRunning || !finishTimerButton.isHidden) {
             showWarningMessage(
-                title: "Uyarı",
-                message: "Çalışmış olduğunuz zaman kaybedilecek. Emin misiniz?",
+                title: NSLocalizedString(
+                    "warning",
+                    comment: "Alert title if user turns off timer while time is running."
+                ),
+                message:  NSLocalizedString(
+                    "timer_turn_off_alert_message",
+                    comment: "Alert message if user turns off timer while time is running."
+                ),
                 handlerOkay: setShortBreakTime,
                 handlerCancel: nil
             )
@@ -399,7 +420,5 @@ class HomeViewController: UIViewController {
         NSLayoutConstraint.activate(actionButtonConstraints)
         NSLayoutConstraint.activate(finishTimerButtonConstraints)
     }
-    
-    
 }
 

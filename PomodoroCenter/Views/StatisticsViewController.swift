@@ -5,12 +5,15 @@ class StatisticsViewController: UIViewController {
     
     var model: StatisticViewModel!
     
-    let statisticTypes = ["Haftalık", "Aylık"]
+    let statisticTypes = [
+        NSLocalizedString("weekly", comment: "One of the types of statistics shown on the statistics screen."),
+        NSLocalizedString("monthly", comment: "One of the types of statistics shown on the statistics screen.")
+    ]
     
     private lazy var screenTitle: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "İstatistikler"
+        label.text = NSLocalizedString("statistics", comment: "Title of statistics screen.")
         label.font = .systemFont(ofSize: 25, weight: .bold)
         return label
     }()
@@ -146,7 +149,13 @@ class StatisticsViewController: UIViewController {
             )
         }
         
-        let set = BarChartDataSet(entries: entries, label: "Saat")
+        let set = BarChartDataSet(
+            entries: entries,
+            label: NSLocalizedString(
+                "hour",
+                comment: "Time type for chart"
+            )
+        )
         set.drawValuesEnabled = false
         set.colors = ChartColorTemplates.colorful()
         
@@ -181,7 +190,14 @@ class StatisticsViewController: UIViewController {
             entries.append(ChartDataEntry(x: Double(index), y: pomodoroHoursByMonths[index].hours))
         }
         
-        let set = LineChartDataSet(entries: entries, label: "Saat")
+        let set = LineChartDataSet(
+            entries: entries,
+            label: NSLocalizedString(
+            "hour",
+            comment: "Time type for chart"
+            )
+        )
+        
         set.mode = .linear
         set.lineWidth = 3
         set.fill = ColorFill(color: .systemBlue)

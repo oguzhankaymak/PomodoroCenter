@@ -11,3 +11,10 @@
 "cancel" = "Vazgeç";
 "play" = "Oynat";
 "calendar" = "Takvim";
+"productivityTitle" =  "VERİMLİLİK";
+"productivityDescription" = "Pomodoro yöntemini kullanırsanız daha uzun süre odaklanabilir ve daha üretken olabilirsiniz.";
+"simpleInterfaceTitle" = "BASİT ARAYÜZ";
+"simpleInterfaceDescription" = "Pomodoro Center çok basit bir kullanıcı arayüzüne sahiptir. Pomodoro Center ile çalışabilir veya mola verebilirsiniz.";
+"chartTitle" = "İSTATİSTİKLER";
+"chartDescription" = "İstatistikleri grafiklerle gün veya ay bazında görebilirsiniz. Böylece çalışma performansınızı analiz edebilirsiniz.";
+"skip" = "Atla";

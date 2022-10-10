@@ -11,3 +11,10 @@
 "cancel" = "Cancel";
 "play" = "Play";
 "calendar" = "Calendar";
+"productivityTitle" = "PRODUCTIVITY";
+"productivityDescription" = "You can focus longer and be more productive if you use the pomodoro method.";
+"simpleInterfaceTitle" = "SIMPLE INTERFACE";
+"simpleInterfaceDescription" = "Pomodoro Center has a very simple user interface. You can work or take a break with the Pomodoro Center.";
+"chartTitle" = "STATISTICS";
+"chartDescription" = "You can see the statistics by days or months with graphs. So you can analyze your study performance.";
+"skip" = "Skip";

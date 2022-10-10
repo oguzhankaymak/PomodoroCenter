@@ -11,7 +11,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         window?.overrideUserInterfaceStyle = .light
-        window?.rootViewController = UINavigationController(rootViewController: HomeViewController())
+        
+        if UserDefaults.standard.isAppOpenedBefore {
+            window?.rootViewController = UINavigationController(rootViewController: HomeViewController())
+        }
+        else {
+            window?.rootViewController = UINavigationController(rootViewController: OnboardViewController())
+        }
+        
         window?.makeKeyAndVisible()
     }
 

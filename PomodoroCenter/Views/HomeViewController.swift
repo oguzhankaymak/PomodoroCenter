@@ -174,13 +174,21 @@ class HomeViewController: UIViewController {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
         
-        let image = UIImage(systemName: "calendar.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22))
+        let image = UIImage(
+            systemName: "calendar.circle.fill",
+            withConfiguration: UIImage.SymbolConfiguration(pointSize: 22)
+        )
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
+        let rightBarButtonItem = UIBarButtonItem(
             image: image,
             style: .plain,
             target: self,
-            action: #selector(openStatistics))
+            action: #selector(openStatistics)
+        )
+        
+        rightBarButtonItem.accessibilityIdentifier = "calendar"
+        
+        navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
     @objc private func openStatistics(){

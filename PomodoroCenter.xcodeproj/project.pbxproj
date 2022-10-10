@@ -136,13 +136,13 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		E20E608C28DC6D1100D43F02 /* Extension */ = {
+		E20E608C28DC6D1100D43F02 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				E20E608D28DC6D3000D43F02 /* UIViewController+Extensions.swift */,
 				E2F4169028F46DDD0031046C /* UserDefaults+Extensions.swift */,
 			);
-			path = Extension;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		E22E486428DDCB8200A84689 /* Database */ = {
@@ -284,7 +284,7 @@
 				E29FCBD328F2BE4F00A6BE18 /* localization */,
 				E2955EA028E19C14002D868C /* Utils */,
 				E22E486428DDCB8200A84689 /* Database */,
-				E20E608C28DC6D1100D43F02 /* Extension */,
+				E20E608C28DC6D1100D43F02 /* Extensions */,
 				E2B74AF928D8EDD30076ACC4 /* Views */,
 				E2B74AF828D8EDC40076ACC4 /* ViewModels */,
 				E2B74AF728D8EDB60076ACC4 /* Models */,

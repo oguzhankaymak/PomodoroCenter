@@ -76,23 +76,23 @@ class ThirdPageOnboardViewController: UIViewController {
             imageView.widthAnchor.constraint(equalToConstant: view.frame.width / 4),
             imageView.heightAnchor.constraint(equalToConstant: view.frame.height / 4),
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height / 5)
+            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height / 6)
         ]
         
         let titleLabelConstraints : [NSLayoutConstraint] = [
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 100),
+            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: view.frame.height / 8),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
         
         let descriptionLabelConstraints: [NSLayoutConstraint] = [
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: view.frame.height / 14),
             descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
         ]
         
         let skipButtonConstraints: [NSLayoutConstraint] = [
-            skipButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 100),
+            skipButton.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.frame.height / 6),
             skipButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             skipButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
             skipButton.heightAnchor.constraint(equalToConstant: 50)

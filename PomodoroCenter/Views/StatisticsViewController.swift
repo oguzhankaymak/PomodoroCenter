@@ -72,7 +72,7 @@ class StatisticsViewController: UIViewController {
         model.getSavedPomodoroTimesByMonths()
     }
     
-    private func subscribeToModel(){
+    private func subscribeToModel() {
         model.onGetPomodoroTimesByDays = { [weak self] pomodoroHoursByDays in
             self?.createBarChart(
                 pomodoroHoursByDays: pomodoroHoursByDays
@@ -86,12 +86,12 @@ class StatisticsViewController: UIViewController {
         }
     }
     
-    private func addSubViews(){
+    private func addSubViews() {
         view.addSubview(screenTitle)
         view.addSubview(statisticTypeSegmentedControl)
     }
     
-    private func configureConstraints(){
+    private func configureConstraints() {
         let screenTitleConstraints: [NSLayoutConstraint] = [
             screenTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 35),
             screenTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -107,7 +107,7 @@ class StatisticsViewController: UIViewController {
         NSLayoutConstraint.activate(statisticTypeSegmentedControlConstraints)
     }
     
-    @objc func statisticTypesSegmentedControlValueChanged(_ segmentedControl: UISegmentedControl){
+    @objc func statisticTypesSegmentedControlValueChanged(_ segmentedControl: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             showBarChart()
@@ -119,19 +119,19 @@ class StatisticsViewController: UIViewController {
         
     }
     
-    private func showBarChart(){
+    private func showBarChart() {
         barChartView.animate(yAxisDuration: 1.5)
         lineChartView.isHidden = true
         barChartView.isHidden = false
     }
     
-    private func showLineChart(){
+    private func showLineChart() {
         barChartView.isHidden = true
         lineChartView.isHidden = false
         lineChartView.animate(yAxisDuration: 1.5)
     }
     
-    private func createBarChart(pomodoroHoursByDays: [TimeByDay]){
+    private func createBarChart(pomodoroHoursByDays: [TimeByDay]) {
         let xAxis = barChartView.xAxis
         xAxis.valueFormatter = IndexAxisValueFormatter(values: pomodoroHoursByDays.map {
             $0.day
@@ -193,8 +193,8 @@ class StatisticsViewController: UIViewController {
         let set = LineChartDataSet(
             entries: entries,
             label: NSLocalizedString(
-            "hour",
-            comment: "Time type for chart"
+                "hour",
+                comment: "Time type for chart"
             )
         )
         

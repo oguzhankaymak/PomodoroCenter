@@ -112,7 +112,7 @@ class HomeViewController: UIViewController {
         subscribeToModel()
     }
     
-    @objc func timeTypesSegmentedControlValueChanged(_ segmentedControl: UISegmentedControl){
+    @objc func timeTypesSegmentedControlValueChanged(_ segmentedControl: UISegmentedControl) {
         if (model.timerIsRunning || !finishTimerButton.isHidden) {
             showWarningMessage(
                 title: NSLocalizedString(
@@ -138,7 +138,7 @@ class HomeViewController: UIViewController {
         
     }
     
-    private func onChangeTimeTypesSegmentedValue(newSelectedSegmentIndex: Int){
+    private func onChangeTimeTypesSegmentedValue(newSelectedSegmentIndex: Int) {
         switch newSelectedSegmentIndex {
         case 0:
             timeTypesSegmentedControl.backgroundColor = .black
@@ -151,7 +151,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private func cancelTimeTypesSegmentedValue(newSelectedSegmentIndex: Int){
+    private func cancelTimeTypesSegmentedValue(newSelectedSegmentIndex: Int) {
         switch newSelectedSegmentIndex {
         case 0:
             timeTypesSegmentedControl.selectedSegmentIndex = 1
@@ -162,7 +162,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private func configureNavigationBar(){
+    private func configureNavigationBar() {
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.backgroundColor = .systemTeal
         
@@ -191,32 +191,32 @@ class HomeViewController: UIViewController {
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
-    @objc private func openStatistics(){
+    @objc private func openStatistics() {
         let vc = StatisticsViewController()
         navigationController?.present(vc, animated: true)
     }
     
-    private func convertActionButtonToPauseButton(){
+    private func convertActionButtonToPauseButton() {
         let image = UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
         actionButton.setImage(image, for: .normal)
     }
     
-    private func convertActionButtonToPlayButton(){
+    private func convertActionButtonToPlayButton() {
         let image = UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
         actionButton.setImage(image, for: .normal)
     }
     
-    private func setStopTimeView(){
+    private func setStopTimeView() {
         convertActionButtonToPlayButton()
         finishTimerButton.isHidden = false
     }
     
-    private func setStartTimeView(){
+    private func setStartTimeView() {
         convertActionButtonToPauseButton()
         finishTimerButton.isHidden = true
     }
     
-    @objc private func actionButtonPress(sender: UIButton){
+    @objc private func actionButtonPress(sender: UIButton) {
         if(model.timerIsRunning){
             setStopTimeView()
             model.stopTimer()
@@ -227,20 +227,20 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @objc private func continueButtonPress(sender: UIButton){
+    @objc private func continueButtonPress(sender: UIButton) {
         convertActionButtonToPauseButton()
         setStartTimeView()
         model.startTimer()
     }
     
     
-    @objc private func finishtimerButtonPress(sender: UIButton){
+    @objc private func finishtimerButtonPress(sender: UIButton) {
         convertActionButtonToPlayButton()
         finishTimerButton.isHidden = true
         model.finishtimer()
     }
     
-    private func goToPomodoro(){
+    private func goToPomodoro() {
         setStartTimeView()
         convertActionButtonToPlayButton()
         
@@ -266,7 +266,7 @@ class HomeViewController: UIViewController {
     }
     
     
-    private func setLongBreakTime(){
+    private func setLongBreakTime() {
         shortBreakTimeButton.backgroundColor = .white
         shortBreakTimeButton.setTitleColor(.gray, for: .normal)
         
@@ -282,7 +282,7 @@ class HomeViewController: UIViewController {
         model.assignTime(timeType: .longBreak)
     }
     
-    @objc private func longBreakTimeButtonPress(sender: UIButton){
+    @objc private func longBreakTimeButtonPress(sender: UIButton) {
         if (model.timerIsRunning || !finishTimerButton.isHidden) {
             showWarningMessage(
                 title: NSLocalizedString(
@@ -302,7 +302,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private func setShortBreakTime(){
+    private func setShortBreakTime() {
         longBreakTimeButton.backgroundColor = .white
         longBreakTimeButton.setTitleColor(.gray, for: .normal)
         
@@ -319,7 +319,7 @@ class HomeViewController: UIViewController {
         model.assignTime(timeType: .shortBreak)
     }
     
-    @objc private func shortBreakTimeButtonPress(sender: UIButton){
+    @objc private func shortBreakTimeButtonPress(sender: UIButton) {
         if (model.timerIsRunning || !finishTimerButton.isHidden) {
             showWarningMessage(
                 title: NSLocalizedString(
@@ -340,8 +340,7 @@ class HomeViewController: UIViewController {
     }
     
     
-    private func subscribeToModel(){
-        
+    private func subscribeToModel() {
         timeLabel.text = model.getFormattedSeconds()
         
         model.onRunningTimer = { [weak self] timeStr in
@@ -369,7 +368,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private func addSubViews(){
+    private func addSubViews() {
         view.addSubview(timeTypesSegmentedControl)
         
         view.addSubview(timeLabel)
@@ -382,7 +381,7 @@ class HomeViewController: UIViewController {
         view.addSubview(finishTimerButton)
     }
     
-    private func configureConstraints(){
+    private func configureConstraints() {
         let timeTypesSegmentedControlConstraints: [NSLayoutConstraint] = [
             timeTypesSegmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.frame.height / 10),
             timeTypesSegmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: 50),

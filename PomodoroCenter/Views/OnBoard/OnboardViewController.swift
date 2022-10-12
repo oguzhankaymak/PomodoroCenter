@@ -40,7 +40,7 @@ class OnboardViewController: UIPageViewController {
         setupPageControl()
         
     }
-
+    
     private func addSubViews() {
         view.addSubview(pageControl)
     }
@@ -68,7 +68,7 @@ class OnboardViewController: UIPageViewController {
 }
 
 extension OnboardViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-
+    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         guard let currentIndex = pages.firstIndex(of: viewController) else { return nil }

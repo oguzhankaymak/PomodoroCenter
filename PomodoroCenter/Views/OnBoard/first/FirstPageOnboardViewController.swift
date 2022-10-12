@@ -1,10 +1,3 @@
-//
-//  FirstPageOnBoardViewController.swift
-//  PomodoroCenter
-//
-//  Created by Oğuzhan Kaymak on 9.10.2022.
-//
-
 import UIKit
 
 class FirstPageOnboardViewController: UIViewController {
@@ -37,7 +30,7 @@ class FirstPageOnboardViewController: UIViewController {
         label.lineBreakMode = .byWordWrapping
         return label
     }()
-
+    
     // MARK: - viewDidLoad
     
     override func viewDidLoad() {
@@ -48,13 +41,13 @@ class FirstPageOnboardViewController: UIViewController {
         
     }
     
-    private func addSubViews(){
+    private func addSubViews() {
         view.addSubview(imageView)
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
     }
     
-    private func configureConstraints(){
+    private func configureConstraints() {
         let imageViewConstraints : [NSLayoutConstraint] = [
             imageView.widthAnchor.constraint(equalToConstant: view.frame.width / 4),
             imageView.heightAnchor.constraint(equalToConstant: view.frame.height / 4),
@@ -78,6 +71,4 @@ class FirstPageOnboardViewController: UIViewController {
         NSLayoutConstraint.activate(titleLabelConstraints)
         NSLayoutConstraint.activate(descriptionLabelConstraints)
     }
-    
-
 }

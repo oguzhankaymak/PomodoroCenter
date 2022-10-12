@@ -24,7 +24,7 @@ final class StatisticViewModel {
         return pomodoroHoursByMonths.firstIndex(where: {$0.month == month}) ?? -1
     }
     
-    private func addTimeInPomodoroTimesByDay(day: String, saveDate: Time){
+    private func addTimeInPomodoroTimesByDay(day: String, saveDate: Time) {
         let index = findDataIndexInPomodoroHoursByDay(day: day)
         
         if index != -1 {
@@ -58,7 +58,7 @@ final class StatisticViewModel {
     
     // MARK: - Public Methods
     
-    func getSavedPomodoroTimesByDays(){
+    func getSavedPomodoroTimesByDays() {
         let savedTimes = database.getSavedTimesByType(type: .pomodoro)
         let sixDaysAgo = Calendar.current.date(byAdding: .day, value: -6, to: Date())
         
@@ -167,5 +167,4 @@ final class StatisticViewModel {
         
         onGetPomodoroTimesByMonths?(pomodoroHoursByMonths)
     }
-    
 }

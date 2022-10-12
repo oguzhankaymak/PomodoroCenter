@@ -1,10 +1,3 @@
-//
-//  FirstPageOnBoardViewController.swift
-//  PomodoroCenter
-//
-//  Created by Oğuzhan Kaymak on 9.10.2022.
-//
-
 import UIKit
 
 class ThirdPageOnboardViewController: UIViewController {
@@ -49,7 +42,7 @@ class ThirdPageOnboardViewController: UIViewController {
         return button
     }()
     
-    @objc private func skipButtonPress(sender: UIButton){
+    @objc private func skipButtonPress(sender: UIButton) {
         let homeViewController = HomeViewController()
         UserDefaults.standard.isAppOpenedBefore = true
         self.navigationController?.pushViewController(homeViewController, animated: true)
@@ -64,14 +57,14 @@ class ThirdPageOnboardViewController: UIViewController {
         configureConstraints()
     }
     
-    private func addSubViews(){
+    private func addSubViews() {
         view.addSubview(imageView)
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
         view.addSubview(skipButton)
     }
     
-    private func configureConstraints(){
+    private func configureConstraints() {
         let imageViewConstraints : [NSLayoutConstraint] = [
             imageView.widthAnchor.constraint(equalToConstant: view.frame.width / 4),
             imageView.heightAnchor.constraint(equalToConstant: view.frame.height / 4),

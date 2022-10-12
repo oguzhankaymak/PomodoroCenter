@@ -1,10 +1,3 @@
-//
-//  FirstPageOnBoardViewController.swift
-//  PomodoroCenter
-//
-//  Created by Oğuzhan Kaymak on 9.10.2022.
-//
-
 import UIKit
 
 class SecondPageOnboardViewController: UIViewController {
@@ -39,22 +32,21 @@ class SecondPageOnboardViewController: UIViewController {
     }()
     
     // MARK: - viewDidLoad
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0.79, green: 0.87, blue: 0.94, alpha: 1)
         addSubViews()
         configureConstraints()
-        
     }
     
-    private func addSubViews(){
+    private func addSubViews() {
         view.addSubview(imageView)
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
     }
     
-    private func configureConstraints(){
+    private func configureConstraints() {
         let imageViewConstraints : [NSLayoutConstraint] = [
             imageView.widthAnchor.constraint(equalToConstant: view.frame.width / 4),
             imageView.heightAnchor.constraint(equalToConstant: view.frame.height / 4),
@@ -73,11 +65,9 @@ class SecondPageOnboardViewController: UIViewController {
             descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
         ]
-            
+        
         NSLayoutConstraint.activate(imageViewConstraints)
         NSLayoutConstraint.activate(titleLabelConstraints)
         NSLayoutConstraint.activate(descriptionLabelConstraints)
     }
-    
-
 }

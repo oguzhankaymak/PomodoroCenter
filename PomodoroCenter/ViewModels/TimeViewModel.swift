@@ -21,7 +21,7 @@ final class TimeViewModel {
     var onAssignTimer: ((String) -> Void)? = nil
     
     // MARK: - init
-
+    
     init(database: PomodoroDatabaseProtocol = PomodoroCoreDataDatabase()) {
         self.database = database
         self.seconds = Global.pomodorotime
@@ -31,7 +31,7 @@ final class TimeViewModel {
     
     // MARK: - Private Methods
     
-    @objc private func timerCounter(){
+    @objc private func timerCounter() {
         seconds = seconds - 1
         
         if seconds == 0 {
@@ -46,7 +46,7 @@ final class TimeViewModel {
         }
         onRunningTimer?(formatedSeconds)
     }
-
+    
     
     private func getTimeByTimeType(timeType: TimeType) -> Int {
         switch timeType {
@@ -71,7 +71,7 @@ final class TimeViewModel {
         timer.invalidate()
     }
     
-    func finishtimer(){
+    func finishtimer() {
         let elapseTime = getTimeByTimeType(timeType: activeTimeType) - seconds
         database.saveTime(time: elapseTime, timeType: activeTimeType)
         
@@ -89,5 +89,4 @@ final class TimeViewModel {
     func getFormattedSeconds() -> String {
         return formatedSeconds
     }
-    
 }

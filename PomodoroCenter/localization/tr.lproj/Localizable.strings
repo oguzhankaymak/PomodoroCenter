@@ -18,3 +18,11 @@
 "chartTitle" = "İSTATİSTİKLER";
 "chartDescription" = "İstatistikleri grafiklerle gün veya ay bazında görebilirsiniz. Böylece çalışma performansınızı analiz edebilirsiniz.";
 "skip" = "Atla";
+"notifications" = "BİLDİRİMLER";
+"breakTime" = "Mola Vakti!";
+"nowItIsTimeToWork" = "Şimdi Çalışma Zamanı!";
+"keepWorking" = "Çalışmaya Devam Et!";
+"nowItIsTimeToRest" = "Şimdi biraz dinlenme zamanı.";
+"takeADeepBreathAndGetToWork" = "Derin bir nefes al ve işe koyul.";
+"dontGiveUpAndKeepWorking" = "Sakın pes etme çalışmaya devam et.";
+"notificationOnBoardingDescription" = "Telefonunuzun ekranını kilitlediğinizde veya uygulamayı arka plana aldığınızda size süre tamamlandığı zaman bildirim göndereceğiz.";

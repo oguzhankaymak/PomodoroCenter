@@ -18,3 +18,11 @@
 "chartTitle" = "STATISTICS";
 "chartDescription" = "You can see the statistics by days or months with graphs. So you can analyze your study performance.";
 "skip" = "Skip";
+"notifications" = "NOTIFICATIONS";
+"breakTime" = "Break Time!";
+"nowItIsTimeToWork" = "Now It's Time To Work!";
+"keepWorking" = "Keep Working!";
+"nowItIsTimeToRest" = "Now It's time to rest.";
+"takeADeepBreathAndGetToWork" = "Take a deep breath and get to work.";
+"dontGiveUpKeepWorking" = "Don't give up keep working.";
+"notificationOnBoardingDescription" = "If you locked your phone or the app is in the background, we will send you notification when the time is up.";

@@ -349,6 +349,8 @@ class HomeViewController: UIViewController {
         
         model.onCompleteTimer = { [weak self] activeTimeType in
             self?.convertActionButtonToPlayButton()
+            self?.sendNotificationIfAppIsBackgroundOrInactive(completedTimeType: activeTimeType)
+            
             if activeTimeType == TimeType.shortBreak || activeTimeType == TimeType.longBreak {
                 self?.timeTypesSegmentedControl.selectedSegmentIndex = 0
                 self?.onChangeTimeTypesSegmentedValue(newSelectedSegmentIndex: 0)
@@ -365,6 +367,13 @@ class HomeViewController: UIViewController {
         
         model.onAssignTimer = { [weak self] timeStr in
             self?.timeLabel.text = timeStr
+        }
+    }
+    
+    private func sendNotificationIfAppIsBackgroundOrInactive(completedTimeType: TimeType){
+        let state = UIApplication.shared.applicationState
+        if state == .background || state == .inactive {
+            model.sendNotification(completedTimeType: completedTimeType)
         }
     }
     

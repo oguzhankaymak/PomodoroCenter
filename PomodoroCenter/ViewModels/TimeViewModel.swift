@@ -1,4 +1,5 @@
 import Foundation
+import UserNotifications
 
 final class TimeViewModel {
     
@@ -59,6 +60,28 @@ final class TimeViewModel {
         }
     }
     
+    private func createNotificationTitle(completedTimeType: TimeType) -> String {
+        switch completedTimeType {
+        case .pomodoro:
+            return NSLocalizedString("breakTime", comment: "It's notification title when completed one pomodoro.")
+        case .longBreak:
+            return NSLocalizedString("nowItIsTimeToWork", comment: "It's notification title when completed long break.")
+        case .shortBreak:
+            return NSLocalizedString("keepWorking", comment: "It's notification title when completed short break.")
+        }
+    }
+    
+    private func createNotificationBody(completedTimeType: TimeType) -> String {
+        switch completedTimeType {
+        case .pomodoro:
+            return NSLocalizedString("nowItIsTimeToRest", comment: "It's notification message when completed one pomodoro.")
+        case .longBreak:
+            return  NSLocalizedString("takeADeepBreathAndGetToWork", comment: "It's notification message when completed long break.")
+        case .shortBreak:
+            return NSLocalizedString("dontGiveUpAndKeepWorking", comment: "It's notification message when completed short break")
+        }
+    }
+    
     //MARK: - Public Methods
     
     func startTimer() {
@@ -88,5 +111,21 @@ final class TimeViewModel {
     
     func getFormattedSeconds() -> String {
         return formatedSeconds
+    }
+    
+    func sendNotification(completedTimeType: TimeType) {
+        let content = UNMutableNotificationContent()
+        content.title = createNotificationTitle(completedTimeType: completedTimeType)
+        content.body = createNotificationBody(completedTimeType: completedTimeType)
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        
+        
+        let request = UNNotificationRequest(identifier: "pomodoroCenter",
+                                            content: content,
+                                            trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 }

@@ -16,9 +16,10 @@ class OnboardViewController: UIPageViewController {
     }()
     
     var pages : [UIViewController] = [
-        FirstPageOnboardViewController(),
-        SecondPageOnboardViewController(),
-        ThirdPageOnboardViewController()
+        ProductivityOnboardViewController(),
+        SimpleInterfaceOnboardViewController(),
+        ChartOnboardViewController(),
+        NotificationOnboardViewController()
     ]
     
     // MARK: - init
@@ -38,7 +39,6 @@ class OnboardViewController: UIPageViewController {
         addSubViews()
         configureConstraints()
         setupPageControl()
-        
     }
     
     private func addSubViews() {
@@ -67,7 +67,8 @@ class OnboardViewController: UIPageViewController {
     }
 }
 
-extension OnboardViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+extension OnboardViewController: UIPageViewControllerDataSource {
+    
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
@@ -90,6 +91,11 @@ extension OnboardViewController: UIPageViewControllerDataSource, UIPageViewContr
             return pages.first
         }
     }
+    
+    
+}
+
+extension OnboardViewController: UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         

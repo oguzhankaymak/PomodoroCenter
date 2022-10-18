@@ -19,14 +19,15 @@
 		E25C02A928E8908A00007D87 /* PomodoroCenterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25C02A828E8908A00007D87 /* PomodoroCenterUITestsLaunchTests.swift */; };
 		E27A98B528E058E90002C14F /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27A98B428E058E90002C14F /* StatisticsViewController.swift */; };
 		E27AEAAF28E45AF900CFB06A /* TimeByMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27AEAAE28E45AF900CFB06A /* TimeByMonth.swift */; };
+		E27ED10E28FC56F400FEB28B /* NotificationOnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27ED10D28FC56F400FEB28B /* NotificationOnboardViewController.swift */; };
 		E2955EA228E19C25002D868C /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2955EA128E19C25002D868C /* Functions.swift */; };
 		E29FCBD628F2BE7D00A6BE18 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E29FCBD828F2BE7D00A6BE18 /* Localizable.strings */; };
 		E29FCBDB28F2C04700A6BE18 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FCBDA28F2C04700A6BE18 /* String+Extensions.swift */; };
 		E29FCBDC28F2C05100A6BE18 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E29FCBD828F2BE7D00A6BE18 /* Localizable.strings */; };
 		E29FCBDF28F2C99A00A6BE18 /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FCBDE28F2C99A00A6BE18 /* OnboardViewController.swift */; };
-		E29FCBE128F2E0D000A6BE18 /* FirstPageOnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FCBE028F2E0D000A6BE18 /* FirstPageOnboardViewController.swift */; };
-		E29FCBE328F2E0E400A6BE18 /* SecondPageOnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FCBE228F2E0E400A6BE18 /* SecondPageOnboardViewController.swift */; };
-		E29FCBE528F2E18000A6BE18 /* ThirdPageOnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FCBE428F2E18000A6BE18 /* ThirdPageOnboardViewController.swift */; };
+		E29FCBE128F2E0D000A6BE18 /* ProductivityOnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FCBE028F2E0D000A6BE18 /* ProductivityOnboardViewController.swift */; };
+		E29FCBE328F2E0E400A6BE18 /* SimpleInterfaceOnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FCBE228F2E0E400A6BE18 /* SimpleInterfaceOnboardViewController.swift */; };
+		E29FCBE528F2E18000A6BE18 /* ChartOnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FCBE428F2E18000A6BE18 /* ChartOnboardViewController.swift */; };
 		E2A26BE828D9D4AE0098A182 /* TimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A26BE728D9D4AE0098A182 /* TimeType.swift */; };
 		E2AF474A28E4DF510073F32A /* TimeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AF474928E4DF510073F32A /* TimeViewModelTests.swift */; };
 		E2B74AFB28D8EE4D0076ACC4 /* TimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B74AFA28D8EE4D0076ACC4 /* TimeViewModel.swift */; };
@@ -75,14 +76,15 @@
 		E25C02A828E8908A00007D87 /* PomodoroCenterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroCenterUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E27A98B428E058E90002C14F /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		E27AEAAE28E45AF900CFB06A /* TimeByMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeByMonth.swift; sourceTree = "<group>"; };
+		E27ED10D28FC56F400FEB28B /* NotificationOnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationOnboardViewController.swift; sourceTree = "<group>"; };
 		E2955EA128E19C25002D868C /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		E29FCBD728F2BE7D00A6BE18 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E29FCBD928F2BE8900A6BE18 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E29FCBDA28F2C04700A6BE18 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		E29FCBDE28F2C99A00A6BE18 /* OnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
-		E29FCBE028F2E0D000A6BE18 /* FirstPageOnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstPageOnboardViewController.swift; sourceTree = "<group>"; };
-		E29FCBE228F2E0E400A6BE18 /* SecondPageOnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondPageOnboardViewController.swift; sourceTree = "<group>"; };
-		E29FCBE428F2E18000A6BE18 /* ThirdPageOnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPageOnboardViewController.swift; sourceTree = "<group>"; };
+		E29FCBE028F2E0D000A6BE18 /* ProductivityOnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductivityOnboardViewController.swift; sourceTree = "<group>"; };
+		E29FCBE228F2E0E400A6BE18 /* SimpleInterfaceOnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleInterfaceOnboardViewController.swift; sourceTree = "<group>"; };
+		E29FCBE428F2E18000A6BE18 /* ChartOnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartOnboardViewController.swift; sourceTree = "<group>"; };
 		E2A26BE728D9D4AE0098A182 /* TimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeType.swift; sourceTree = "<group>"; };
 		E2AF474728E4DF510073F32A /* PomodoroCenterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomodoroCenterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2AF474928E4DF510073F32A /* TimeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewModelTests.swift; sourceTree = "<group>"; };
@@ -163,6 +165,14 @@
 			path = PomodoroCenterUITests;
 			sourceTree = "<group>";
 		};
+		E27ED10C28FC563500FEB28B /* notification */ = {
+			isa = PBXGroup;
+			children = (
+				E27ED10D28FC56F400FEB28B /* NotificationOnboardViewController.swift */,
+			);
+			path = notification;
+			sourceTree = "<group>";
+		};
 		E2955EA028E19C14002D868C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,36 +193,37 @@
 		E29FCBDD28F2C8EE00A6BE18 /* OnBoard */ = {
 			isa = PBXGroup;
 			children = (
-				E29FCBE828F2E1A400A6BE18 /* third */,
-				E29FCBE728F2E19E00A6BE18 /* second */,
-				E29FCBE628F2E19600A6BE18 /* first */,
+				E27ED10C28FC563500FEB28B /* notification */,
+				E29FCBE828F2E1A400A6BE18 /* chart */,
+				E29FCBE728F2E19E00A6BE18 /* simpleInterface */,
+				E29FCBE628F2E19600A6BE18 /* productivity */,
 				E29FCBDE28F2C99A00A6BE18 /* OnboardViewController.swift */,
 			);
 			path = OnBoard;
 			sourceTree = "<group>";
 		};
-		E29FCBE628F2E19600A6BE18 /* first */ = {
+		E29FCBE628F2E19600A6BE18 /* productivity */ = {
 			isa = PBXGroup;
 			children = (
-				E29FCBE028F2E0D000A6BE18 /* FirstPageOnboardViewController.swift */,
+				E29FCBE028F2E0D000A6BE18 /* ProductivityOnboardViewController.swift */,
 			);
-			path = first;
+			path = productivity;
 			sourceTree = "<group>";
 		};
-		E29FCBE728F2E19E00A6BE18 /* second */ = {
+		E29FCBE728F2E19E00A6BE18 /* simpleInterface */ = {
 			isa = PBXGroup;
 			children = (
-				E29FCBE228F2E0E400A6BE18 /* SecondPageOnboardViewController.swift */,
+				E29FCBE228F2E0E400A6BE18 /* SimpleInterfaceOnboardViewController.swift */,
 			);
-			path = second;
+			path = simpleInterface;
 			sourceTree = "<group>";
 		};
-		E29FCBE828F2E1A400A6BE18 /* third */ = {
+		E29FCBE828F2E1A400A6BE18 /* chart */ = {
 			isa = PBXGroup;
 			children = (
-				E29FCBE428F2E18000A6BE18 /* ThirdPageOnboardViewController.swift */,
+				E29FCBE428F2E18000A6BE18 /* ChartOnboardViewController.swift */,
 			);
-			path = third;
+			path = chart;
 			sourceTree = "<group>";
 		};
 		E2AF474828E4DF510073F32A /* PomodoroCenterTests */ = {
@@ -517,18 +528,19 @@
 				E25126B528E0C7D600673B6F /* StatisticViewModel.swift in Sources */,
 				E2B79D5828D891AD00058EF5 /* HomeViewController.swift in Sources */,
 				E27A98B528E058E90002C14F /* StatisticsViewController.swift in Sources */,
-				E29FCBE328F2E0E400A6BE18 /* SecondPageOnboardViewController.swift in Sources */,
-				E29FCBE128F2E0D000A6BE18 /* FirstPageOnboardViewController.swift in Sources */,
+				E29FCBE328F2E0E400A6BE18 /* SimpleInterfaceOnboardViewController.swift in Sources */,
+				E29FCBE128F2E0D000A6BE18 /* ProductivityOnboardViewController.swift in Sources */,
 				E2B79D5428D891AD00058EF5 /* AppDelegate.swift in Sources */,
 				E27AEAAF28E45AF900CFB06A /* TimeByMonth.swift in Sources */,
 				E20E608E28DC6D3000D43F02 /* UIViewController+Extensions.swift in Sources */,
 				E2955EA228E19C25002D868C /* Functions.swift in Sources */,
-				E29FCBE528F2E18000A6BE18 /* ThirdPageOnboardViewController.swift in Sources */,
+				E29FCBE528F2E18000A6BE18 /* ChartOnboardViewController.swift in Sources */,
 				E2B74AFB28D8EE4D0076ACC4 /* TimeViewModel.swift in Sources */,
 				E25C029F28E88B1700007D87 /* Global.swift in Sources */,
 				E25126B728E0CF0200673B6F /* TimeByDay.swift in Sources */,
 				E29FCBDF28F2C99A00A6BE18 /* OnboardViewController.swift in Sources */,
 				E22E486028DDC86000A84689 /* Time.swift in Sources */,
+				E27ED10E28FC56F400FEB28B /* NotificationOnboardViewController.swift in Sources */,
 				E2A26BE828D9D4AE0098A182 /* TimeType.swift in Sources */,
 				E2B79D5628D891AD00058EF5 /* SceneDelegate.swift in Sources */,
 				E22E486628DDCB9600A84689 /* PomodoroCoreDataDatabase.swift in Sources */,

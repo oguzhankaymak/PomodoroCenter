@@ -1,19 +1,19 @@
 import UIKit
 
-class ThirdPageOnboardViewController: UIViewController {
+class SimpleInterfaceOnboardViewController: UIViewController {
     
     private lazy var imageView : UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: "chart")
+        imageView.image = UIImage(named: "simple_interface")
         return imageView
     }()
     
     private lazy var titleLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = NSLocalizedString("chartTitle", comment: "Third onboarding screen title.")
+        label.text = NSLocalizedString("simpleInterfaceTitle", comment: "Simple interface onboarding screen title.")
         label.textColor = .black
         label.font = .systemFont(ofSize: 25, weight: .bold)
         return label
@@ -22,7 +22,7 @@ class ThirdPageOnboardViewController: UIViewController {
     private lazy var descriptionLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = NSLocalizedString("chartDescription", comment: "Third onboarding screen descriptipn.")
+        label.text = NSLocalizedString("simpleInterfaceDescription", comment: "Simple interface onboarding screen description.")
         label.textColor = .black
         label.font = .italicSystemFont(ofSize: 17)
         label.textAlignment = .center
@@ -30,23 +30,6 @@ class ThirdPageOnboardViewController: UIViewController {
         label.lineBreakMode = .byWordWrapping
         return label
     }()
-    
-    private lazy var skipButton : UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .systemBlue
-        button.setTitle(NSLocalizedString("skip", comment: "Skip button on last onboarding screen."), for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 12
-        button.addTarget(self, action: #selector(skipButtonPress), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc private func skipButtonPress(sender: UIButton) {
-        let homeViewController = HomeViewController()
-        UserDefaults.standard.isAppOpenedBefore = true
-        self.navigationController?.pushViewController(homeViewController, animated: true)
-    }
     
     // MARK: - viewDidLoad
     
@@ -61,7 +44,6 @@ class ThirdPageOnboardViewController: UIViewController {
         view.addSubview(imageView)
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
-        view.addSubview(skipButton)
     }
     
     private func configureConstraints() {
@@ -84,16 +66,8 @@ class ThirdPageOnboardViewController: UIViewController {
             descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
         ]
         
-        let skipButtonConstraints: [NSLayoutConstraint] = [
-            skipButton.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.frame.height / 6),
-            skipButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            skipButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            skipButton.heightAnchor.constraint(equalToConstant: 50)
-        ]
-        
         NSLayoutConstraint.activate(imageViewConstraints)
         NSLayoutConstraint.activate(titleLabelConstraints)
         NSLayoutConstraint.activate(descriptionLabelConstraints)
-        NSLayoutConstraint.activate(skipButtonConstraints)
     }
 }

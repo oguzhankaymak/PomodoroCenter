@@ -1,19 +1,19 @@
 import UIKit
 
-class SecondPageOnboardViewController: UIViewController {
+class ProductivityOnboardViewController: UIViewController {
     
     private lazy var imageView : UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: "simple_interface")
+        imageView.image = UIImage(named: "productivity")
         return imageView
     }()
     
     private lazy var titleLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = NSLocalizedString("simpleInterfaceTitle", comment: "Second onboarding screen title.")
+        label.text = NSLocalizedString("productivityTitle", comment: "Productivity onboarding screen title.")
         label.textColor = .black
         label.font = .systemFont(ofSize: 25, weight: .bold)
         return label
@@ -22,7 +22,7 @@ class SecondPageOnboardViewController: UIViewController {
     private lazy var descriptionLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = NSLocalizedString("simpleInterfaceDescription", comment: "Second onboarding screen description.")
+        label.text = NSLocalizedString("productivityDescription", comment: "Productivity onboarding screen description.")
         label.textColor = .black
         label.font = .italicSystemFont(ofSize: 17)
         label.textAlignment = .center
@@ -38,6 +38,7 @@ class SecondPageOnboardViewController: UIViewController {
         view.backgroundColor = UIColor(red: 0.79, green: 0.87, blue: 0.94, alpha: 1)
         addSubViews()
         configureConstraints()
+        
     }
     
     private func addSubViews() {

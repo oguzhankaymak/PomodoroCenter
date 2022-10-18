@@ -1,19 +1,19 @@
 import UIKit
 
-class FirstPageOnboardViewController: UIViewController {
+class ChartOnboardViewController: UIViewController {
     
     private lazy var imageView : UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: "productivity")
+        imageView.image = UIImage(named: "chart")
         return imageView
     }()
     
     private lazy var titleLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = NSLocalizedString("productivityTitle", comment: "First onboarding screen title.")
+        label.text = NSLocalizedString("chartTitle", comment: "Chart onboarding screen title.")
         label.textColor = .black
         label.font = .systemFont(ofSize: 25, weight: .bold)
         return label
@@ -22,7 +22,7 @@ class FirstPageOnboardViewController: UIViewController {
     private lazy var descriptionLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = NSLocalizedString("productivityDescription", comment: "First onboarding screen description.")
+        label.text = NSLocalizedString("chartDescription", comment: "Chart onboarding screen descriptipn.")
         label.textColor = .black
         label.font = .italicSystemFont(ofSize: 17)
         label.textAlignment = .center
@@ -38,7 +38,6 @@ class FirstPageOnboardViewController: UIViewController {
         view.backgroundColor = UIColor(red: 0.79, green: 0.87, blue: 0.94, alpha: 1)
         addSubViews()
         configureConstraints()
-        
     }
     
     private func addSubViews() {

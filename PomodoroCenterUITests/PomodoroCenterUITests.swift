@@ -9,7 +9,8 @@ class PomodoroCenterUITests: XCTestCase {
 
         let scrollViewsQuery = XCUIApplication().scrollViews
         let element = scrollViewsQuery.children(matching: .other).element.children(matching: .other).element
-        
+
+        element.swipeLeft()
         element.swipeLeft()
         element.swipeLeft()
         scrollViewsQuery.otherElements.buttons["skip".localized].tap()
@@ -17,7 +18,7 @@ class PomodoroCenterUITests: XCTestCase {
         app.terminate()
         app.setIsAppOpenedBefore(true)
         app.launch()
-        
+
         let actionButton = app.buttons["actionButton"]
         XCTAssertTrue(actionButton.exists, "Home view controller isn't open when app opened second")
     }

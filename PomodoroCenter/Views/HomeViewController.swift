@@ -2,6 +2,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    var coordinator: HomeFlow?
+    
     var model: TimeViewModel!
     let timeTypes = [
         NSLocalizedString("pomodoro", comment: "User choose this section if wants to work."),
@@ -192,8 +194,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func openStatistics() {
-        let vc = StatisticsViewController()
-        navigationController?.present(vc, animated: true)
+        coordinator?.goToStatisticsViewController()
     }
     
     private func convertActionButtonToPauseButton() {

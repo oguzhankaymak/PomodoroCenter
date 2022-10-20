@@ -3,6 +3,7 @@ import Charts
 
 class StatisticsViewController: UIViewController {
     
+    var coordinator: HomeFlow?
     var model: StatisticViewModel!
     
     let statisticTypes = [

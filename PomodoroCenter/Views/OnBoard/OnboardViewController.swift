@@ -2,6 +2,7 @@ import UIKit
 
 class OnboardViewController: UIPageViewController {
     
+    var coordinator: OnboardingFlow?
     let initialPage = 0
     
     private lazy var pageControl : UIPageControl = {
@@ -15,11 +16,11 @@ class OnboardViewController: UIPageViewController {
         return pageControl
     }()
     
-    var pages : [UIViewController] = [
+    private lazy var  pages : [UIViewController] = [
         ProductivityOnboardViewController(),
         SimpleInterfaceOnboardViewController(),
         ChartOnboardViewController(),
-        NotificationOnboardViewController()
+        NotificationOnboardViewController(coordinator: coordinator)
     ]
     
     // MARK: - init

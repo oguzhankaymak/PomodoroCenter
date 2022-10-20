@@ -3,7 +3,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var coordinator: AppCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
@@ -12,14 +12,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.overrideUserInterfaceStyle = .light
         
-        if UserDefaults.standard.isAppOpenedBefore {
-            window?.rootViewController = UINavigationController(rootViewController: HomeViewController())
-        }
-        else {
-            window?.rootViewController = UINavigationController(rootViewController: OnboardViewController())
-        }
         
-        window?.makeKeyAndVisible()
+        coordinator = AppCoordinator(window: window!)
+        coordinator?.start()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

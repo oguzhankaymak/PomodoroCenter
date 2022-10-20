@@ -2,6 +2,8 @@ import UIKit
 
 class NotificationOnboardViewController: UIViewController {
     
+    private var coordinator: OnboardingFlow?
+    
     private lazy var imageView : UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -55,12 +57,19 @@ class NotificationOnboardViewController: UIViewController {
         configureConstraints()
     }
     
+    init(coordinator: OnboardingFlow?) {
+        self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+    
     private func requestNotificationPermission() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
             DispatchQueue.main.async {
-                let homeViewController = HomeViewController()
-                UserDefaults.standard.isAppOpenedBefore = true
-                self.navigationController?.pushViewController(homeViewController, animated: true)
+                self.coordinator?.coodinateToHome()
             }
         }
     }

@@ -19,7 +19,7 @@ class OnboardingCoordinator: Coordinator, OnboardingFlow {
     
     // MARK: - Flow Methods
     func coodinateToHome() {
-        UserDefaults.standard.isAppOpenedBefore = true
+        AppData.isAppOpenedBefore = true
         let homeCoordinator = HomeCoordinator(navigationController: navigationController)
         coordinate(to: homeCoordinator)
     }

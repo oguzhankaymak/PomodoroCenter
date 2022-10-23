@@ -13,7 +13,7 @@ class StartCoordinator: Coordinator, StartFlow {
     }
     
     func start() {
-        let coordinator : Coordinator = UserDefaults.standard.isAppOpenedBefore
+        let coordinator : Coordinator = AppData.isAppOpenedBefore
             ? HomeCoordinator(navigationController: navigationController)
             : OnboardingCoordinator(navigationController: navigationController)
         

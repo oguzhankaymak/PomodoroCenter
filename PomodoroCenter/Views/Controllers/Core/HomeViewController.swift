@@ -14,16 +14,16 @@ class HomeViewController: UIViewController {
         let segmentedControl = UISegmentedControl(items: timeTypes)
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.tintColor = .white
-        segmentedControl.backgroundColor = .black
+        segmentedControl.backgroundColor = Color.black
         
-        let font = UIFont.systemFont(ofSize: 14)
+        let font = AppFont.segmentedControlTitle
         
         segmentedControl.setTitleTextAttributes(
-            [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.black],
+            [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: Color.black],
             for: .selected
         )
         segmentedControl.setTitleTextAttributes(
-            [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white],
+            [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: Color.white],
             for: .normal
         )
         segmentedControl.addTarget(self, action: #selector(timeTypesSegmentedControlValueChanged(_:)), for: .valueChanged)
@@ -41,12 +41,15 @@ class HomeViewController: UIViewController {
     private lazy var shortBreakTimeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 8
-        button.layer.borderColor = UIColor.gray.cgColor
+        button.layer.cornerRadius = CornerRadius.small
+        button.layer.borderColor = BorderColor.gray
         button.layer.borderWidth = 1
         button.setTitle("5", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .gray
+        button.setTitleColor(
+            Color.white,
+            for: .normal
+        )
+        button.backgroundColor = Color.gray
         button.addTarget(self, action: #selector(shortBreakTimeButtonPress), for: .touchUpInside)
         return button
     }()
@@ -54,11 +57,14 @@ class HomeViewController: UIViewController {
     private lazy var longBreakTimeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 8
-        button.layer.borderColor = UIColor.gray.cgColor
+        button.layer.cornerRadius = CornerRadius.small
+        button.layer.borderColor = BorderColor.gray
         button.layer.borderWidth = 1
         button.setTitle("15", for: .normal)
-        button.setTitleColor(.gray, for: .normal)
+        button.setTitleColor(
+            Color.gray,
+            for: .normal
+        )
         button.addTarget(self, action: #selector(longBreakTimeButtonPress), for: .touchUpInside)
         return button
     }()
@@ -66,8 +72,8 @@ class HomeViewController: UIViewController {
     private lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 75, weight: .bold)
-        label.textColor = .black
+        label.font = AppFont.extraLargetitle
+        label.textColor = Color.black
         label.textAlignment = .center
         label.accessibilityIdentifier = "timeLabel"
         return label
@@ -76,9 +82,9 @@ class HomeViewController: UIViewController {
     private lazy var actionButton: UIButton = {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 40
-        button.backgroundColor = .black
-        button.tintColor = .white
+        button.layer.cornerRadius = CornerRadius.extraLarge
+        button.backgroundColor = Color.black
+        button.tintColor = Color.white
         
         button.addTarget(self, action: #selector(actionButtonPress), for: .touchUpInside)
         
@@ -94,10 +100,10 @@ class HomeViewController: UIViewController {
     private lazy var finishTimerButton: UIButton = {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = CornerRadius.normal
         button.backgroundColor = .systemTeal
         button.setTitle(NSLocalizedString("finish", comment: "Title of finish timer button."), for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(Color.white, for: .normal)
         
         button.addTarget(self, action: #selector(finishtimerButtonPress), for: .touchUpInside)
         button.isHidden = true
@@ -106,7 +112,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = Color.white
         configureNavigationBar()
         model = TimeViewModel()
         addSubViews()
@@ -143,10 +149,10 @@ class HomeViewController: UIViewController {
     private func onChangeTimeTypesSegmentedValue(newSelectedSegmentIndex: Int) {
         switch newSelectedSegmentIndex {
         case 0:
-            timeTypesSegmentedControl.backgroundColor = .black
+            timeTypesSegmentedControl.backgroundColor = Color.black
             goToPomodoro()
         case 1:
-            timeTypesSegmentedControl.backgroundColor = .gray
+            timeTypesSegmentedControl.backgroundColor = Color.gray
             goToBreak()
         default:
             break
@@ -165,13 +171,13 @@ class HomeViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.backgroundColor = .systemTeal
+        navigationController?.navigationBar.tintColor = Color.white
+        navigationController?.navigationBar.backgroundColor = Color.teal
         
         let label = UILabel()
-        label.textColor = .white
+        label.textColor = Color.white
         label.text = "PomodoroCenter"
-        label.font = .italicSystemFont(ofSize: 20)
+        label.font = AppFont.navigationBarItalic
         
         
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
@@ -247,8 +253,8 @@ class HomeViewController: UIViewController {
         
         breakTimesView.isHidden = true
         
-        timeLabel.textColor = .black
-        actionButton.backgroundColor = .black
+        timeLabel.textColor = Color.black
+        actionButton.backgroundColor = Color.black
         
         model.assignTime(timeType: .pomodoro)
     }
@@ -261,18 +267,18 @@ class HomeViewController: UIViewController {
         
         breakTimesView.isHidden = false
         
-        timeLabel.textColor = .gray
-        actionButton.backgroundColor = .gray
-        model.assignTime(timeType: self.shortBreakTimeButton.backgroundColor == .gray ? .shortBreak : .longBreak)
+        timeLabel.textColor = Color.gray
+        actionButton.backgroundColor = Color.gray
+        model.assignTime(timeType: self.shortBreakTimeButton.backgroundColor == Color.gray ? .shortBreak : .longBreak)
     }
     
     
     private func setLongBreakTime() {
-        shortBreakTimeButton.backgroundColor = .white
-        shortBreakTimeButton.setTitleColor(.gray, for: .normal)
+        shortBreakTimeButton.backgroundColor = Color.white
+        shortBreakTimeButton.setTitleColor(Color.gray, for: .normal)
         
-        longBreakTimeButton.backgroundColor = .gray
-        longBreakTimeButton.setTitleColor(.white, for: .normal)
+        longBreakTimeButton.backgroundColor = Color.gray
+        longBreakTimeButton.setTitleColor(Color.white, for: .normal)
         
         if model.timerIsRunning {
             convertActionButtonToPlayButton()
@@ -304,11 +310,11 @@ class HomeViewController: UIViewController {
     }
     
     private func setShortBreakTime() {
-        longBreakTimeButton.backgroundColor = .white
-        longBreakTimeButton.setTitleColor(.gray, for: .normal)
+        longBreakTimeButton.backgroundColor = Color.white
+        longBreakTimeButton.setTitleColor(Color.gray, for: .normal)
         
-        shortBreakTimeButton.backgroundColor = .gray
-        shortBreakTimeButton.setTitleColor(.white, for: .normal)
+        shortBreakTimeButton.backgroundColor = Color.gray
+        shortBreakTimeButton.setTitleColor(Color.white, for: .normal)
         
         if model.timerIsRunning {
             convertActionButtonToPlayButton()

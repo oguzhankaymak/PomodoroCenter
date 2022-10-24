@@ -15,21 +15,21 @@ class StatisticsViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = NSLocalizedString("statistics", comment: "Title of statistics screen.")
-        label.font = .systemFont(ofSize: 25, weight: .bold)
+        label.font = AppFont.title
         return label
     }()
     
     private lazy var statisticTypeSegmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: statisticTypes)
         segmentedControl.selectedSegmentIndex = 0
-        segmentedControl.tintColor = .black
-        segmentedControl.backgroundColor = .black
+        segmentedControl.tintColor = Color.black
+        segmentedControl.backgroundColor = Color.black
         segmentedControl.setTitleTextAttributes(
-            [NSAttributedString.Key.foregroundColor: UIColor.black],
+            [NSAttributedString.Key.foregroundColor: Color.black],
             for: .selected
         )
         segmentedControl.setTitleTextAttributes(
-            [NSAttributedString.Key.foregroundColor: UIColor.white],
+            [NSAttributedString.Key.foregroundColor: Color.white],
             for: .normal
         )
         segmentedControl.addTarget(self, action: #selector(statisticTypesSegmentedControlValueChanged(_:)), for: .valueChanged)

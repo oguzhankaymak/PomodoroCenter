@@ -26,6 +26,8 @@
 		E28B161929008E1D00F2DFEF /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28B161829008E1D00F2DFEF /* HomeCoordinator.swift */; };
 		E28B161B29008E2D00F2DFEF /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28B161A29008E2D00F2DFEF /* OnboardingCoordinator.swift */; };
 		E2955EA228E19C25002D868C /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2955EA128E19C25002D868C /* Functions.swift */; };
+		E2988FAA2905D9B000613EE7 /* OnboardingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2988FA92905D9B000613EE7 /* OnboardingImageView.swift */; };
+		E2988FAD2905EAEE00613EE7 /* OnboardingImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2988FAC2905EAEE00613EE7 /* OnboardingImageViewModel.swift */; };
 		E29FCBD628F2BE7D00A6BE18 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E29FCBD828F2BE7D00A6BE18 /* Localizable.strings */; };
 		E29FCBDB28F2C04700A6BE18 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FCBDA28F2C04700A6BE18 /* String+Extensions.swift */; };
 		E29FCBDC28F2C05100A6BE18 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E29FCBD828F2BE7D00A6BE18 /* Localizable.strings */; };
@@ -35,6 +37,9 @@
 		E29FCBE528F2E18000A6BE18 /* ChartOnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FCBE428F2E18000A6BE18 /* ChartOnboardViewController.swift */; };
 		E2A26BE828D9D4AE0098A182 /* TimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A26BE728D9D4AE0098A182 /* TimeType.swift */; };
 		E2AF474A28E4DF510073F32A /* TimeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AF474928E4DF510073F32A /* TimeViewModelTests.swift */; };
+		E2B6BB6529057A25006AA1DA /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B6BB6429057A25006AA1DA /* Color.swift */; };
+		E2B6BB6729057A66006AA1DA /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B6BB6629057A66006AA1DA /* Font.swift */; };
+		E2B6BB6B2905832A006AA1DA /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B6BB6A2905832A006AA1DA /* Layer.swift */; };
 		E2B74AFB28D8EE4D0076ACC4 /* TimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B74AFA28D8EE4D0076ACC4 /* TimeViewModel.swift */; };
 		E2B79D5428D891AD00058EF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B79D5328D891AD00058EF5 /* AppDelegate.swift */; };
 		E2B79D5628D891AD00058EF5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B79D5528D891AD00058EF5 /* SceneDelegate.swift */; };
@@ -44,6 +49,10 @@
 		E2B79D6328D891AF00058EF5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B79D6128D891AF00058EF5 /* LaunchScreen.storyboard */; };
 		E2BB897F2901B20E004CCA79 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BB897E2901B20E004CCA79 /* Storage.swift */; };
 		E2BB89812901B24C004CCA79 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BB89802901B24C004CCA79 /* AppData.swift */; };
+		E2BD549129070AAA00ACF399 /* OnboardingTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BD549029070AAA00ACF399 /* OnboardingTitleLabel.swift */; };
+		E2BD549329070ACA00ACF399 /* OnboardingTitleLabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BD549229070ACA00ACF399 /* OnboardingTitleLabelViewModel.swift */; };
+		E2BD549629070ED500ACF399 /* OnboardingDescriptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BD549529070ED500ACF399 /* OnboardingDescriptionLabel.swift */; };
+		E2BD549829070EE100ACF399 /* OnboardingDescriptionLabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BD549729070EE100ACF399 /* OnboardingDescriptionLabelViewModel.swift */; };
 		E2CF312E28E6E83F00D3669E /* StatisticsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF312D28E6E83F00D3669E /* StatisticsViewModelTests.swift */; };
 		E2CF313128E6ED7000D3669E /* PomodoroDatabaseSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF313028E6ED7000D3669E /* PomodoroDatabaseSpy.swift */; };
 		E2F4169428F4719F0031046C /* XCUIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F4169328F4719F0031046C /* XCUIApplication+Extensions.swift */; };
@@ -89,6 +98,8 @@
 		E28B161829008E1D00F2DFEF /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		E28B161A29008E2D00F2DFEF /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		E2955EA128E19C25002D868C /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		E2988FA92905D9B000613EE7 /* OnboardingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingImageView.swift; sourceTree = "<group>"; };
+		E2988FAC2905EAEE00613EE7 /* OnboardingImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingImageViewModel.swift; sourceTree = "<group>"; };
 		E29FCBD728F2BE7D00A6BE18 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E29FCBD928F2BE8900A6BE18 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E29FCBDA28F2C04700A6BE18 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -99,6 +110,9 @@
 		E2A26BE728D9D4AE0098A182 /* TimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeType.swift; sourceTree = "<group>"; };
 		E2AF474728E4DF510073F32A /* PomodoroCenterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomodoroCenterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2AF474928E4DF510073F32A /* TimeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewModelTests.swift; sourceTree = "<group>"; };
+		E2B6BB6429057A25006AA1DA /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		E2B6BB6629057A66006AA1DA /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		E2B6BB6A2905832A006AA1DA /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
 		E2B74AFA28D8EE4D0076ACC4 /* TimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewModel.swift; sourceTree = "<group>"; };
 		E2B79D5028D891AD00058EF5 /* PomodoroCenter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomodoroCenter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2B79D5328D891AD00058EF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +124,10 @@
 		E2B79D6428D891AF00058EF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2BB897E2901B20E004CCA79 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		E2BB89802901B24C004CCA79 /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
+		E2BD549029070AAA00ACF399 /* OnboardingTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTitleLabel.swift; sourceTree = "<group>"; };
+		E2BD549229070ACA00ACF399 /* OnboardingTitleLabelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTitleLabelViewModel.swift; sourceTree = "<group>"; };
+		E2BD549529070ED500ACF399 /* OnboardingDescriptionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDescriptionLabel.swift; sourceTree = "<group>"; };
+		E2BD549729070EE100ACF399 /* OnboardingDescriptionLabelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDescriptionLabelViewModel.swift; sourceTree = "<group>"; };
 		E2CF312D28E6E83F00D3669E /* StatisticsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModelTests.swift; sourceTree = "<group>"; };
 		E2CF313028E6ED7000D3669E /* PomodoroDatabaseSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroDatabaseSpy.swift; sourceTree = "<group>"; };
 		E2F4169328F4719F0031046C /* XCUIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Extensions.swift"; sourceTree = "<group>"; };
@@ -205,6 +223,25 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		E2988FA82905D99B00613EE7 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E2BD549429070EB900ACF399 /* OnboardingDescriptionLabel */,
+				E2BD548F29070A8F00ACF399 /* OnboardingTitleLabel */,
+				E2988FAB2905EABB00613EE7 /* OnboardingImageView */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E2988FAB2905EABB00613EE7 /* OnboardingImageView */ = {
+			isa = PBXGroup;
+			children = (
+				E2988FA92905D9B000613EE7 /* OnboardingImageView.swift */,
+				E2988FAC2905EAEE00613EE7 /* OnboardingImageViewModel.swift */,
+			);
+			path = OnboardingImageView;
+			sourceTree = "<group>";
+		};
 		E29FCBD328F2BE4F00A6BE18 /* localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,6 +297,16 @@
 			path = PomodoroCenterTests;
 			sourceTree = "<group>";
 		};
+		E2B6BB6329057A15006AA1DA /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				E2B6BB6429057A25006AA1DA /* Color.swift */,
+				E2B6BB6629057A66006AA1DA /* Font.swift */,
+				E2B6BB6A2905832A006AA1DA /* Layer.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
 		E2B74AF728D8EDB60076ACC4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,9 +330,8 @@
 		E2B74AF928D8EDD30076ACC4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E29FCBDD28F2C8EE00A6BE18 /* OnBoard */,
-				E2B79D5728D891AD00058EF5 /* HomeViewController.swift */,
-				E27A98B428E058E90002C14F /* StatisticsViewController.swift */,
+				E2988FA82905D99B00613EE7 /* Components */,
+				E2BD549929071A7300ACF399 /* Controllers */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -315,6 +361,7 @@
 		E2B79D5228D891AD00058EF5 /* PomodoroCenter */ = {
 			isa = PBXGroup;
 			children = (
+				E2B6BB6329057A15006AA1DA /* Styles */,
 				E2BB897D2901B1EE004CCA79 /* UserDefaults */,
 				E28B16112900816200F2DFEF /* Coordinator */,
 				E29FCBD328F2BE4F00A6BE18 /* localization */,
@@ -341,6 +388,42 @@
 				E2BB89802901B24C004CCA79 /* AppData.swift */,
 			);
 			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		E2BD548F29070A8F00ACF399 /* OnboardingTitleLabel */ = {
+			isa = PBXGroup;
+			children = (
+				E2BD549029070AAA00ACF399 /* OnboardingTitleLabel.swift */,
+				E2BD549229070ACA00ACF399 /* OnboardingTitleLabelViewModel.swift */,
+			);
+			path = OnboardingTitleLabel;
+			sourceTree = "<group>";
+		};
+		E2BD549429070EB900ACF399 /* OnboardingDescriptionLabel */ = {
+			isa = PBXGroup;
+			children = (
+				E2BD549529070ED500ACF399 /* OnboardingDescriptionLabel.swift */,
+				E2BD549729070EE100ACF399 /* OnboardingDescriptionLabelViewModel.swift */,
+			);
+			path = OnboardingDescriptionLabel;
+			sourceTree = "<group>";
+		};
+		E2BD549929071A7300ACF399 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E2BD549A29071B0F00ACF399 /* Core */,
+				E29FCBDD28F2C8EE00A6BE18 /* OnBoard */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E2BD549A29071B0F00ACF399 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				E2B79D5728D891AD00058EF5 /* HomeViewController.swift */,
+				E27A98B428E058E90002C14F /* StatisticsViewController.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		E2F4169528F471A60031046C /* Extensions */ = {
@@ -567,23 +650,32 @@
 				E29FCBE128F2E0D000A6BE18 /* ProductivityOnboardViewController.swift in Sources */,
 				E2B79D5428D891AD00058EF5 /* AppDelegate.swift in Sources */,
 				E28B16132900819B00F2DFEF /* Coordinator.swift in Sources */,
+				E2B6BB6729057A66006AA1DA /* Font.swift in Sources */,
 				E28B161929008E1D00F2DFEF /* HomeCoordinator.swift in Sources */,
+				E2B6BB6B2905832A006AA1DA /* Layer.swift in Sources */,
+				E2B6BB6529057A25006AA1DA /* Color.swift in Sources */,
 				E27AEAAF28E45AF900CFB06A /* TimeByMonth.swift in Sources */,
 				E28B1615290081A900F2DFEF /* AppCoordinator.swift in Sources */,
 				E20E608E28DC6D3000D43F02 /* UIViewController+Extensions.swift in Sources */,
 				E2955EA228E19C25002D868C /* Functions.swift in Sources */,
+				E2988FAA2905D9B000613EE7 /* OnboardingImageView.swift in Sources */,
 				E29FCBE528F2E18000A6BE18 /* ChartOnboardViewController.swift in Sources */,
 				E2BB897F2901B20E004CCA79 /* Storage.swift in Sources */,
+				E2BD549629070ED500ACF399 /* OnboardingDescriptionLabel.swift in Sources */,
 				E2B74AFB28D8EE4D0076ACC4 /* TimeViewModel.swift in Sources */,
 				E25C029F28E88B1700007D87 /* Global.swift in Sources */,
 				E25126B728E0CF0200673B6F /* TimeByDay.swift in Sources */,
+				E2988FAD2905EAEE00613EE7 /* OnboardingImageViewModel.swift in Sources */,
 				E29FCBDF28F2C99A00A6BE18 /* OnboardViewController.swift in Sources */,
 				E22E486028DDC86000A84689 /* Time.swift in Sources */,
+				E2BD549829070EE100ACF399 /* OnboardingDescriptionLabelViewModel.swift in Sources */,
 				E27ED10E28FC56F400FEB28B /* NotificationOnboardViewController.swift in Sources */,
 				E2A26BE828D9D4AE0098A182 /* TimeType.swift in Sources */,
 				E28B161729008A8400F2DFEF /* StartCoordinator.swift in Sources */,
 				E2B79D5628D891AD00058EF5 /* SceneDelegate.swift in Sources */,
+				E2BD549129070AAA00ACF399 /* OnboardingTitleLabel.swift in Sources */,
 				E22E486628DDCB9600A84689 /* PomodoroCoreDataDatabase.swift in Sources */,
+				E2BD549329070ACA00ACF399 /* OnboardingTitleLabelViewModel.swift in Sources */,
 				E2B79D5E28D891AD00058EF5 /* PomodoroCenter.xcdatamodeld in Sources */,
 				E2BB89812901B24C004CCA79 /* AppData.swift in Sources */,
 			);

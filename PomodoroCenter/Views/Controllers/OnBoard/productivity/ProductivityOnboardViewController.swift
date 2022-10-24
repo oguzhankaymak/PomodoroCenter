@@ -1,33 +1,37 @@
 import UIKit
 
-class SimpleInterfaceOnboardViewController: UIViewController {
+class ProductivityOnboardViewController: UIViewController {
     
     private lazy var imageView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: "simple_interface")
+        let imageView = OnboardingImageView(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: view.frame.width / 4,
+                height: view.frame.height / 4
+            )
+        )
+        imageView.configure(with: OnboardingImageViewModel(imageName: "productivity"))
         return imageView
     }()
     
-    private lazy var titleLabel : UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = NSLocalizedString("simpleInterfaceTitle", comment: "Simple interface onboarding screen title.")
-        label.textColor = .black
-        label.font = .systemFont(ofSize: 25, weight: .bold)
+    private lazy var titleLabel: UILabel = {
+        let label = OnboardingTitleLabel()
+        label.configure(
+            with: OnboardingTitleLabelViewModel(
+                text: NSLocalizedString("productivityTitle", comment: "Productivity onboarding screen title.")
+            )
+        )
         return label
     }()
     
-    private lazy var descriptionLabel : UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = NSLocalizedString("simpleInterfaceDescription", comment: "Simple interface onboarding screen description.")
-        label.textColor = .black
-        label.font = .italicSystemFont(ofSize: 17)
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
+    private lazy var descriptionLabel: UILabel = {
+        let label = OnboardingDescriptionLabel()
+        label.configure(
+            with: OnboardingTitleLabelViewModel(
+                text: NSLocalizedString("productivityDescription", comment: "Productivity onboarding screen description.")
+            )
+        )
         return label
     }()
     
@@ -35,9 +39,10 @@ class SimpleInterfaceOnboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0.79, green: 0.87, blue: 0.94, alpha: 1)
+        view.backgroundColor = Color.onboardingBackgroundColor
         addSubViews()
         configureConstraints()
+        
     }
     
     private func addSubViews() {
@@ -48,8 +53,6 @@ class SimpleInterfaceOnboardViewController: UIViewController {
     
     private func configureConstraints() {
         let imageViewConstraints : [NSLayoutConstraint] = [
-            imageView.widthAnchor.constraint(equalToConstant: view.frame.width / 4),
-            imageView.heightAnchor.constraint(equalToConstant: view.frame.height / 4),
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height / 6)
         ]

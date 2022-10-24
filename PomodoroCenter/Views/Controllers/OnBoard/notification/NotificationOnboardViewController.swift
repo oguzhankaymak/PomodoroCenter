@@ -4,32 +4,36 @@ class NotificationOnboardViewController: UIViewController {
     
     private var coordinator: OnboardingFlow?
     
-    private lazy var imageView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: "notification")
+    private lazy var imageView: UIImageView = {
+        let imageView = OnboardingImageView(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: view.frame.width / 4,
+                height: view.frame.height / 4
+            )
+        )
+        imageView.configure(with: OnboardingImageViewModel(imageName: "notification"))
         return imageView
     }()
     
-    private lazy var titleLabel : UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = NSLocalizedString("notifications", comment: "Notification onboarding screen title.")
-        label.textColor = .black
-        label.font = .systemFont(ofSize: 25, weight: .bold)
+    private lazy var titleLabel: UILabel = {
+        let label = OnboardingTitleLabel()
+        label.configure(
+            with: OnboardingTitleLabelViewModel(
+                text: NSLocalizedString("notifications", comment: "Notification onboarding screen title.")
+            )
+        )
         return label
     }()
     
-    private lazy var descriptionLabel : UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = NSLocalizedString("notificationOnBoardingDescription", comment: "Notification onboarding screen descriptipn.")
-        label.textColor = .black
-        label.font = .italicSystemFont(ofSize: 17)
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
+    private lazy var descriptionLabel: UILabel = {
+        let label = OnboardingDescriptionLabel()
+        label.configure(
+            with: OnboardingTitleLabelViewModel(
+                text: NSLocalizedString("notificationOnBoardingDescription", comment: "Notification onboarding screen description.")
+            )
+        )
         return label
     }()
     
@@ -39,7 +43,7 @@ class NotificationOnboardViewController: UIViewController {
         button.backgroundColor = .systemBlue
         button.setTitle(NSLocalizedString("skip", comment: "Skip button on last onboarding screen."), for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = CornerRadius.normal
         button.addTarget(self, action: #selector(skipButtonPress), for: .touchUpInside)
         return button
     }()
@@ -52,7 +56,7 @@ class NotificationOnboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0.79, green: 0.87, blue: 0.94, alpha: 1)
+        view.backgroundColor = Color.onboardingBackgroundColor
         addSubViews()
         configureConstraints()
     }
@@ -83,8 +87,6 @@ class NotificationOnboardViewController: UIViewController {
     
     private func configureConstraints() {
         let imageViewConstraints : [NSLayoutConstraint] = [
-            imageView.widthAnchor.constraint(equalToConstant: view.frame.width / 4),
-            imageView.heightAnchor.constraint(equalToConstant: view.frame.height / 4),
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height / 6)
         ]

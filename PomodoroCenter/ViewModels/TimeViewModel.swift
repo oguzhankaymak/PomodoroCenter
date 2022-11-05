@@ -16,10 +16,12 @@ final class TimeViewModel {
     private var formatedSeconds: String
     private let database: PomodoroDatabaseProtocol
     
+    var onStartedTimer: (() -> Void)? = nil
+    var onStoppedTimer: (() -> Void)? = nil
     var onRunningTimer: ((String) -> Void)? = nil
-    var onCompleteTimer: ((TimeType) -> Void)? = nil
-    var onFinishTimer: ((String) -> Void)? = nil
-    var onAssignTimer: ((String) -> Void)? = nil
+    var onCompletedTimer: ((TimeType) -> Void)? = nil
+    var onFinishedTimer: ((String) -> Void)? = nil
+    var onAssignedTimer: ((AssignTime) -> Void)? = nil
     
     // MARK: - init
     
@@ -43,7 +45,7 @@ final class TimeViewModel {
                 time: getTimeByTimeType(timeType: activeTimeType),
                 timeType: activeTimeType)
             
-            onCompleteTimer?(activeTimeType)
+            onCompletedTimer?(activeTimeType)
         }
         onRunningTimer?(formatedSeconds)
     }
@@ -87,11 +89,13 @@ final class TimeViewModel {
     func startTimer() {
         timerIsRunning = true
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
+        onStartedTimer?()
     }
     
     func stopTimer() {
         timerIsRunning = false
         timer.invalidate()
+        onStoppedTimer?()
     }
     
     func finishtimer() {
@@ -99,14 +103,33 @@ final class TimeViewModel {
         database.saveTime(time: elapseTime, timeType: activeTimeType)
         
         assignTime(timeType: activeTimeType)
-        onFinishTimer?(formatedSeconds)
+        onFinishedTimer?(formatedSeconds)
     }
     
     func assignTime(timeType: TimeType) {
-        stopTimer()
-        activeTimeType = timeType
-        seconds = getTimeByTimeType(timeType: timeType)
-        onAssignTimer?(formatedSeconds)
+        if (timerIsRunning) {
+            onAssignedTimer?(
+                AssignTime(
+                    formatedSeconds: formatedSeconds,
+                    activeTimeType: activeTimeType,
+                    assignedTimeType: timeType,
+                    error: "Timer is running!"
+                )
+            )
+        }
+        else {
+            activeTimeType = timeType
+            seconds = getTimeByTimeType(timeType: timeType)
+            onAssignedTimer?(
+                AssignTime(
+                    formatedSeconds: formatedSeconds,
+                    activeTimeType: activeTimeType,
+                    assignedTimeType: timeType,
+                    error: nil
+                )
+            )
+        }
+        
     }
     
     func getFormattedSeconds() -> String {

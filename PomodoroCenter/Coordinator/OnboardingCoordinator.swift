@@ -6,17 +6,17 @@ protocol OnboardingFlow {
 
 class OnboardingCoordinator: Coordinator, OnboardingFlow {
     let navigationController: UINavigationController
-    
+
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
-    
+
     func start() {
         let onboardViewController = OnboardViewController()
         onboardViewController.coordinator = self
         navigationController.pushViewController(onboardViewController, animated: true)
     }
-    
+
     // MARK: - Flow Methods
     func coodinateToHome() {
         AppData.isAppOpenedBefore = true

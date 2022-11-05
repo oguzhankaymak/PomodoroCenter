@@ -10,22 +10,22 @@ class StatisticsViewModelTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-    
-    func testModelTriggersOnGetPomodoroTimesByDaysWhenCallGetSavedPomodoroTimesByDays(){
+
+    func testModelTriggersOnGetPomodoroTimesByDaysWhenCallGetSavedPomodoroTimesByDays() {
         let model = StatisticViewModel(database: PomodoroDatabaseSpy())
-        
+
         model.onGetPomodoroTimesByDays = { pomodoroHoursByDays in
             XCTAssertEqual(pomodoroHoursByDays.count, 7, "Model didn't return Hours data by days")
         }
-        
+
         model.getSavedPomodoroTimesByDays()
     }
-    
-    func testModelReturnCorrectDataWhenTriggersOnGetPomodoroTimesByDays(){
+
+    func testModelReturnCorrectDataWhenTriggersOnGetPomodoroTimesByDays() {
         let mockPomodoroHoursByDaysData: [TimeByDay] = createMockPomodoroHoursByDaysData()
-        
+
         let model = StatisticViewModel(database: PomodoroDatabaseSpy())
-        
+
         model.onGetPomodoroTimesByDays = { pomodoroHoursByDays in
             for (index, dayData) in pomodoroHoursByDays.enumerated() {
                 if dayData != mockPomodoroHoursByDaysData[index] {
@@ -33,25 +33,25 @@ class StatisticsViewModelTests: XCTestCase {
                 }
             }
         }
-        
+
         model.getSavedPomodoroTimesByDays()
     }
-    
-    func testModelTriggersOnGetPomodoroTimesByMonthsWhenCallGetSavedPomodoroTimesByMonths(){
+
+    func testModelTriggersOnGetPomodoroTimesByMonthsWhenCallGetSavedPomodoroTimesByMonths() {
         let model = StatisticViewModel(database: PomodoroDatabaseSpy())
-        
+
         model.onGetPomodoroTimesByMonths = { pomodoroHoursByMonths in
             XCTAssertEqual(pomodoroHoursByMonths.count, 7, "Model didn't return hours data by months!")
         }
-        
+
         model.getSavedPomodoroTimesByMonths()
     }
-    
-    func testModelReturnCorrectDataWhenTriggersOnGetPomodoroTimesByMonths(){
+
+    func testModelReturnCorrectDataWhenTriggersOnGetPomodoroTimesByMonths() {
         let mockPomodoroHoursByMonthsData: [TimeByMonth] = createMockPomodoroHoursByMonthsData()
-        
+
         let model = StatisticViewModel(database: PomodoroDatabaseSpy())
-        
+
         model.onGetPomodoroTimesByMonths = { pomodoroHoursByMonths in
             for (index, monthData) in pomodoroHoursByMonths.enumerated() {
                 if monthData != mockPomodoroHoursByMonthsData[index] {
@@ -59,8 +59,8 @@ class StatisticsViewModelTests: XCTestCase {
                 }
             }
         }
-        
+
         model.getSavedPomodoroTimesByMonths()
     }
-    
+
 }

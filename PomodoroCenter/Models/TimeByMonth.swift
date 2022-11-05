@@ -5,7 +5,6 @@ struct TimeByMonth {
     var hours: Double
 }
 
-
 extension TimeByMonth: Equatable {
     static func ==(lhs: TimeByMonth, rhs: TimeByMonth) -> Bool {
         return lhs.month == rhs.month

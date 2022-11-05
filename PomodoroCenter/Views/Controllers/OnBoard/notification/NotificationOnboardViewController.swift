@@ -1,9 +1,9 @@
 import UIKit
 
 class NotificationOnboardViewController: UIViewController {
-    
+
     private var coordinator: OnboardingFlow?
-    
+
     private lazy var imageView: UIImageView = {
         let imageView = OnboardingImageView(
             frame: CGRect(
@@ -16,7 +16,7 @@ class NotificationOnboardViewController: UIViewController {
         imageView.configure(with: OnboardingImageViewModel(imageName: "notification"))
         return imageView
     }()
-    
+
     private lazy var titleLabel: UILabel = {
         let label = OnboardingTitleLabel()
         label.configure(
@@ -26,7 +26,7 @@ class NotificationOnboardViewController: UIViewController {
         )
         return label
     }()
-    
+
     private lazy var descriptionLabel: UILabel = {
         let label = OnboardingDescriptionLabel()
         label.configure(
@@ -36,8 +36,8 @@ class NotificationOnboardViewController: UIViewController {
         )
         return label
     }()
-    
-    private lazy var skipButton : UIButton = {
+
+    private lazy var skipButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .systemBlue
@@ -47,69 +47,69 @@ class NotificationOnboardViewController: UIViewController {
         button.addTarget(self, action: #selector(skipButtonPress), for: .touchUpInside)
         return button
     }()
-    
+
     @objc private func skipButtonPress(sender: UIButton) {
         requestNotificationPermission()
     }
-    
+
     // MARK: - viewDidLoad
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Color.onboardingBackgroundColor
         addSubViews()
         configureConstraints()
     }
-    
+
     init(coordinator: OnboardingFlow?) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError()
     }
-    
+
     private func requestNotificationPermission() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { _, _ in
             DispatchQueue.main.async {
                 self.coordinator?.coodinateToHome()
             }
         }
     }
-    
+
     private func addSubViews() {
         view.addSubview(imageView)
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
         view.addSubview(skipButton)
     }
-    
+
     private func configureConstraints() {
-        let imageViewConstraints : [NSLayoutConstraint] = [
+        let imageViewConstraints: [NSLayoutConstraint] = [
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height / 6)
         ]
-        
-        let titleLabelConstraints : [NSLayoutConstraint] = [
+
+        let titleLabelConstraints: [NSLayoutConstraint] = [
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: view.frame.height / 8),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
-        
+
         let descriptionLabelConstraints: [NSLayoutConstraint] = [
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: view.frame.height / 14),
             descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25)
         ]
-        
+
         let skipButtonConstraints: [NSLayoutConstraint] = [
             skipButton.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.frame.height / 6),
             skipButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             skipButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
             skipButton.heightAnchor.constraint(equalToConstant: 50)
         ]
-        
+
         NSLayoutConstraint.activate(imageViewConstraints)
         NSLayoutConstraint.activate(titleLabelConstraints)
         NSLayoutConstraint.activate(descriptionLabelConstraints)

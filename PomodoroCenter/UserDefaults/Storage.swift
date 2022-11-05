@@ -21,7 +21,7 @@ struct Storage<T: Codable> {
         }
         set {
             let data = try? JSONEncoder().encode(newValue)
-            
+
             UserDefaults.standard.set(data, forKey: key)
         }
     }

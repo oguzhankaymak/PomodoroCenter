@@ -1,8 +1,8 @@
 import UIKit
 
 class ChartOnboardViewController: UIViewController {
-    
-    private lazy var imageView : UIImageView = {
+
+    private lazy var imageView: UIImageView = {
         let imageView = OnboardingImageView(
             frame: CGRect(
                 x: 0,
@@ -14,7 +14,7 @@ class ChartOnboardViewController: UIViewController {
         imageView.configure(with: OnboardingImageViewModel(imageName: "chart"))
         return imageView
     }()
-    
+
     private lazy var titleLabel: UILabel = {
         let label = OnboardingTitleLabel()
         label.configure(
@@ -24,7 +24,7 @@ class ChartOnboardViewController: UIViewController {
         )
         return label
     }()
-    
+
     private lazy var descriptionLabel: UILabel = {
         let label = OnboardingDescriptionLabel()
         label.configure(
@@ -34,40 +34,40 @@ class ChartOnboardViewController: UIViewController {
         )
         return label
     }()
-    
+
     // MARK: - viewDidLoad
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Color.onboardingBackgroundColor
         addSubViews()
         configureConstraints()
     }
-    
+
     private func addSubViews() {
         view.addSubview(imageView)
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
     }
-    
+
     private func configureConstraints() {
-        let imageViewConstraints : [NSLayoutConstraint] = [
+        let imageViewConstraints: [NSLayoutConstraint] = [
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height / 6)
         ]
-        
-        let titleLabelConstraints : [NSLayoutConstraint] = [
+
+        let titleLabelConstraints: [NSLayoutConstraint] = [
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: view.frame.height / 8),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
-        
+
         let descriptionLabelConstraints: [NSLayoutConstraint] = [
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: view.frame.height / 14),
             descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25)
         ]
-        
+
         NSLayoutConstraint.activate(imageViewConstraints)
         NSLayoutConstraint.activate(titleLabelConstraints)
         NSLayoutConstraint.activate(descriptionLabelConstraints)

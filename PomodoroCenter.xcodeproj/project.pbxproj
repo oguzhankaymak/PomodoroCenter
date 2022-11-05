@@ -490,6 +490,7 @@
 			buildConfigurationList = E2B79D6728D891AF00058EF5 /* Build configuration list for PBXNativeTarget "PomodoroCenter" */;
 			buildPhases = (
 				868C3C3C13470191EF496C6C /* [CP] Check Pods Manifest.lock */,
+				E21C0711291669BD004DAF40 /* SwiftLint */,
 				E2B79D4C28D891AD00058EF5 /* Sources */,
 				E2B79D4D28D891AD00058EF5 /* Frameworks */,
 				E2B79D4E28D891AD00058EF5 /* Resources */,
@@ -615,6 +616,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PomodoroCenter/Pods-PomodoroCenter-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		E21C0711291669BD004DAF40 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

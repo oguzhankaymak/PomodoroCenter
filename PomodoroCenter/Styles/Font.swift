@@ -13,7 +13,7 @@ private enum Font {
     static func systemFont(size: CGFloat, weight: UIFont.Weight) -> UIFont {
         return UIFont.systemFont(ofSize: size, weight: weight)
     }
-    
+
     static func systemItalicFont(size: CGFloat) -> UIFont {
         return UIFont.italicSystemFont(ofSize: size)
     }

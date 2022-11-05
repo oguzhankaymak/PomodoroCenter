@@ -246,7 +246,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController {
 
     private func subscribeToModel() {
-        timeLabel.text = model.getFormattedSeconds()
+        timeLabel.text = model.formatedSeconds
 
         model.onStartedTimer = {
             self.setRunningTimeView()

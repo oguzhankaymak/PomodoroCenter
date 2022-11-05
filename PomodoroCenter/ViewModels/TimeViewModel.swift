@@ -13,7 +13,7 @@ final class TimeViewModel {
     }
 
     private var activeTimeType: TimeType
-    private var formatedSeconds: String
+    private(set) var formatedSeconds: String
     private let database: PomodoroDatabaseProtocol
 
     var onStartedTimer: (() -> Void)?
@@ -128,10 +128,6 @@ final class TimeViewModel {
             )
         }
 
-    }
-
-    func getFormattedSeconds() -> String {
-        return formatedSeconds
     }
 
     func sendNotification(completedTimeType: TimeType) {

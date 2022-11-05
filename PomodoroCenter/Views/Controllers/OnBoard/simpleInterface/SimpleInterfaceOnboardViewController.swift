@@ -29,7 +29,10 @@ class SimpleInterfaceOnboardViewController: UIViewController {
         let label = OnboardingDescriptionLabel()
         label.configure(
             with: OnboardingTitleLabelViewModel(
-                text: NSLocalizedString("simpleInterfaceDescription", comment: "Simple interface onboarding screen description.")
+                text: NSLocalizedString(
+                    "simpleInterfaceDescription",
+                    comment: "Simple interface onboarding screen description."
+                )
             )
         )
         return label

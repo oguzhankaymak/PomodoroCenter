@@ -75,11 +75,20 @@ final class TimeViewModel {
     private func createNotificationBody(completedTimeType: TimeType) -> String {
         switch completedTimeType {
         case .pomodoro:
-            return NSLocalizedString("nowItIsTimeToRest", comment: "It's notification message when completed one pomodoro.")
+            return NSLocalizedString(
+                "nowItIsTimeToRest",
+                comment: "It's notification message when completed one pomodoro."
+            )
         case .longBreak:
-            return  NSLocalizedString("takeADeepBreathAndGetToWork", comment: "It's notification message when completed long break.")
+            return  NSLocalizedString(
+                "takeADeepBreathAndGetToWork",
+                comment: "It's notification message when completed long break."
+            )
         case .shortBreak:
-            return NSLocalizedString("dontGiveUpAndKeepWorking", comment: "It's notification message when completed short break")
+            return NSLocalizedString(
+                "dontGiveUpAndKeepWorking",
+                comment: "It's notification message when completed short break"
+            )
         }
     }
 
@@ -87,7 +96,13 @@ final class TimeViewModel {
 
     func startTimer() {
         timerIsRunning = true
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(timerCounter),
+            userInfo: nil,
+            repeats: true
+        )
         onStartedTimer?()
     }
 

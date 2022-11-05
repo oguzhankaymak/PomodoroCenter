@@ -29,7 +29,10 @@ class ProductivityOnboardViewController: UIViewController {
         let label = OnboardingDescriptionLabel()
         label.configure(
             with: OnboardingTitleLabelViewModel(
-                text: NSLocalizedString("productivityDescription", comment: "Productivity onboarding screen description.")
+                text: NSLocalizedString(
+                    "productivityDescription",
+                    comment: "Productivity onboarding screen description."
+                )
             )
         )
         return label

@@ -31,7 +31,10 @@ class NotificationOnboardViewController: UIViewController {
         let label = OnboardingDescriptionLabel()
         label.configure(
             with: OnboardingTitleLabelViewModel(
-                text: NSLocalizedString("notificationOnBoardingDescription", comment: "Notification onboarding screen description.")
+                text: NSLocalizedString(
+                    "notificationOnBoardingDescription",
+                    comment: "Notification onboarding screen description."
+                )
             )
         )
         return label

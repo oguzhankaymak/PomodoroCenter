@@ -73,7 +73,10 @@ class OnboardViewController: UIPageViewController {
 
 extension OnboardViewController: UIPageViewControllerDataSource {
 
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        viewControllerBefore viewController: UIViewController
+    ) -> UIViewController? {
 
         guard let currentIndex = pages.firstIndex(of: viewController) else { return nil }
 
@@ -84,7 +87,10 @@ extension OnboardViewController: UIPageViewControllerDataSource {
         }
     }
 
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        viewControllerAfter viewController: UIViewController
+    ) -> UIViewController? {
 
         guard let currentIndex = pages.firstIndex(of: viewController) else { return nil }
 
@@ -94,12 +100,16 @@ extension OnboardViewController: UIPageViewControllerDataSource {
             return pages.first
         }
     }
-
 }
 
 extension OnboardViewController: UIPageViewControllerDelegate {
 
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        didFinishAnimating finished: Bool,
+        previousViewControllers: [UIViewController],
+        transitionCompleted completed: Bool
+    ) {
 
         guard let viewControllers = pageViewController.viewControllers else { return }
         guard let currentIndex = pages.firstIndex(of: viewControllers[0]) else { return }

@@ -32,7 +32,11 @@ class StatisticsViewController: UIViewController {
             [NSAttributedString.Key.foregroundColor: Color.white],
             for: .normal
         )
-        segmentedControl.addTarget(self, action: #selector(statisticTypesSegmentedControlValueChanged(_:)), for: .valueChanged)
+        segmentedControl.addTarget(
+            self,
+            action: #selector(statisticTypesSegmentedControlValueChanged(_:)),
+            for: .valueChanged
+        )
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         return segmentedControl
     }()

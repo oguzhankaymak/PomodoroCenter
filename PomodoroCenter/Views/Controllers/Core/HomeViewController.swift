@@ -27,7 +27,11 @@ class HomeViewController: UIViewController {
             for: .normal
         )
 
-        segmentedControl.addTarget(self, action: #selector(timeTypesSegmentedControlValueChanged(_:)), for: .valueChanged)
+        segmentedControl.addTarget(
+            self,
+            action: #selector(timeTypesSegmentedControlValueChanged(_:)),
+            for: .valueChanged
+        )
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         return segmentedControl
     }()
@@ -415,13 +419,25 @@ extension HomeViewController {
 
     private func configureConstraints() {
         let timeTypesSegmentedControlConstraints: [NSLayoutConstraint] = [
-            timeTypesSegmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.frame.height / 10),
-            timeTypesSegmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
-            timeTypesSegmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
+            timeTypesSegmentedControl.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: view.frame.height / 10
+            ),
+            timeTypesSegmentedControl.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: 50
+            ),
+            timeTypesSegmentedControl.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: -50
+            ),
             timeTypesSegmentedControl.heightAnchor.constraint(equalToConstant: 35)]
 
         let timeLabelConstraints: [NSLayoutConstraint] = [
-            timeLabel.topAnchor.constraint(equalTo: timeTypesSegmentedControl.bottomAnchor, constant: view.frame.height / 10),
+            timeLabel.topAnchor.constraint(
+                equalTo: timeTypesSegmentedControl.bottomAnchor,
+                constant: view.frame.height / 10
+            ),
             timeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)]
 
         let shortBreakTimeButtonConstraints: [NSLayoutConstraint] = [
@@ -447,7 +463,10 @@ extension HomeViewController {
             actionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)]
 
         let finishTimerButtonConstraints: [NSLayoutConstraint] = [
-            finishTimerButton.topAnchor.constraint(equalTo: actionButton.bottomAnchor, constant: view.frame.height / 22),
+            finishTimerButton.topAnchor.constraint(
+                equalTo: actionButton.bottomAnchor,
+                constant: view.frame.height / 22
+            ),
             finishTimerButton.widthAnchor.constraint(equalToConstant: 100),
             finishTimerButton.heightAnchor.constraint(equalToConstant: 35),
             finishTimerButton.centerXAnchor.constraint(equalTo: actionButton.centerXAnchor)]

@@ -68,7 +68,7 @@ final class StatisticViewModel {
         var isDatePassed = false
 
         while !isDatePassed {
-            let dayStr = dayOfWeek(date: tempDate)
+            let dayStr = tempDate.dayOfWeek()
 
             let filteredDataByTempDate = savedTimes.filter { time in
                 return Calendar.current.compare(tempDate,
@@ -119,7 +119,7 @@ final class StatisticViewModel {
         var isDatePassed = false
 
         while !isDatePassed {
-            let monthStr = monthOfYear(date: tempDate)
+            let monthStr = tempDate.monthOfYear()
 
             let filteredDataByTempDate = savedTimes.filter { time in
                 return Calendar.current.compare(tempDate,

@@ -14,7 +14,7 @@ func createMockPomodoroHoursByDaysData() -> [TimeByDay] {
     var isDatePassed = false
 
     while !isDatePassed {
-        let dayStr = dayOfWeek(date: tempDate)
+        let dayStr = tempDate.dayOfWeek()
         mockPomodoroHoursByDaysData.append(
             TimeByDay(
                 day: dayStr,
@@ -49,7 +49,7 @@ func createMockPomodoroHoursByMonthsData() -> [TimeByMonth] {
     var isDatePassed = false
 
     while !isDatePassed {
-        let monthStr = monthOfYear(date: tempDate)
+        let monthStr = tempDate.monthOfYear()
 
         mockPomodoroHoursByMonthsData.append(
             TimeByMonth(

@@ -5,10 +5,9 @@ final class TimeViewModel {
 
     var timer = Timer()
     var timerIsRunning: Bool = false
-
     private var seconds: Int {
         didSet {
-            formatedSeconds = formatSeconds(seconds: seconds)
+            formatedSeconds = seconds.formatSeconds()
         }
     }
 
@@ -16,6 +15,7 @@ final class TimeViewModel {
     private(set) var formatedSeconds: String
     private let database: PomodoroDatabaseProtocol
 
+    // MARK: - Closures
     var onStartedTimer: (() -> Void)?
     var onStoppedTimer: (() -> Void)?
     var onRunningTimer: ((String) -> Void)?
@@ -24,27 +24,22 @@ final class TimeViewModel {
     var onAssignedTimer: ((AssignTime) -> Void)?
 
     // MARK: - init
-
     init(database: PomodoroDatabaseProtocol = PomodoroCoreDataDatabase()) {
         self.database = database
         self.seconds = Global.pomodorotime
-        self.formatedSeconds = formatSeconds(seconds: self.seconds)
+        self.formatedSeconds = seconds.formatSeconds()
         self.activeTimeType = .pomodoro
     }
 
     // MARK: - Private Methods
-
     @objc private func timerCounter() {
         seconds -= 1
-
         if seconds == 0 {
             timerIsRunning = false
             timer.invalidate()
-
             database.saveTime(
                 time: getTimeByTimeType(timeType: activeTimeType),
                 timeType: activeTimeType)
-
             onCompletedTimer?(activeTimeType)
         }
         onRunningTimer?(formatedSeconds)
@@ -93,7 +88,6 @@ final class TimeViewModel {
     }
 
     // MARK: - Public Methods
-
     func startTimer() {
         timerIsRunning = true
         timer = Timer.scheduledTimer(
@@ -115,7 +109,6 @@ final class TimeViewModel {
     func finishtimer() {
         let elapseTime = getTimeByTimeType(timeType: activeTimeType) - seconds
         database.saveTime(time: elapseTime, timeType: activeTimeType)
-
         assignTime(timeType: activeTimeType)
         onFinishedTimer?(formatedSeconds)
     }
@@ -142,7 +135,6 @@ final class TimeViewModel {
                 )
             )
         }
-
     }
 
     func sendNotification(completedTimeType: TimeType) {

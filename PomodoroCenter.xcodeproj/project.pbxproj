@@ -13,6 +13,8 @@
 		E22E486028DDC86000A84689 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E485F28DDC86000A84689 /* Time.swift */; };
 		E22E486628DDCB9600A84689 /* PomodoroCoreDataDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E486528DDCB9600A84689 /* PomodoroCoreDataDatabase.swift */; };
 		E235652928E714ED002B09BE /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235652828E714ED002B09BE /* Mocks.swift */; };
+		E23FD50B2916FA1600E30BC3 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23FD50A2916FA1600E30BC3 /* Date+Extensions.swift */; };
+		E23FD50D2916FBAB00E30BC3 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23FD50C2916FBAB00E30BC3 /* Int+Extensions.swift */; };
 		E25126B528E0C7D600673B6F /* StatisticViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25126B428E0C7D600673B6F /* StatisticViewModel.swift */; };
 		E25126B728E0CF0200673B6F /* TimeByDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25126B628E0CF0200673B6F /* TimeByDay.swift */; };
 		E252945D2916979E00415DF9 /* History+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E252945B2916979E00415DF9 /* History+CoreDataProperties.swift */; };
@@ -29,7 +31,6 @@
 		E28B161729008A8400F2DFEF /* StartCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28B161629008A8400F2DFEF /* StartCoordinator.swift */; };
 		E28B161929008E1D00F2DFEF /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28B161829008E1D00F2DFEF /* HomeCoordinator.swift */; };
 		E28B161B29008E2D00F2DFEF /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28B161A29008E2D00F2DFEF /* OnboardingCoordinator.swift */; };
-		E2955EA228E19C25002D868C /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2955EA128E19C25002D868C /* Functions.swift */; };
 		E2988FAA2905D9B000613EE7 /* OnboardingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2988FA92905D9B000613EE7 /* OnboardingImageView.swift */; };
 		E2988FAD2905EAEE00613EE7 /* OnboardingImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2988FAC2905EAEE00613EE7 /* OnboardingImageViewModel.swift */; };
 		E29FCBD628F2BE7D00A6BE18 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E29FCBD828F2BE7D00A6BE18 /* Localizable.strings */; };
@@ -88,6 +89,8 @@
 		E22E485F28DDC86000A84689 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		E22E486528DDCB9600A84689 /* PomodoroCoreDataDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroCoreDataDatabase.swift; sourceTree = "<group>"; };
 		E235652828E714ED002B09BE /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
+		E23FD50A2916FA1600E30BC3 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		E23FD50C2916FBAB00E30BC3 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		E25126B428E0C7D600673B6F /* StatisticViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewModel.swift; sourceTree = "<group>"; };
 		E25126B628E0CF0200673B6F /* TimeByDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeByDay.swift; sourceTree = "<group>"; };
 		E252945B2916979E00415DF9 /* History+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "History+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -105,7 +108,6 @@
 		E28B161629008A8400F2DFEF /* StartCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartCoordinator.swift; sourceTree = "<group>"; };
 		E28B161829008E1D00F2DFEF /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		E28B161A29008E2D00F2DFEF /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
-		E2955EA128E19C25002D868C /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		E2988FA92905D9B000613EE7 /* OnboardingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingImageView.swift; sourceTree = "<group>"; };
 		E2988FAC2905EAEE00613EE7 /* OnboardingImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingImageViewModel.swift; sourceTree = "<group>"; };
 		E29FCBD728F2BE7D00A6BE18 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -180,6 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				E20E608D28DC6D3000D43F02 /* UIViewController+Extensions.swift */,
+				E23FD50A2916FA1600E30BC3 /* Date+Extensions.swift */,
+				E23FD50C2916FBAB00E30BC3 /* Int+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -235,7 +239,6 @@
 		E2955EA028E19C14002D868C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				E2955EA128E19C25002D868C /* Functions.swift */,
 				E25C029E28E88B1700007D87 /* Global.swift */,
 			);
 			path = Utils;
@@ -687,6 +690,7 @@
 				E28B161B29008E2D00F2DFEF /* OnboardingCoordinator.swift in Sources */,
 				E29FCBE328F2E0E400A6BE18 /* SimpleInterfaceOnboardViewController.swift in Sources */,
 				E29FCBE128F2E0D000A6BE18 /* ProductivityOnboardViewController.swift in Sources */,
+				E23FD50D2916FBAB00E30BC3 /* Int+Extensions.swift in Sources */,
 				E2B79D5428D891AD00058EF5 /* AppDelegate.swift in Sources */,
 				E28B16132900819B00F2DFEF /* Coordinator.swift in Sources */,
 				E2B6BB6729057A66006AA1DA /* Font.swift in Sources */,
@@ -697,7 +701,6 @@
 				E27AEAAF28E45AF900CFB06A /* TimeByMonth.swift in Sources */,
 				E28B1615290081A900F2DFEF /* AppCoordinator.swift in Sources */,
 				E20E608E28DC6D3000D43F02 /* UIViewController+Extensions.swift in Sources */,
-				E2955EA228E19C25002D868C /* Functions.swift in Sources */,
 				E2988FAA2905D9B000613EE7 /* OnboardingImageView.swift in Sources */,
 				E29FCBE528F2E18000A6BE18 /* ChartOnboardViewController.swift in Sources */,
 				E2BB897F2901B20E004CCA79 /* Storage.swift in Sources */,
@@ -708,6 +711,7 @@
 				E2988FAD2905EAEE00613EE7 /* OnboardingImageViewModel.swift in Sources */,
 				E29FCBDF28F2C99A00A6BE18 /* OnboardViewController.swift in Sources */,
 				E22E486028DDC86000A84689 /* Time.swift in Sources */,
+				E23FD50B2916FA1600E30BC3 /* Date+Extensions.swift in Sources */,
 				E2BD549829070EE100ACF399 /* OnboardingDescriptionLabelViewModel.swift in Sources */,
 				E27ED10E28FC56F400FEB28B /* NotificationOnboardViewController.swift in Sources */,
 				E2A26BE828D9D4AE0098A182 /* TimeType.swift in Sources */,

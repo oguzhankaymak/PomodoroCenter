@@ -2,7 +2,7 @@
 "break" = "Break";
 "finish" = "Finish";
 "warning" = "Warning";
-"timer_turn_off_alert_message" = "The time you worked won't recorded. Are you sure?";
+"timer_turn_off_alert_message" = "You can't change the timer type before the timer is complete. If you still want, you can stop the timer and finish it.";
 "weekly" = "Weekly";
 "monthly" = "Monthly";
 "statistics" = "Statistics";

@@ -2,7 +2,7 @@
 "break" = "Mola";
 "finish" = "Bitir";
 "warning" = "Uyarı";
-"timer_turn_off_alert_message" = "Çalışmış olduğunuz zaman kaydedilmeyecek. Emin misiniz?";
+"timer_turn_off_alert_message" = "Zamanlayıcı tamamlanmadan zamanlayıcı türünü değiştiremezsiniz. Yinede devam etmek istiyorsanız zamanlayıcı durdurup sonlandırabilirsiniz.";
 "weekly" = "Haftalık";
 "monthly" = "Aylık";
 "statistics" = "İstatistikler";

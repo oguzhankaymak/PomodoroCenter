@@ -17,15 +17,21 @@ extension UIViewController {
                 style: .default,
                 handler: { _ in
                     handlerOkay?()
-                }))
+                }
+            )
+        )
 
-        alertController.addAction(UIAlertAction(
-            title: NSLocalizedString("cancel", comment: "Alert cancel button"),
-            style: .cancel,
-            handler: { _ in
-                handlerCancel?()
-
-            }))
+        if handlerCancel != nil {
+            alertController.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("cancel", comment: "Alert cancel button"),
+                    style: .cancel,
+                    handler: { _ in
+                        handlerCancel?()
+                    }
+                )
+            )
+        }
 
         self.present(alertController, animated: true, completion: nil)
     }

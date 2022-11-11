@@ -3,46 +3,40 @@ import UserNotifications
 
 final class TimeViewModel {
 
-    var timer = Timer()
-    var timerIsRunning: Bool = false
+    private var timer = Timer()
+    private(set) var timerIsRunning: Observable<Bool> = Observable()
     private var seconds: Int {
         didSet {
-            formatedSeconds = seconds.formatSeconds()
+            formatedSeconds.value = seconds.formatSeconds()
         }
     }
 
-    private var activeTimeType: TimeType
-    private(set) var formatedSeconds: String
+    private(set) var activeTimeType: Observable<TimeType> = Observable()
+    private(set) var formatedSeconds: Observable<String> = Observable()
+    private(set) var isResetTimer: Observable<Bool> = Observable()
     private let database: PomodoroDatabaseProtocol
-
-    // MARK: - Closures
-    var onStartedTimer: (() -> Void)?
-    var onStoppedTimer: (() -> Void)?
-    var onRunningTimer: ((String) -> Void)?
-    var onCompletedTimer: ((TimeType) -> Void)?
-    var onFinishedTimer: ((String) -> Void)?
-    var onAssignedTimer: ((AssignTime) -> Void)?
 
     // MARK: - init
     init(database: PomodoroDatabaseProtocol = PomodoroCoreDataDatabase()) {
         self.database = database
         self.seconds = Global.pomodorotime
-        self.formatedSeconds = seconds.formatSeconds()
-        self.activeTimeType = .pomodoro
+        self.formatedSeconds.value = seconds.formatSeconds()
+        self.activeTimeType.value = .pomodoro
+        self.timerIsRunning.value = false
+        self.isResetTimer.value = false
     }
 
     // MARK: - Private Methods
     @objc private func timerCounter() {
         seconds -= 1
         if seconds == 0 {
-            timerIsRunning = false
+            timerIsRunning.value = false
             timer.invalidate()
             database.saveTime(
-                time: getTimeByTimeType(timeType: activeTimeType),
-                timeType: activeTimeType)
-            onCompletedTimer?(activeTimeType)
+                time: getTimeByTimeType(timeType: activeTimeType.value ?? .pomodoro),
+                timeType: activeTimeType.value ?? .pomodoro
+            )
         }
-        onRunningTimer?(formatedSeconds)
     }
 
     private func getTimeByTimeType(timeType: TimeType) -> Int {
@@ -89,7 +83,7 @@ final class TimeViewModel {
 
     // MARK: - Public Methods
     func startTimer() {
-        timerIsRunning = true
+        timerIsRunning.value = true
         timer = Timer.scheduledTimer(
             timeInterval: 1,
             target: self,
@@ -97,44 +91,27 @@ final class TimeViewModel {
             userInfo: nil,
             repeats: true
         )
-        onStartedTimer?()
     }
 
     func stopTimer() {
-        timerIsRunning = false
+        timerIsRunning.value = false
         timer.invalidate()
-        onStoppedTimer?()
     }
 
     func finishtimer() {
-        let elapseTime = getTimeByTimeType(timeType: activeTimeType) - seconds
-        database.saveTime(time: elapseTime, timeType: activeTimeType)
-        assignTime(timeType: activeTimeType)
-        onFinishedTimer?(formatedSeconds)
+        guard let timeType = activeTimeType.value else { return }
+
+        let elapseTime = getTimeByTimeType(timeType: timeType) - seconds
+        database.saveTime(time: elapseTime, timeType: timeType)
+
+        isResetTimer.value = true
+        seconds = getTimeByTimeType(timeType: timeType)
+        isResetTimer.value = false
     }
 
     func assignTime(timeType: TimeType) {
-        if timerIsRunning {
-            onAssignedTimer?(
-                AssignTime(
-                    formatedSeconds: formatedSeconds,
-                    activeTimeType: activeTimeType,
-                    assignedTimeType: timeType,
-                    error: "Timer is running!"
-                )
-            )
-        } else {
-            activeTimeType = timeType
-            seconds = getTimeByTimeType(timeType: timeType)
-            onAssignedTimer?(
-                AssignTime(
-                    formatedSeconds: formatedSeconds,
-                    activeTimeType: activeTimeType,
-                    assignedTimeType: timeType,
-                    error: nil
-                )
-            )
-        }
+        activeTimeType.value = timeType
+        seconds = getTimeByTimeType(timeType: timeType)
     }
 
     func sendNotification(completedTimeType: TimeType) {

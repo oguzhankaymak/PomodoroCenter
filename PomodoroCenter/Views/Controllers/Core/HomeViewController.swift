@@ -150,11 +150,6 @@ class HomeViewController: UIViewController {
 
     }
 
-    private func setStartTimeView() {
-        convertActionButton()
-        finishTimerButton.isHidden = true
-    }
-
     private func setStopTimeView() {
         convertActionButton()
         finishTimerButton.isHidden = false
@@ -166,48 +161,42 @@ class HomeViewController: UIViewController {
     }
 
     private func setPomodoroView() {
-        setStartTimeView()
-
         breakTimesView.isHidden = true
-
         timeLabel.textColor = Color.black
         actionButton.backgroundColor = Color.black
         timeTypesSegmentedControl.backgroundColor = Color.black
     }
 
-    private func setBreakView(isLongBreak: Bool) {
-        if !finishTimerButton.isHidden {
-            setStartTimeView()
-        }
-
+    private func setBreakView(isShortBreak: Bool) {
         breakTimesView.isHidden = false
         timeLabel.textColor = Color.gray
         actionButton.backgroundColor = Color.gray
         timeTypesSegmentedControl.backgroundColor = Color.gray
 
-        if isLongBreak {
-            shortBreakTimeButton.backgroundColor = Color.white
-            shortBreakTimeButton.setTitleColor(Color.gray, for: .normal)
-
-            longBreakTimeButton.backgroundColor = Color.gray
-            longBreakTimeButton.setTitleColor(Color.white, for: .normal)
-        } else {
+        if isShortBreak {
             longBreakTimeButton.backgroundColor = Color.white
             longBreakTimeButton.setTitleColor(Color.gray, for: .normal)
 
             shortBreakTimeButton.backgroundColor = Color.gray
             shortBreakTimeButton.setTitleColor(Color.white, for: .normal)
+        } else {
+            shortBreakTimeButton.backgroundColor = Color.white
+            shortBreakTimeButton.setTitleColor(Color.gray, for: .normal)
+
+            longBreakTimeButton.backgroundColor = Color.gray
+            longBreakTimeButton.setTitleColor(Color.white, for: .normal)
         }
     }
 
-    private func setShortBreakTime() {
-        longBreakTimeButton.backgroundColor = Color.white
-        longBreakTimeButton.setTitleColor(Color.gray, for: .normal)
-
-        shortBreakTimeButton.backgroundColor = Color.gray
-        shortBreakTimeButton.setTitleColor(Color.white, for: .normal)
-
-        finishTimerButton.isHidden = true
+    private func setViewByTimeType(timeType: TimeType) {
+        switch timeType {
+        case .pomodoro:
+            setPomodoroView()
+        case .shortBreak:
+            setBreakView(isShortBreak: true)
+        case .longBreak:
+            setBreakView(isShortBreak: false)
+        }
     }
 
     private func changeTimer(timeType: TimeType, isForce: Bool = false) {
@@ -218,15 +207,16 @@ class HomeViewController: UIViewController {
         model.assignTime(timeType: timeType)
     }
 
-    private func sendNotificationIfAppIsBackgroundOrInactive(completedTimeType: TimeType) {
+    private func sendNotificationByTimeTypeIfAppIsBackgroundOrInactive() {
+        guard let timeType = model.activeTimeType.value else { return }
         let state = UIApplication.shared.applicationState
         if state == .background || state == .inactive {
-            model.sendNotification(completedTimeType: completedTimeType)
+            model.sendNotification(completedTimeType: timeType)
         }
     }
 
     @objc private func actionButtonPress(sender: UIButton) {
-        if model.timerIsRunning {
+        if model.timerIsRunning.value ?? false {
             model.stopTimer()
         } else {
             model.startTimer()
@@ -238,11 +228,36 @@ class HomeViewController: UIViewController {
     }
 
     @objc private func longBreakTimeButtonPress(sender: UIButton) {
-        changeTimer(timeType: .longBreak)
+        if !finishTimerButton.isHidden || (model.timerIsRunning.value ?? false) {
+            showErrorChangeTimerWhenTimerIsRunning()
+        } else {
+            changeTimer(timeType: .longBreak)
+        }
+
     }
 
     @objc private func shortBreakTimeButtonPress(sender: UIButton) {
-        changeTimer(timeType: .shortBreak)
+        if !finishTimerButton.isHidden || (model.timerIsRunning.value ?? false) {
+            showErrorChangeTimerWhenTimerIsRunning()
+        } else {
+            changeTimer(timeType: .shortBreak)
+        }
+
+    }
+
+    private func showErrorChangeTimerWhenTimerIsRunning() {
+        showWarningMessage(
+            title: NSLocalizedString(
+                "warning",
+                comment: "Alert title if user turns off timer before timer isn't finished."
+            ),
+            message: NSLocalizedString(
+                "timer_turn_off_alert_message",
+                comment: "Alert message if user turns off timer before timer isn't finished."
+            ),
+            handlerOkay: nil,
+            handlerCancel: nil
+        )
     }
 }
 
@@ -250,69 +265,34 @@ class HomeViewController: UIViewController {
 extension HomeViewController {
 
     private func subscribeToModel() {
-        timeLabel.text = model.formatedSeconds
+        timeLabel.text = model.formatedSeconds.value
 
-        model.onStartedTimer = {
-            self.setRunningTimeView()
-        }
+        model.formatedSeconds.bind { [weak self] seconds in
+            self?.timeLabel.text = seconds
 
-        model.onStoppedTimer = {
-            self.setStopTimeView()
-        }
-
-        model.onRunningTimer = { [weak self] timeStr in
-            self?.timeLabel.text = timeStr
-        }
-
-        model.onCompletedTimer = { [weak self] activeTimeType in
-            self?.convertActionButton()
-            self?.sendNotificationIfAppIsBackgroundOrInactive(completedTimeType: activeTimeType)
-
-            if activeTimeType == TimeType.shortBreak || activeTimeType == TimeType.longBreak {
-                self?.timeTypesSegmentedControl.selectedSegmentIndex = 0
-                self?.timeTypeSegmentIndexChanged(newSelectedSegmentIndex: 0)
-            } else {
-                self?.timeTypesSegmentedControl.selectedSegmentIndex = 1
-                self?.timeTypeSegmentIndexChanged(newSelectedSegmentIndex: 1)
+            if seconds == "00 : 00" {
+                self?.sendNotificationByTimeTypeIfAppIsBackgroundOrInactive()
             }
         }
 
-        model.onFinishedTimer = { [weak self] timeStr in
-            self?.timeLabel.text = timeStr
-            self?.convertActionButton()
-            self?.finishTimerButton.isHidden = true
+        model.timerIsRunning.bind { [weak self] timerIsRunning in
+            if timerIsRunning ?? false {
+                self?.setRunningTimeView()
+            } else {
+                self?.setStopTimeView()
+            }
         }
 
-        model.onAssignedTimer = { [weak self] assignTimeModel in
-            if assignTimeModel.error != nil {
-                self?.showWarningMessage(
-                    title: NSLocalizedString(
-                        "warning",
-                        comment: "Alert title if user turns off timer while time is running."
-                    ),
-                    message: NSLocalizedString(
-                        "timer_turn_off_alert_message",
-                        comment: "Alert message if user turns off timer while time is running."
-                    ),
-                    handlerOkay: {
-                        self?.changeTimer(timeType: assignTimeModel.assignedTimeType, isForce: true)
-                    },
-                    handlerCancel: {
-                        self?.changeTimeTypeSegmentIndexByTimeType(timeType: assignTimeModel.activeTimeType)
-                    }
-                )
-            } else {
-                self?.timeLabel.text = assignTimeModel.formatedSeconds
+        model.activeTimeType.bind { [weak self] activeTimeType in
+            guard let timeType = activeTimeType else { return }
+            self?.setViewByTimeType(timeType: timeType)
+        }
 
-                if assignTimeModel.activeTimeType == TimeType.pomodoro {
-                    self?.setPomodoroView()
-                } else if assignTimeModel.activeTimeType == .shortBreak {
-                    self?.setBreakView(isLongBreak: false)
-                } else if assignTimeModel.activeTimeType == .longBreak {
-                    self?.setBreakView(isLongBreak: true)
-                }
+        model.isResetTimer.bind { [weak self] isResetTimer in
+            if isResetTimer ?? false {
+                self?.convertActionButton()
+                self?.finishTimerButton.isHidden = true
             }
-
         }
     }
 }
@@ -357,23 +337,10 @@ extension HomeViewController {
 extension HomeViewController {
 
     @objc func timeTypesSegmentedControlValueChanged(_ segmentedControl: UISegmentedControl) {
-        if !finishTimerButton.isHidden {
-            showWarningMessage(
-                title: NSLocalizedString(
-                    "warning",
-                    comment: "Alert title if user turns off timer while time is running."
-                ),
-                message: NSLocalizedString(
-                    "timer_turn_off_alert_message",
-                    comment: "Alert message if user turns off timer while time is running."
-                ),
-                handlerOkay: {
-                    self.timeTypeSegmentIndexChanged(newSelectedSegmentIndex: segmentedControl.selectedSegmentIndex)
-                },
-                handlerCancel: {
-                    self.cancelTimeTypeSegmentedValue(newSelectedSegmentIndex: segmentedControl.selectedSegmentIndex)
-                }
-            )
+        if !finishTimerButton.isHidden || (model.timerIsRunning.value ?? false) {
+            let indexOfGoBack: Int = segmentedControl.selectedSegmentIndex == 0 ? 1 : 0
+            showErrorChangeTimerWhenTimerIsRunning()
+            cancelTimeTypeSegmentedValue(goToIndex: indexOfGoBack)
         } else {
             timeTypeSegmentIndexChanged(
                 newSelectedSegmentIndex: segmentedControl.selectedSegmentIndex
@@ -392,24 +359,14 @@ extension HomeViewController {
         }
     }
 
-    private func cancelTimeTypeSegmentedValue(newSelectedSegmentIndex: Int) {
-        switch newSelectedSegmentIndex {
+    private func cancelTimeTypeSegmentedValue(goToIndex: Int) {
+        switch goToIndex {
         case 0:
-            timeTypesSegmentedControl.selectedSegmentIndex = 1
-        case 1:
             timeTypesSegmentedControl.selectedSegmentIndex = 0
+        case 1:
+            timeTypesSegmentedControl.selectedSegmentIndex = 1
         default:
             break
-        }
-    }
-
-    private func changeTimeTypeSegmentIndexByTimeType(timeType: TimeType) {
-        if timeType == TimeType.pomodoro {
-            timeTypesSegmentedControl.selectedSegmentIndex = 0
-        } else if timeType == .shortBreak {
-            timeTypesSegmentedControl.selectedSegmentIndex = 1
-        } else if timeType == .longBreak {
-            timeTypesSegmentedControl.selectedSegmentIndex = 1
         }
     }
 }

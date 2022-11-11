@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2BEF17078D6E844633CFB8A8 /* Pods_PomodoroCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEE1D24B463AEBE1A23A579 /* Pods_PomodoroCenter.framework */; };
 		E20E608E28DC6D3000D43F02 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20E608D28DC6D3000D43F02 /* UIViewController+Extensions.swift */; };
-		E2152B18290AFAFE00339BF0 /* AssignTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2152B17290AFAFE00339BF0 /* AssignTime.swift */; };
 		E22E486028DDC86000A84689 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E485F28DDC86000A84689 /* Time.swift */; };
 		E22E486628DDCB9600A84689 /* PomodoroCoreDataDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E486528DDCB9600A84689 /* PomodoroCoreDataDatabase.swift */; };
 		E235652928E714ED002B09BE /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = E235652828E714ED002B09BE /* Mocks.swift */; };
@@ -23,6 +22,7 @@
 		E25C029F28E88B1700007D87 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25C029E28E88B1700007D87 /* Global.swift */; };
 		E25C02A728E8908A00007D87 /* PomodoroCenterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25C02A628E8908A00007D87 /* PomodoroCenterUITests.swift */; };
 		E25C02A928E8908A00007D87 /* PomodoroCenterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25C02A828E8908A00007D87 /* PomodoroCenterUITestsLaunchTests.swift */; };
+		E25D232A291ADF48003CF735 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25D2329291ADF48003CF735 /* Observable.swift */; };
 		E27A98B528E058E90002C14F /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27A98B428E058E90002C14F /* StatisticsViewController.swift */; };
 		E27AEAAF28E45AF900CFB06A /* TimeByMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27AEAAE28E45AF900CFB06A /* TimeByMonth.swift */; };
 		E27ED10E28FC56F400FEB28B /* NotificationOnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27ED10D28FC56F400FEB28B /* NotificationOnboardViewController.swift */; };
@@ -85,7 +85,6 @@
 		4CEE1D24B463AEBE1A23A579 /* Pods_PomodoroCenter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PomodoroCenter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E4E5312E4304CAA511AD97F /* Pods-PomodoroCenter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PomodoroCenter.release.xcconfig"; path = "Target Support Files/Pods-PomodoroCenter/Pods-PomodoroCenter.release.xcconfig"; sourceTree = "<group>"; };
 		E20E608D28DC6D3000D43F02 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
-		E2152B17290AFAFE00339BF0 /* AssignTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignTime.swift; sourceTree = "<group>"; };
 		E22E485F28DDC86000A84689 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		E22E486528DDCB9600A84689 /* PomodoroCoreDataDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroCoreDataDatabase.swift; sourceTree = "<group>"; };
 		E235652828E714ED002B09BE /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
@@ -100,6 +99,7 @@
 		E25C02A428E8908A00007D87 /* PomodoroCenterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomodoroCenterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E25C02A628E8908A00007D87 /* PomodoroCenterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroCenterUITests.swift; sourceTree = "<group>"; };
 		E25C02A828E8908A00007D87 /* PomodoroCenterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroCenterUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E25D2329291ADF48003CF735 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		E27A98B428E058E90002C14F /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		E27AEAAE28E45AF900CFB06A /* TimeByMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeByMonth.swift; sourceTree = "<group>"; };
 		E27ED10D28FC56F400FEB28B /* NotificationOnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationOnboardViewController.swift; sourceTree = "<group>"; };
@@ -240,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				E25C029E28E88B1700007D87 /* Global.swift */,
+				E25D2329291ADF48003CF735 /* Observable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -335,7 +336,6 @@
 				E22E485F28DDC86000A84689 /* Time.swift */,
 				E25126B628E0CF0200673B6F /* TimeByDay.swift */,
 				E27AEAAE28E45AF900CFB06A /* TimeByMonth.swift */,
-				E2152B17290AFAFE00339BF0 /* AssignTime.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -694,6 +694,7 @@
 				E2B79D5428D891AD00058EF5 /* AppDelegate.swift in Sources */,
 				E28B16132900819B00F2DFEF /* Coordinator.swift in Sources */,
 				E2B6BB6729057A66006AA1DA /* Font.swift in Sources */,
+				E25D232A291ADF48003CF735 /* Observable.swift in Sources */,
 				E28B161929008E1D00F2DFEF /* HomeCoordinator.swift in Sources */,
 				E2529460291697D400415DF9 /* CoreDataHelper.swift in Sources */,
 				E2B6BB6B2905832A006AA1DA /* Layer.swift in Sources */,
@@ -717,7 +718,6 @@
 				E2A26BE828D9D4AE0098A182 /* TimeType.swift in Sources */,
 				E28B161729008A8400F2DFEF /* StartCoordinator.swift in Sources */,
 				E252945E2916979E00415DF9 /* History+CoreDataClass.swift in Sources */,
-				E2152B18290AFAFE00339BF0 /* AssignTime.swift in Sources */,
 				E2B79D5628D891AD00058EF5 /* SceneDelegate.swift in Sources */,
 				E2BD549129070AAA00ACF399 /* OnboardingTitleLabel.swift in Sources */,
 				E22E486628DDCB9600A84689 /* PomodoroCoreDataDatabase.swift in Sources */,

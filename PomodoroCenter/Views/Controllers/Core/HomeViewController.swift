@@ -150,6 +150,11 @@ class HomeViewController: UIViewController {
 
     }
 
+    private func setStartView() {
+        convertActionButton()
+        finishTimerButton.isHidden = true
+    }
+
     private func setStopTimeView() {
         convertActionButton()
         finishTimerButton.isHidden = false
@@ -189,6 +194,7 @@ class HomeViewController: UIViewController {
     }
 
     private func setViewByTimeType(timeType: TimeType) {
+        setStartView()
         switch timeType {
         case .pomodoro:
             setPomodoroView()
@@ -199,19 +205,14 @@ class HomeViewController: UIViewController {
         }
     }
 
-    private func changeTimer(timeType: TimeType, isForce: Bool = false) {
-        if isForce {
-            model.stopTimer()
-        }
-
+    private func changeTimer(timeType: TimeType) {
         model.assignTime(timeType: timeType)
     }
 
-    private func sendNotificationByTimeTypeIfAppIsBackgroundOrInactive() {
-        guard let timeType = model.activeTimeType.value else { return }
+    private func sendNotificationByTimeTypeIfAppIsBackgroundOrInactive(completedTimeType: TimeType) {
         let state = UIApplication.shared.applicationState
         if state == .background || state == .inactive {
-            model.sendNotification(completedTimeType: timeType)
+            model.sendNotification(completedTimeType: completedTimeType)
         }
     }
 
@@ -269,10 +270,6 @@ extension HomeViewController {
 
         model.formatedSeconds.bind { [weak self] seconds in
             self?.timeLabel.text = seconds
-
-            if seconds == "00 : 00" {
-                self?.sendNotificationByTimeTypeIfAppIsBackgroundOrInactive()
-            }
         }
 
         model.timerIsRunning.bind { [weak self] timerIsRunning in
@@ -292,6 +289,21 @@ extension HomeViewController {
             if isResetTimer ?? false {
                 self?.convertActionButton()
                 self?.finishTimerButton.isHidden = true
+            }
+        }
+
+        model.timerIsCompleted.bind { [weak self] timerIsCompleted in
+            if timerIsCompleted ?? false {
+                guard let completedTimeType = self?.model.activeTimeType.value else { return }
+                self?.sendNotificationByTimeTypeIfAppIsBackgroundOrInactive(completedTimeType: completedTimeType)
+                switch completedTimeType {
+                case .pomodoro:
+                    self?.timeTypesSegmentedControl.selectedSegmentIndex = 1
+                    self?.changeTimer(timeType: .shortBreak)
+                default:
+                    self?.timeTypesSegmentedControl.selectedSegmentIndex = 0
+                    self?.changeTimer(timeType: .pomodoro)
+                }
             }
         }
     }

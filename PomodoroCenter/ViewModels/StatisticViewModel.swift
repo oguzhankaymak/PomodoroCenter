@@ -2,67 +2,26 @@ import Foundation
 
 final class StatisticViewModel {
 
-    private var pomodoroHoursByDays: [TimeByDay] = []
-    private var pomodoroHoursByMonths: [TimeByMonth] = []
+    private(set) var pomodoroHoursByDays: Observable<[TimeByDay]> = Observable()
+    private(set) var pomodoroHoursByMonths: Observable<[TimeByMonth]> = Observable()
     private let database: PomodoroDatabaseProtocol
 
-    var onGetPomodoroTimesByDays: (([TimeByDay]) -> Void)?
-    var onGetPomodoroTimesByMonths: (([TimeByMonth]) -> Void)?
+    private var tempPomodoroHoursByDays: [TimeByDay] = []
+    private var tempPomodoroHoursByMonths: [TimeByMonth] = []
 
     // MARK: - init
-
     init(database: PomodoroDatabaseProtocol = PomodoroCoreDataDatabase()) {
         self.database = database
     }
 
-    // MARK: - Private Methods
-    private func findDataIndexInPomodoroHoursByDay(day: String) -> Int {
-        return pomodoroHoursByDays.firstIndex(where: {$0.day == day}) ?? -1
-    }
-
-    private func findDataIndexInPomodoroHoursByMonth(month: String) -> Int {
-        return pomodoroHoursByMonths.firstIndex(where: {$0.month == month}) ?? -1
-    }
-
-    private func addTimeInPomodoroTimesByDay(day: String, saveDate: Time) {
-        let index = findDataIndexInPomodoroHoursByDay(day: day)
-
-        if index != -1 {
-            pomodoroHoursByDays[index].hours = pomodoroHoursByDays[index].hours + ( Double(saveDate.time) / 3600.0 )
-        } else {
-            pomodoroHoursByDays.append(
-                TimeByDay(
-                    day: day,
-                    hours: Double(saveDate.time) / 3600.0
-                )
-            )
-        }
-    }
-
-    private func addTimeInPomodoroTimesByMonth(month: String, saveDate: Time) {
-        let index = findDataIndexInPomodoroHoursByMonth(month: month)
-
-        if index != -1 {
-            pomodoroHoursByMonths[index].hours = pomodoroHoursByMonths[index].hours + (Double(saveDate.time) / 3600.0)
-        } else {
-            pomodoroHoursByMonths.append(
-                TimeByMonth(
-                    month: month,
-                    hours: Double(saveDate.time) / 3600.0
-                )
-            )
-        }
-    }
-
     // MARK: - Public Methods
-
     func getSavedPomodoroTimesByDays() {
+        tempPomodoroHoursByDays = pomodoroHoursByDays.value ?? []
+
         let savedTimes = database.getSavedTimesByType(type: .pomodoro)
         let sixDaysAgo = Calendar.current.date(byAdding: .day, value: -6, to: Date())
 
-        guard let sixDaysAgo = sixDaysAgo else {
-            return
-        }
+        guard let sixDaysAgo = sixDaysAgo else { return }
 
         var tempDate = sixDaysAgo
         var isDatePassed = false
@@ -77,7 +36,7 @@ final class StatisticViewModel {
             }
 
             if filteredDataByTempDate.isEmpty {
-                pomodoroHoursByDays.append(
+                tempPomodoroHoursByDays.append(
                     TimeByDay(
                         day: dayStr,
                         hours: 0
@@ -103,11 +62,11 @@ final class StatisticViewModel {
             }
 
         }
-
-        onGetPomodoroTimesByDays?(pomodoroHoursByDays)
+        pomodoroHoursByDays.value = tempPomodoroHoursByDays
     }
 
     func getSavedPomodoroTimesByMonths() {
+        tempPomodoroHoursByMonths = pomodoroHoursByMonths.value ?? []
         let savedTimes = database.getSavedTimesByType(type: .pomodoro)
         let sixMonthAgo = Calendar.current.date(byAdding: .month, value: -6, to: Date())
 
@@ -128,7 +87,7 @@ final class StatisticViewModel {
             }
 
             if filteredDataByTempDate.isEmpty {
-                pomodoroHoursByMonths.append(
+                tempPomodoroHoursByMonths.append(
                     TimeByMonth(
                         month: monthStr,
                         hours: 0
@@ -155,6 +114,47 @@ final class StatisticViewModel {
 
         }
 
-        onGetPomodoroTimesByMonths?(pomodoroHoursByMonths)
+        pomodoroHoursByMonths.value = tempPomodoroHoursByMonths
+    }
+
+    // MARK: - Private Methods
+    private func findDataIndexInPomodoroHoursByDay(day: String) -> Int {
+        return tempPomodoroHoursByDays.firstIndex(where: {$0.day == day}) ?? -1
+    }
+
+    private func findDataIndexInPomodoroHoursByMonth(month: String) -> Int {
+        return tempPomodoroHoursByMonths.firstIndex(where: {$0.month == month}) ?? -1
+    }
+
+    private func addTimeInPomodoroTimesByDay(day: String, saveDate: Time) {
+        let index = findDataIndexInPomodoroHoursByDay(day: day)
+
+        if index != -1 {
+            tempPomodoroHoursByDays[index].hours =
+                tempPomodoroHoursByDays[index].hours + (Double(saveDate.time) / 3600.0)
+        } else {
+            tempPomodoroHoursByDays.append(
+                TimeByDay(
+                    day: day,
+                    hours: Double(saveDate.time) / 3600.0
+                )
+            )
+        }
+    }
+
+    private func addTimeInPomodoroTimesByMonth(month: String, saveDate: Time) {
+        let index = findDataIndexInPomodoroHoursByMonth(month: month)
+
+        if index != -1 {
+            tempPomodoroHoursByMonths[index].hours =
+                tempPomodoroHoursByMonths[index].hours + (Double(saveDate.time) / 3600.0)
+        } else {
+            tempPomodoroHoursByMonths.append(
+                TimeByMonth(
+                    month: month,
+                    hours: Double(saveDate.time) / 3600.0
+                )
+            )
+        }
     }
 }

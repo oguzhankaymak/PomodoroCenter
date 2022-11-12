@@ -7,6 +7,7 @@ enum AppFont {
     static let descriptionOnboarding = Font.systemItalicFont(size: FontSize.description)
     static let segmentedControlTitle = Font.systemFont(size: FontSize.normal, weight: FontWeight.regular)
     static let navigationBarItalic = Font.systemItalicFont(size: FontSize.navigationItem)
+    static let emptyText = Font.systemFont(size: FontSize.normal, weight: FontWeight.regular)
 }
 
 private enum Font {

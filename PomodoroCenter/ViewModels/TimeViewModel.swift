@@ -8,12 +8,21 @@ final class TimeViewModel {
     private var seconds: Int {
         didSet {
             formatedSeconds.value = seconds.formatSeconds()
+            if seconds == 0 {
+                saveTimeInDatabase(
+                    seconds: getTimeByTimeType(timeType: activeTimeType.value ?? .pomodoro),
+                    timeType: activeTimeType.value ?? .pomodoro
+                )
+                timerIsCompleted.value = true
+                timerIsCompleted.value = false
+            }
         }
     }
 
     private(set) var activeTimeType: Observable<TimeType> = Observable()
     private(set) var formatedSeconds: Observable<String> = Observable()
     private(set) var isResetTimer: Observable<Bool> = Observable()
+    private(set) var timerIsCompleted: Observable<Bool> = Observable()
     private let database: PomodoroDatabaseProtocol
 
     // MARK: - init
@@ -24,6 +33,55 @@ final class TimeViewModel {
         self.activeTimeType.value = .pomodoro
         self.timerIsRunning.value = false
         self.isResetTimer.value = false
+    }
+
+    // MARK: - Public Methods
+    func startTimer() {
+        timerIsRunning.value = true
+        timer = Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(timerCounter),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+
+    func stopTimer() {
+        timerIsRunning.value = false
+        timer.invalidate()
+    }
+
+    func finishtimer() {
+        guard let timeType = activeTimeType.value else { return }
+
+        let elapseTime = getTimeByTimeType(timeType: timeType) - seconds
+        saveTimeInDatabase(seconds: elapseTime, timeType: timeType)
+
+        isResetTimer.value = true
+        seconds = getTimeByTimeType(timeType: timeType)
+        isResetTimer.value = false
+    }
+
+    func assignTime(timeType: TimeType) {
+        stopTimer()
+        activeTimeType.value = timeType
+        seconds = getTimeByTimeType(timeType: timeType)
+    }
+
+    func sendNotification(completedTimeType: TimeType) {
+        let content = UNMutableNotificationContent()
+        content.title = createNotificationTitle(completedTimeType: completedTimeType)
+        content.body = createNotificationBody(completedTimeType: completedTimeType)
+        content.sound = UNNotificationSound.default
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+
+        let request = UNNotificationRequest(identifier: "pomodoroCenter",
+                                            content: content,
+                                            trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 
     // MARK: - Private Methods
@@ -81,51 +139,7 @@ final class TimeViewModel {
         }
     }
 
-    // MARK: - Public Methods
-    func startTimer() {
-        timerIsRunning.value = true
-        timer = Timer.scheduledTimer(
-            timeInterval: 1,
-            target: self,
-            selector: #selector(timerCounter),
-            userInfo: nil,
-            repeats: true
-        )
-    }
-
-    func stopTimer() {
-        timerIsRunning.value = false
-        timer.invalidate()
-    }
-
-    func finishtimer() {
-        guard let timeType = activeTimeType.value else { return }
-
-        let elapseTime = getTimeByTimeType(timeType: timeType) - seconds
-        database.saveTime(time: elapseTime, timeType: timeType)
-
-        isResetTimer.value = true
-        seconds = getTimeByTimeType(timeType: timeType)
-        isResetTimer.value = false
-    }
-
-    func assignTime(timeType: TimeType) {
-        activeTimeType.value = timeType
-        seconds = getTimeByTimeType(timeType: timeType)
-    }
-
-    func sendNotification(completedTimeType: TimeType) {
-        let content = UNMutableNotificationContent()
-        content.title = createNotificationTitle(completedTimeType: completedTimeType)
-        content.body = createNotificationBody(completedTimeType: completedTimeType)
-        content.sound = UNNotificationSound.default
-
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-
-        let request = UNNotificationRequest(identifier: "pomodoroCenter",
-                                            content: content,
-                                            trigger: trigger)
-
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+    private func saveTimeInDatabase(seconds: Int, timeType: TimeType) {
+        database.saveTime(time: seconds, timeType: timeType)
     }
 }

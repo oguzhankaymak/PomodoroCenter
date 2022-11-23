@@ -80,7 +80,10 @@ class StatisticsViewController: UIViewController {
     private lazy var emptyDataByDaysLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Henüz kayıtlı bir veriniz bulunmamaktadır."
+        label.text = NSLocalizedString(
+            "noDataForThisWeek",
+            comment: "If there is no data in database for this week. Show this message."
+        )
         label.font = AppFont.emptyText
         label.textColor = Color.black
         return label
@@ -89,7 +92,10 @@ class StatisticsViewController: UIViewController {
     private lazy var emptyDataByMonthsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Henüz kayıtlı bir veriniz bulunmamaktadır."
+        label.text = NSLocalizedString(
+            "noDataForThisMonth",
+            comment: "If there is no data in database for this week. Show this message."
+        )
         label.font = AppFont.emptyText
         label.textColor = Color.black
         return label

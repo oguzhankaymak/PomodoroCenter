@@ -26,3 +26,5 @@
 "takeADeepBreathAndGetToWork" = "Take a deep breath and get to work.";
 "dontGiveUpKeepWorking" = "Don't give up keep working.";
 "notificationOnBoardingDescription" = "If you locked your phone or the app is in the background, we will send you notification when the time is up.";
+"noDataForThisWeek" = "You didn't work at all this week :(";
+"noDataForThisMonth" = "You didn't work at all this month :(";

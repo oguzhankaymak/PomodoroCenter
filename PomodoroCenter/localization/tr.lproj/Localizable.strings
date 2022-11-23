@@ -26,3 +26,5 @@
 "takeADeepBreathAndGetToWork" = "Derin bir nefes al ve işe koyul.";
 "dontGiveUpAndKeepWorking" = "Sakın pes etme çalışmaya devam et.";
 "notificationOnBoardingDescription" = "Telefonunuzun ekranını kilitlediğinizde veya uygulamayı arka plana aldığınızda size süre tamamlandığı zaman bildirim göndereceğiz.";
+"noDataForThisWeek" = "Bu hafta hiç çalışmadın :(";
+"noDataForThisMonth" = "Bu ay hiç çalışmadın :(";

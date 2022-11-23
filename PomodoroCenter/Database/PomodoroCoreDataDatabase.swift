@@ -9,6 +9,7 @@ protocol PomodoroDatabaseProtocol {
 
 class PomodoroCoreDataDatabase: PomodoroDatabaseProtocol {
     let coreDataHelper = CoreDataHelper()
+
     func saveTime(time: Int, timeType: TimeType) {
         coreDataHelper.saveTime(time: time, timeType: timeType)
     }

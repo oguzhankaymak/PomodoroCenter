@@ -11,5 +11,4 @@ extension History {
     @NSManaged public var id: UUID?
     @NSManaged public var time: Int32
     @NSManaged public var timeType: String?
-
 }

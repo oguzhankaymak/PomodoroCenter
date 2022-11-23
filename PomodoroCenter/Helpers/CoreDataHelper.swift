@@ -3,6 +3,7 @@ import UIKit
 class CoreDataHelper {
     static let shared = CoreDataHelper()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
     func getSavedTimesByType(type: TimeType) -> [Time] {
         do {
             var historiesData: [Time] = []
@@ -26,6 +27,7 @@ class CoreDataHelper {
             return []
         }
     }
+
     func saveTime(time: Int, timeType: TimeType) {
         let history = History(context: context)
         history.id = UUID()

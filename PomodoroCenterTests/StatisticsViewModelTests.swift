@@ -3,19 +3,11 @@ import XCTest
 
 class StatisticsViewModelTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
     func testModelTriggersOnGetPomodoroTimesByDaysWhenCallGetSavedPomodoroTimesByDays() {
         let model = StatisticViewModel(database: PomodoroDatabaseSpy())
 
-        model.onGetPomodoroTimesByDays = { pomodoroHoursByDays in
-            XCTAssertEqual(pomodoroHoursByDays.count, 7, "Model didn't return Hours data by days")
+        model.pomodoroHoursByDays.bind { pomodoroHoursByDays in
+            XCTAssertEqual(pomodoroHoursByDays?.count, 7, "Model didn't return Hours data by days")
         }
 
         model.getSavedPomodoroTimesByDays()
@@ -26,9 +18,9 @@ class StatisticsViewModelTests: XCTestCase {
 
         let model = StatisticViewModel(database: PomodoroDatabaseSpy())
 
-        model.onGetPomodoroTimesByDays = { pomodoroHoursByDays in
-            for (index, dayData) in pomodoroHoursByDays.enumerated() {
-                if dayData != mockPomodoroHoursByDaysData[index] {
+        model.pomodoroHoursByDays.bind { pomodoroHoursByDays in
+            pomodoroHoursByDays?.indices.forEach { index in
+                if pomodoroHoursByDays?[index] != mockPomodoroHoursByDaysData[index] {
                     return XCTFail("Model didn't correctly return hours data by days!")
                 }
             }
@@ -40,8 +32,8 @@ class StatisticsViewModelTests: XCTestCase {
     func testModelTriggersOnGetPomodoroTimesByMonthsWhenCallGetSavedPomodoroTimesByMonths() {
         let model = StatisticViewModel(database: PomodoroDatabaseSpy())
 
-        model.onGetPomodoroTimesByMonths = { pomodoroHoursByMonths in
-            XCTAssertEqual(pomodoroHoursByMonths.count, 7, "Model didn't return hours data by months!")
+        model.pomodoroHoursByMonths.bind { pomodoroHoursByMonths in
+            XCTAssertEqual(pomodoroHoursByMonths?.count, 7, "Model didn't return hours data by months!")
         }
 
         model.getSavedPomodoroTimesByMonths()
@@ -52,9 +44,9 @@ class StatisticsViewModelTests: XCTestCase {
 
         let model = StatisticViewModel(database: PomodoroDatabaseSpy())
 
-        model.onGetPomodoroTimesByMonths = { pomodoroHoursByMonths in
-            for (index, monthData) in pomodoroHoursByMonths.enumerated() {
-                if monthData != mockPomodoroHoursByMonthsData[index] {
+        model.pomodoroHoursByMonths.bind { pomodoroHoursByMonths in
+            pomodoroHoursByMonths?.indices.forEach { index in
+                if pomodoroHoursByMonths?[index] != mockPomodoroHoursByMonthsData[index] {
                     return XCTFail("Model didn't correctly return hours data by months!")
                 }
             }

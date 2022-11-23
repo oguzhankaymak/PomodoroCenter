@@ -3,35 +3,32 @@ import XCTest
 
 class TimeViewModelTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
     func testModelRunTimerWhenStartedTimer() {
         let model = TimeViewModel()
         model.startTimer()
-        XCTAssertTrue(model.timerIsRunning, "Model didn't timer start!")
+        guard let timerIsRunning = model.timerIsRunning.value else { return XCTFail("Model didn't timer start!") }
+        XCTAssertTrue(timerIsRunning, "Model didn't timer start!")
     }
 
     func testModelStopTimerDuringRunningTimer() {
         let model = TimeViewModel()
         model.startTimer()
-        XCTAssertTrue(model.timerIsRunning, "Model didn't timer start!")
         model.stopTimer()
-        XCTAssertFalse(model.timerIsRunning, "Model didn't timer stop!")
+        guard let timerIsRunning = model.timerIsRunning.value else { return XCTFail("Model didn't timer start!") }
+        XCTAssertFalse(timerIsRunning, "Model didn't timer stop!")
     }
 
     func testModelTimeChangeWhenAssignPomodoroTime() {
         let formatedPomodoroTime = "25 : 00"
         let model = TimeViewModel()
 
-        model.onAssignTimer = { timeStr in
-            XCTAssertEqual(timeStr, formatedPomodoroTime, "Model didn't assign pomodoro time!")
+        model.formatedSeconds.bind { seconds in
+            XCTAssertEqual(formatedPomodoroTime, seconds, "Model didn't assign pomodoro time!")
+        }
 
+        model.activeTimeType.bind { activeTimeType in
+            guard let timeType = activeTimeType else { return }
+            XCTAssertTrue(timeType == .pomodoro, "Model didn't assign pomodoro time!")
         }
 
         model.assignTime(timeType: .pomodoro)
@@ -41,8 +38,14 @@ class TimeViewModelTests: XCTestCase {
         let formatedShortBreakTime = "05 : 00"
         let model = TimeViewModel()
 
-        model.onAssignTimer = { timeStr in
-            XCTAssertEqual(timeStr, formatedShortBreakTime, "Model didn't assign short break time!")
+        model.formatedSeconds.bind { seconds in
+            XCTAssertEqual(formatedShortBreakTime, seconds, "Model didn't assign short break time!")
+        }
+
+        model.activeTimeType.bind { activeTimeType in
+            guard let timeType = activeTimeType else { return }
+            XCTAssertTrue(timeType == .shortBreak, "Model didn't assign short break time!")
+
         }
 
         model.assignTime(timeType: .shortBreak)
@@ -51,25 +54,32 @@ class TimeViewModelTests: XCTestCase {
     func testModelTimeChangeWhenAssignLongBreakTime() {
         let formatedLongBreakTime = "15 : 00"
         let model = TimeViewModel()
-        model.onAssignTimer = { value in
-            XCTAssertEqual(value, formatedLongBreakTime, "Model didn't assign long break time!")
+
+        model.formatedSeconds.bind { seconds in
+            XCTAssertEqual(formatedLongBreakTime, seconds, "Model didn't assign long break time!")
+        }
+
+        model.activeTimeType.bind { activeTimeType in
+            guard let timeType = activeTimeType else { return }
+            XCTAssertTrue(timeType == .longBreak, "Model didn't assign long break time!")
 
         }
 
         model.assignTime(timeType: .longBreak)
     }
 
-    func testModelTriggersOnFinishTimerWhenUserWantsTimeToEnd() {
+    func testModelResetTimerWhenUserWantsTimeToEnd() {
         let formatedPomodoroTime = "25 : 00"
         let model = TimeViewModel(database: PomodoroDatabaseSpy())
-
-        model.onFinishTimer = { timeStr in
-            XCTAssertEqual(timeStr, formatedPomodoroTime, "Model didn't trigger on finish timer!")
-        }
 
         model.startTimer()
         model.stopTimer()
         model.finishtimer()
+        XCTAssertEqual(
+            formatedPomodoroTime,
+            model.formatedSeconds.value,
+            "Model didn't trigger on finish timer!"
+        )
     }
 
 }

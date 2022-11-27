@@ -9,12 +9,7 @@ final class TimeViewModel {
         didSet {
             formatedSeconds.value = seconds.formatSeconds()
             if seconds == 0 {
-                saveTimeInDatabase(
-                    seconds: getTimeByTimeType(timeType: activeTimeType.value ?? .pomodoro),
-                    timeType: activeTimeType.value ?? .pomodoro
-                )
-                timerIsCompleted.value = true
-                timerIsCompleted.value = false
+                completeTimer()
             }
         }
     }
@@ -23,6 +18,7 @@ final class TimeViewModel {
     private(set) var formatedSeconds = Observable<String>()
     private(set) var isResetTimer = Observable<Bool>()
     private(set) var timerIsCompleted = Observable<Bool>()
+    private(set) var isUserStoppedTimer = Observable<Bool>()
     private let database: PomodoroDatabaseProtocol
 
     // MARK: - init
@@ -38,6 +34,11 @@ final class TimeViewModel {
     // MARK: - Public Methods
     func startTimer() {
         timerIsRunning.value = true
+
+        if isUserStoppedTimer.value ?? false {
+            isUserStoppedTimer.value = false
+        }
+
         timer = Timer.scheduledTimer(
             timeInterval: 1,
             target: self,
@@ -47,7 +48,11 @@ final class TimeViewModel {
         )
     }
 
-    func stopTimer() {
+    func stopTimer(isUserStopped: Bool = true) {
+        if isUserStopped {
+            isUserStoppedTimer.value = true
+        }
+
         timerIsRunning.value = false
         timer.invalidate()
     }
@@ -58,13 +63,13 @@ final class TimeViewModel {
         let elapseTime = getTimeByTimeType(timeType: timeType) - seconds
         saveTimeInDatabase(seconds: elapseTime, timeType: timeType)
 
+        isUserStoppedTimer.value = false
         isResetTimer.value = true
         seconds = getTimeByTimeType(timeType: timeType)
         isResetTimer.value = false
     }
 
     func assignTime(timeType: TimeType) {
-        stopTimer()
         activeTimeType.value = timeType
         seconds = getTimeByTimeType(timeType: timeType)
     }
@@ -95,6 +100,26 @@ final class TimeViewModel {
                 timeType: activeTimeType.value ?? .pomodoro
             )
         }
+    }
+
+    private func completeTimer() {
+        stopTimer(isUserStopped: false)
+        timerIsCompleted.value = true
+
+        saveTimeInDatabase(
+            seconds: getTimeByTimeType(timeType: activeTimeType.value ?? .pomodoro),
+            timeType: activeTimeType.value ?? .pomodoro
+        )
+
+        switch activeTimeType.value {
+        case .pomodoro:
+            assignTime(timeType: .shortBreak)
+        default:
+            assignTime(timeType: .pomodoro)
+        }
+
+        timerIsCompleted.value = false
+
     }
 
     private func getTimeByTimeType(timeType: TimeType) -> Int {

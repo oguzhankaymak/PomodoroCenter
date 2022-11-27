@@ -166,6 +166,7 @@ class HomeViewController: UIViewController {
     }
 
     private func setPomodoroView() {
+        timeTypesSegmentedControl.selectedSegmentIndex = 0
         breakTimesView.isHidden = true
         timeLabel.textColor = Color.black
         actionButton.backgroundColor = Color.black
@@ -173,6 +174,7 @@ class HomeViewController: UIViewController {
     }
 
     private func setBreakView(isShortBreak: Bool) {
+        timeTypesSegmentedControl.selectedSegmentIndex = 1
         breakTimesView.isHidden = false
         timeLabel.textColor = Color.gray
         actionButton.backgroundColor = Color.gray
@@ -229,7 +231,7 @@ class HomeViewController: UIViewController {
     }
 
     @objc private func longBreakTimeButtonPress(sender: UIButton) {
-        if !finishTimerButton.isHidden || (model.timerIsRunning.value ?? false) {
+        if (model.isUserStoppedTimer.value ?? false) || (model.timerIsRunning.value ?? false) {
             showErrorChangeTimerWhenTimerIsRunning()
         } else {
             changeTimer(timeType: .longBreak)
@@ -238,7 +240,7 @@ class HomeViewController: UIViewController {
     }
 
     @objc private func shortBreakTimeButtonPress(sender: UIButton) {
-        if !finishTimerButton.isHidden || (model.timerIsRunning.value ?? false) {
+        if (model.isUserStoppedTimer.value ?? false) || (model.timerIsRunning.value ?? false) {
             showErrorChangeTimerWhenTimerIsRunning()
         } else {
             changeTimer(timeType: .shortBreak)
@@ -296,15 +298,16 @@ extension HomeViewController {
             if timerIsCompleted ?? false {
                 guard let completedTimeType = self?.model.activeTimeType.value else { return }
                 self?.sendNotificationByTimeTypeIfAppIsBackgroundOrInactive(completedTimeType: completedTimeType)
-                switch completedTimeType {
-                case .pomodoro:
-                    self?.timeTypesSegmentedControl.selectedSegmentIndex = 1
-                    self?.changeTimer(timeType: .shortBreak)
-                default:
-                    self?.timeTypesSegmentedControl.selectedSegmentIndex = 0
-                    self?.changeTimer(timeType: .pomodoro)
-                }
             }
+        }
+
+        model.isUserStoppedTimer.bind { [weak self] isUserStoppedTimer in
+            if isUserStoppedTimer ?? false {
+                self?.finishTimerButton.isHidden = false
+            } else {
+                self?.finishTimerButton.isHidden = true
+            }
+
         }
     }
 }
@@ -349,7 +352,7 @@ extension HomeViewController {
 extension HomeViewController {
 
     @objc func timeTypesSegmentedControlValueChanged(_ segmentedControl: UISegmentedControl) {
-        if !finishTimerButton.isHidden || (model.timerIsRunning.value ?? false) {
+        if (model.isUserStoppedTimer.value ?? false) || (model.timerIsRunning.value ?? false) {
             let indexOfGoBack: Int = segmentedControl.selectedSegmentIndex == 0 ? 1 : 0
             showErrorChangeTimerWhenTimerIsRunning()
             cancelTimeTypeSegmentedValue(goToIndex: indexOfGoBack)

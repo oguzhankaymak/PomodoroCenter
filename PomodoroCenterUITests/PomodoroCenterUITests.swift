@@ -23,7 +23,7 @@ class PomodoroCenterUITests: XCTestCase {
         XCTAssertTrue(actionButton.exists, "Home view controller isn't open when app opened second")
     }
 
-    func testChangePomodoroTimerToBreakTimer() throws {
+    func testChangeTimeToShortBreakTimer() throws {
         let app = XCUIApplication()
         app.setIsAppOpenedBefore(true)
         app.launch()
@@ -33,7 +33,7 @@ class PomodoroCenterUITests: XCTestCase {
         XCTAssertEqual(timerValue, "05 : 00", "Timer is not correct")
     }
 
-    func testChangeShortBreakTimerToLongBreakTimer() throws {
+    func testChangeTimeToLongBreakTimer() throws {
         let app = XCUIApplication()
         app.setIsAppOpenedBefore(true)
         app.launch()
@@ -42,24 +42,9 @@ class PomodoroCenterUITests: XCTestCase {
 
         let timerValue = app.staticTexts["timeLabel"].label
         XCTAssertEqual(timerValue, "15 : 00", "Timer is not correct")
-
     }
 
-    func testShowAlertMessageIfChangeTimerTypeWhenTimerIsRunningAndTimeDontChangeIfUserSelectCancel() throws {
-        let app = XCUIApplication()
-        app.setIsAppOpenedBefore(true)
-        app.launch()
-        app.buttons["actionButton"].tap()
-        app.buttons["break".localized].tap()
-        app.alerts["warning".localized].scrollViews.otherElements.buttons["cancel".localized].tap()
-
-        let timerValue = app.staticTexts["timeLabel"].label
-        XCTAssertNotEqual(timerValue, "25 : 00", "Timer is not correct")
-        XCTAssertNotEqual(timerValue, "15 : 00", "Timer is not correct")
-        XCTAssertNotEqual(timerValue, "05 : 00", "Timer is not correct")
-    }
-
-    func testShowAlertMessageIfChangeTimerTypeWhenTimerIsRunningAndTimeMustBeChangeIfUserSelectOkay() throws {
+    func testShowAlertMessageIfChangeTimerTypeDuringTimerIsRunning() throws {
         let app = XCUIApplication()
         app.setIsAppOpenedBefore(true)
         app.launch()
@@ -68,27 +53,43 @@ class PomodoroCenterUITests: XCTestCase {
         app.alerts["warning".localized].scrollViews.otherElements.buttons["okay".localized].tap()
 
         let timerValue = app.staticTexts["timeLabel"].label
-        XCTAssertEqual(timerValue, "05 : 00", "Timer is not correct")
+        XCTAssertNotEqual(timerValue, "25 : 00", "Timer is not correct")
+        XCTAssertNotEqual(timerValue, "15 : 00", "Timer is not correct")
+        XCTAssertNotEqual(timerValue, "05 : 00", "Timer is not correct")
     }
 
-    func testExistsBarChartViewOnStatisticsViewController() throws {
+    func testShowAlertMessageIfChangeTimerTypeWhenUserStoppedTimer() throws {
+        let app = XCUIApplication()
+        app.setIsAppOpenedBefore(true)
+        app.launch()
+        app.buttons["actionButton"].tap()
+        app.buttons["actionButton"].tap()
+        app.buttons["break".localized].tap()
+        app.alerts["warning".localized].scrollViews.otherElements.buttons["okay".localized].tap()
+
+        let timerValue = app.staticTexts["timeLabel"].label
+        XCTAssertNotEqual(timerValue, "15 : 00", "Timer is not correct")
+        XCTAssertNotEqual(timerValue, "05 : 00", "Timer is not correct")
+    }
+
+    func testExistsEmptyDataLabelIfNoDataForThisWeekInStatisticsViewController() throws {
         let app = XCUIApplication()
         app.setIsAppOpenedBefore(true)
         app.launch()
         app.navigationBars["PomodoroCenter.HomeView"].buttons["calendar"].tap()
 
-        let barChartView = app.otherElements["barChartView"]
-        XCTAssertTrue(barChartView.exists, "Bar chart view is not exists on statistics view controller")
+        let emptyDataLabel = app.staticTexts["noDataForThisWeek".localized]
+        XCTAssertTrue(emptyDataLabel.exists, "Empty data label is not exists in statistics view controller")
     }
 
-    func testExistsLineChartViewOnStatisticsViewController() throws {
+    func testExistsEmptyDataLabelIfNoDataForThisMonthInStatisticsViewController() throws {
         let app = XCUIApplication()
         app.setIsAppOpenedBefore(true)
         app.launch()
         app.navigationBars["PomodoroCenter.HomeView"].buttons["calendar"].tap()
         app.buttons["monthly".localized].tap()
 
-        let lineChartView = app.otherElements["lineChartView"]
-        XCTAssertTrue(lineChartView.exists, "Line chart view is not exists on statistics view controller")
+        let emptyDataLabel = app.staticTexts["noDataForThisMonth".localized]
+        XCTAssertTrue(emptyDataLabel.exists, "Empty data label is not exists in statistics view controller")
     }
 }

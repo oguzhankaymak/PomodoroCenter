@@ -2,7 +2,7 @@ import UIKit
 
 class NotificationOnboardViewController: UIViewController {
 
-    private var coordinator: OnboardingFlow?
+    private var coordinator: OnboardingCoordinatorProtocol?
 
     private lazy var imageView: UIImageView = {
         let imageView = OnboardingImageView(
@@ -64,7 +64,7 @@ class NotificationOnboardViewController: UIViewController {
         configureConstraints()
     }
 
-    init(coordinator: OnboardingFlow?) {
+    init(coordinator: OnboardingCoordinatorProtocol?) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }

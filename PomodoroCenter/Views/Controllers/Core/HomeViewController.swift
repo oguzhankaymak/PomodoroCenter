@@ -2,7 +2,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
-    var coordinator: HomeFlow?
+    var coordinator: HomeCoordinatorProtocol?
 
     var model: TimeViewModel!
     let timeTypes = [

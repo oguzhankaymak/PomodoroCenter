@@ -1,11 +1,11 @@
 import UIKit
 
-protocol StartFlow {
+protocol StartCoordinatorProtocol {
     func goToStatisticsViewController()
     func goToHomeViewController()
 }
 
-class StartCoordinator: Coordinator, StartFlow {
+class StartCoordinator: Coordinator, StartCoordinatorProtocol {
     let navigationController: UINavigationController
 
     init(navigationController: UINavigationController) {

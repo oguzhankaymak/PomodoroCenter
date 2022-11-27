@@ -2,7 +2,7 @@ import UIKit
 
 class OnboardViewController: UIPageViewController {
 
-    var coordinator: OnboardingFlow?
+    var coordinator: OnboardingCoordinatorProtocol?
     let initialPage = 0
 
     private lazy var pageControl: UIPageControl = {

@@ -1,10 +1,10 @@
 import UIKit
 
-protocol OnboardingFlow {
+protocol OnboardingCoordinatorProtocol {
     func coodinateToHome()
 }
 
-class OnboardingCoordinator: Coordinator, OnboardingFlow {
+class OnboardingCoordinator: Coordinator, OnboardingCoordinatorProtocol {
     let navigationController: UINavigationController
 
     init(navigationController: UINavigationController) {

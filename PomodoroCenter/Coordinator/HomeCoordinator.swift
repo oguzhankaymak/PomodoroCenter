@@ -1,10 +1,10 @@
 import UIKit
 
-protocol HomeFlow {
+protocol HomeCoordinatorProtocol {
     func goToStatisticsViewController()
 }
 
-class HomeCoordinator: Coordinator, HomeFlow {
+class HomeCoordinator: Coordinator, HomeCoordinatorProtocol {
     let navigationController: UINavigationController
 
     init(navigationController: UINavigationController) {

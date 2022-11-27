@@ -11,11 +11,11 @@ class StartCoordinator: Coordinator, StartCoordinatorProtocol {
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
-
+    
     func start() {
-        let coordinator: Coordinator = AppData.isAppOpenedBefore
-            ? HomeCoordinator(navigationController: navigationController)
-            : OnboardingCoordinator(navigationController: navigationController)
+        let coordinator: Coordinator = AppData.isAppOpenedBefore || isCheckLaunchArgumentsIsAppOpenedBefore()
+        ? HomeCoordinator(navigationController: navigationController)
+        : OnboardingCoordinator(navigationController: navigationController)
 
         coordinate(to: coordinator)
     }
@@ -29,5 +29,14 @@ class StartCoordinator: Coordinator, StartCoordinatorProtocol {
     func goToHomeViewController() {
         let controller = HomeViewController()
         navigationController.pushViewController(controller, animated: true)
+    }
+
+    // MARK: - Private Methods
+    private func isCheckLaunchArgumentsIsAppOpenedBefore () -> Bool {
+        let tempIndex = CommandLine.arguments.lastIndex(of: "-isAppOpenedBefore")
+        if let index = tempIndex {
+            return CommandLine.arguments[index + 1] == "true"
+        }
+        return false
     }
 }

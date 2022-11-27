@@ -4,7 +4,7 @@ import UserNotifications
 final class TimeViewModel {
 
     private var timer = Timer()
-    private(set) var timerIsRunning: Observable<Bool> = Observable()
+    private(set) var timerIsRunning = Observable<Bool>()
     private var seconds: Int {
         didSet {
             formatedSeconds.value = seconds.formatSeconds()
@@ -19,10 +19,10 @@ final class TimeViewModel {
         }
     }
 
-    private(set) var activeTimeType: Observable<TimeType> = Observable()
-    private(set) var formatedSeconds: Observable<String> = Observable()
-    private(set) var isResetTimer: Observable<Bool> = Observable()
-    private(set) var timerIsCompleted: Observable<Bool> = Observable()
+    private(set) var activeTimeType = Observable<TimeType>()
+    private(set) var formatedSeconds = Observable<String>()
+    private(set) var isResetTimer = Observable<Bool>()
+    private(set) var timerIsCompleted = Observable<Bool>()
     private let database: PomodoroDatabaseProtocol
 
     // MARK: - init

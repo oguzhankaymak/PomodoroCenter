@@ -2,8 +2,8 @@ import Foundation
 
 final class StatisticViewModel {
 
-    private(set) var pomodoroHoursByDays: Observable<[TimeByDay]> = Observable()
-    private(set) var pomodoroHoursByMonths: Observable<[TimeByMonth]> = Observable()
+    private(set) var pomodoroHoursByDays = Observable<[TimeByDay]>()
+    private(set) var pomodoroHoursByMonths = Observable<[TimeByMonth]>()
     private let database: PomodoroDatabaseProtocol
 
     private var tempPomodoroHoursByDays: [TimeByDay] = []

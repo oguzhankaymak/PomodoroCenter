@@ -5,15 +5,15 @@ class TimeViewModelTests: XCTestCase {
 
     func testModelRunTimerWhenStartedTimer() {
         let model = TimeViewModel()
-        model.startTimer()
+        model.startOrStopTimer()
         guard let timerIsRunning = model.timerIsRunning.value else { return XCTFail("Model didn't timer start!") }
         XCTAssertTrue(timerIsRunning, "Model didn't timer start!")
     }
 
     func testModelStopTimerDuringRunningTimer() {
         let model = TimeViewModel()
-        model.startTimer()
-        model.stopTimer()
+        model.startOrStopTimer()
+        model.startOrStopTimer()
         guard let timerIsRunning = model.timerIsRunning.value else { return XCTFail("Model didn't timer start!") }
         XCTAssertFalse(timerIsRunning, "Model didn't timer stop!")
     }
@@ -72,8 +72,7 @@ class TimeViewModelTests: XCTestCase {
         let formatedPomodoroTime = "25 : 00"
         let model = TimeViewModel(database: PomodoroDatabaseSpy())
 
-        model.startTimer()
-        model.stopTimer()
+        model.startOrStopTimer()
         model.finishtimer()
         XCTAssertEqual(
             formatedPomodoroTime,

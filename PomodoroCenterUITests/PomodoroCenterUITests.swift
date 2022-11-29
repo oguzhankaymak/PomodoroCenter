@@ -71,25 +71,4 @@ class PomodoroCenterUITests: XCTestCase {
         XCTAssertNotEqual(timerValue, "15 : 00", "Timer is not correct")
         XCTAssertNotEqual(timerValue, "05 : 00", "Timer is not correct")
     }
-
-    func testExistsEmptyDataLabelIfNoDataForThisWeekInStatisticsViewController() throws {
-        let app = XCUIApplication()
-        app.setIsAppOpenedBefore(true)
-        app.launch()
-        app.navigationBars["PomodoroCenter.HomeView"].buttons["calendar"].tap()
-
-        let emptyDataLabel = app.staticTexts["noDataForThisWeek".localized]
-        XCTAssertTrue(emptyDataLabel.exists, "Empty data label is not exists in statistics view controller")
-    }
-
-    func testExistsEmptyDataLabelIfNoDataForThisMonthInStatisticsViewController() throws {
-        let app = XCUIApplication()
-        app.setIsAppOpenedBefore(true)
-        app.launch()
-        app.navigationBars["PomodoroCenter.HomeView"].buttons["calendar"].tap()
-        app.buttons["monthly".localized].tap()
-
-        let emptyDataLabel = app.staticTexts["noDataForThisMonth".localized]
-        XCTAssertTrue(emptyDataLabel.exists, "Empty data label is not exists in statistics view controller")
-    }
 }

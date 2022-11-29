@@ -19,6 +19,7 @@ final class TimeViewModel {
     private(set) var isResetTimer = Observable<Bool>()
     private(set) var timerIsCompleted = Observable<Bool>()
     private(set) var isUserStoppedTimer = Observable<Bool>()
+    private(set) var errorMessage = Observable<AlertMessage>()
     private let database: PomodoroDatabaseProtocol
 
     // MARK: - init
@@ -32,29 +33,12 @@ final class TimeViewModel {
     }
 
     // MARK: - Public Methods
-    func startTimer() {
-        timerIsRunning.value = true
-
-        if isUserStoppedTimer.value ?? false {
-            isUserStoppedTimer.value = false
+    func startOrStopTimer() {
+        if timerIsRunning.value ?? false {
+            stopTimer()
+        } else {
+            startTimer()
         }
-
-        timer = Timer.scheduledTimer(
-            timeInterval: 1,
-            target: self,
-            selector: #selector(timerCounter),
-            userInfo: nil,
-            repeats: true
-        )
-    }
-
-    func stopTimer(isUserStopped: Bool = true) {
-        if isUserStopped {
-            isUserStoppedTimer.value = true
-        }
-
-        timerIsRunning.value = false
-        timer.invalidate()
     }
 
     func finishtimer() {
@@ -69,9 +53,34 @@ final class TimeViewModel {
         isResetTimer.value = false
     }
 
-    func assignTime(timeType: TimeType) {
-        activeTimeType.value = timeType
-        seconds = getTimeByTimeType(timeType: timeType)
+    func assignTime(timeType: TimeType, indexOfSegment: Int? = nil) {
+        if (isUserStoppedTimer.value ?? false) || (timerIsRunning.value ?? false) {
+            errorMessage.value = AlertMessage(
+                title: NSLocalizedString(
+                    "warning",
+                    comment: "Alert title if user turns off timer before timer isn't finished."),
+                message: NSLocalizedString(
+                    "timer_turn_off_alert_message",
+                    comment: "Alert message if user turns off timer before timer isn't finished."
+                ),
+                indexOfSegment: indexOfSegment
+            )
+        } else {
+            activeTimeType.value = timeType
+            seconds = getTimeByTimeType(timeType: timeType)
+        }
+    }
+
+    func selectedSegmentChanged(newSelectedSegmentIndex: Int) {
+        let indexOfGoBack: Int = newSelectedSegmentIndex == 0 ? 1 : 0
+        switch newSelectedSegmentIndex {
+        case 0:
+            assignTime(timeType: .pomodoro, indexOfSegment: indexOfGoBack)
+        case 1:
+            assignTime(timeType: .shortBreak, indexOfSegment: indexOfGoBack)
+        default:
+            break
+        }
     }
 
     func sendNotification(completedTimeType: TimeType) {
@@ -100,6 +109,31 @@ final class TimeViewModel {
                 timeType: activeTimeType.value ?? .pomodoro
             )
         }
+    }
+
+    private func startTimer() {
+        timerIsRunning.value = true
+
+        if isUserStoppedTimer.value ?? false {
+            isUserStoppedTimer.value = false
+        }
+
+        timer = Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(timerCounter),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+
+    private func stopTimer(isUserStopped: Bool = true) {
+        if isUserStopped {
+            isUserStoppedTimer.value = true
+        }
+
+        timerIsRunning.value = false
+        timer.invalidate()
     }
 
     private func completeTimer() {

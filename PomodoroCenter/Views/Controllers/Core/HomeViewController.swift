@@ -207,10 +207,6 @@ class HomeViewController: UIViewController {
         }
     }
 
-    private func changeTimer(timeType: TimeType) {
-        model.assignTime(timeType: timeType)
-    }
-
     private func sendNotificationByTimeTypeIfAppIsBackgroundOrInactive(completedTimeType: TimeType) {
         let state = UIApplication.shared.applicationState
         if state == .background || state == .inactive {
@@ -219,11 +215,7 @@ class HomeViewController: UIViewController {
     }
 
     @objc private func actionButtonPress(sender: UIButton) {
-        if model.timerIsRunning.value ?? false {
-            model.stopTimer()
-        } else {
-            model.startTimer()
-        }
+        model.startOrStopTimer()
     }
 
     @objc private func finishtimerButtonPress(sender: UIButton) {
@@ -231,33 +223,17 @@ class HomeViewController: UIViewController {
     }
 
     @objc private func longBreakTimeButtonPress(sender: UIButton) {
-        if (model.isUserStoppedTimer.value ?? false) || (model.timerIsRunning.value ?? false) {
-            showErrorChangeTimerWhenTimerIsRunning()
-        } else {
-            changeTimer(timeType: .longBreak)
-        }
-
+        model.assignTime(timeType: .longBreak)
     }
 
     @objc private func shortBreakTimeButtonPress(sender: UIButton) {
-        if (model.isUserStoppedTimer.value ?? false) || (model.timerIsRunning.value ?? false) {
-            showErrorChangeTimerWhenTimerIsRunning()
-        } else {
-            changeTimer(timeType: .shortBreak)
-        }
-
+        model.assignTime(timeType: .shortBreak)
     }
 
-    private func showErrorChangeTimerWhenTimerIsRunning() {
+    private func showAlertMessage(title: String, message: String) {
         showWarningMessage(
-            title: NSLocalizedString(
-                "warning",
-                comment: "Alert title if user turns off timer before timer isn't finished."
-            ),
-            message: NSLocalizedString(
-                "timer_turn_off_alert_message",
-                comment: "Alert message if user turns off timer before timer isn't finished."
-            ),
+            title: title,
+            message: message,
             handlerOkay: nil,
             handlerCancel: nil
         )
@@ -307,7 +283,19 @@ extension HomeViewController {
             } else {
                 self?.finishTimerButton.isHidden = true
             }
+        }
 
+        model.errorMessage.bind { [weak self] errorMessage in
+            if let indexOfSegment = errorMessage?.indexOfSegment {
+                self?.segmentChangeByIndex(goToIndex: indexOfSegment)
+            }
+
+            if errorMessage != nil {
+                self?.showAlertMessage(
+                    title: errorMessage?.title ?? "",
+                    message: errorMessage?.message ?? ""
+                )
+            }
         }
     }
 }
@@ -352,29 +340,10 @@ extension HomeViewController {
 extension HomeViewController {
 
     @objc func timeTypesSegmentedControlValueChanged(_ segmentedControl: UISegmentedControl) {
-        if (model.isUserStoppedTimer.value ?? false) || (model.timerIsRunning.value ?? false) {
-            let indexOfGoBack: Int = segmentedControl.selectedSegmentIndex == 0 ? 1 : 0
-            showErrorChangeTimerWhenTimerIsRunning()
-            cancelTimeTypeSegmentedValue(goToIndex: indexOfGoBack)
-        } else {
-            timeTypeSegmentIndexChanged(
-                newSelectedSegmentIndex: segmentedControl.selectedSegmentIndex
-            )
-        }
+        model.selectedSegmentChanged(newSelectedSegmentIndex: segmentedControl.selectedSegmentIndex)
     }
 
-    private func timeTypeSegmentIndexChanged(newSelectedSegmentIndex: Int) {
-        switch newSelectedSegmentIndex {
-        case 0:
-            changeTimer(timeType: .pomodoro)
-        case 1:
-            changeTimer(timeType: .shortBreak)
-        default:
-            break
-        }
-    }
-
-    private func cancelTimeTypeSegmentedValue(goToIndex: Int) {
+    private func segmentChangeByIndex(goToIndex: Int) {
         switch goToIndex {
         case 0:
             timeTypesSegmentedControl.selectedSegmentIndex = 0

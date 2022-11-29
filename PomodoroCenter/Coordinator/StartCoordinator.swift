@@ -11,7 +11,6 @@ class StartCoordinator: Coordinator, StartCoordinatorProtocol {
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
-    
     func start() {
         let coordinator: Coordinator = AppData.isAppOpenedBefore || isCheckLaunchArgumentsIsAppOpenedBefore()
         ? HomeCoordinator(navigationController: navigationController)

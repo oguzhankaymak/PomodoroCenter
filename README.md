@@ -5,6 +5,9 @@ PomodoroCenter is a simple pomodoro timer app with good looking user interface. 
 #### Some Packages / Libraries
 - [Charts](https://github.com/danielgindi/Charts) <br />
 
+### Credits
+- simple_interface.svg, chart.svg, notification.svg, productivity.svg files in assets file: [Undraw](https://undraw.co)
+
 
 ## Installation
 
